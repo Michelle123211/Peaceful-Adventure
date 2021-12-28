@@ -40,7 +40,7 @@
             ],
             "bindings": [
                 {
-                    "name": "2D Vector",
+                    "name": "WASD Keys",
                     "id": "8336dbea-5fbc-41c5-bad2-3805b09d44c6",
                     "path": "2DVector",
                     "interactions": "",

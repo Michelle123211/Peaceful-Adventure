@@ -647,6 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a47146d9fb25d846907a143ebbe45c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 2.5
 --- !u!1 &815142848
 GameObject:
   m_ObjectHideFlags: 0
@@ -2260,9 +2261,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568460041}
-  - component: {fileID: 1568460042}
   - component: {fileID: 1568460044}
   - component: {fileID: 1568460043}
+  - component: {fileID: 1568460042}
   m_Layer: 5
   m_Name: Stick
   m_TagString: Untagged

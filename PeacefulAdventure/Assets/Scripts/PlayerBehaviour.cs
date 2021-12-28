@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerBehaviour : MonoBehaviour
 {
+    public float speed = 2;
+
     PlayerInputActions playerInputActions;
+    Rigidbody2D rb;
 
     private void Awake() {
         playerInputActions = new PlayerInputActions();
@@ -15,12 +19,17 @@ public class PlayerBehaviour : MonoBehaviour
         playerInputActions.Player.Interaction.performed += Interaction;
     }
 
-    private void FixedUpdate() {
-        Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
-        this.gameObject.transform.localPosition += new Vector3(inputVector.x, inputVector.y, 0f) * 0.1f;
+    private void Start() {
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Attack(InputAction.CallbackContext context) {
+    private void FixedUpdate() {
+        Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
+        Vector2 velocity = ConvertToFourDirections(inputVector);
+        rb.velocity = velocity * speed;
+    }
+
+    private void Attack(InputAction.CallbackContext context) {
         Debug.Log("Attack!");
     }
 
@@ -30,5 +39,19 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Interaction(InputAction.CallbackContext ocontext) {
         Debug.Log("Interaction!");
+    }
+
+    private Vector2 ConvertToFourDirections(Vector2 inputVector) {
+        float xAbs = Mathf.Abs(inputVector.x);
+        float yAbs = Mathf.Abs(inputVector.y);
+        if (xAbs < 0.1 && yAbs < 0.1)
+            return Vector2.zero;
+        if (xAbs > yAbs) {
+            if (inputVector.x < 0) return Vector2.left;
+            else return Vector2.right;
+        } else {
+            if (inputVector.y < 0) return Vector2.down;
+            else return Vector2.up;
+        }
     }
 }

@@ -1,15 +1,28 @@
+//#define VELOCITY_MOVEMENT
+#define FORCE_MOVEMENT
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerBehaviour : MonoBehaviour
 {
-    public float speed = 2;
+#if VELOCITY_MOVEMENT
+    public float speed = 2.5f;
+#endif
+#if FORCE_MOVEMENT
+    public float force = 25f;
+#endif
 
     PlayerInputActions playerInputActions;
     Rigidbody2D rb;
+
+#if FORCE_MOVEMENT
+    Vector2 movement;
+#endif
 
     private void Awake() {
         playerInputActions = new PlayerInputActions();
@@ -17,6 +30,10 @@ public class PlayerBehaviour : MonoBehaviour
         playerInputActions.Player.Attack.performed += Attack;
         playerInputActions.Player.Inventory.performed += Inventory;
         playerInputActions.Player.Interaction.performed += Interaction;
+#if FORCE_MOVEMENT
+        playerInputActions.Player.Movement.performed += Movement;
+        playerInputActions.Player.Movement.canceled += Movement;
+#endif
     }
 
     private void Start() {
@@ -24,10 +41,21 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void FixedUpdate() {
+#if FORCE_MOVEMENT
+        rb.AddForce(movement * force);
+#endif
+#if VELOCITY_MOVEMENT
         Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
-        Vector2 velocity = ConvertToFourDirections(inputVector);
-        rb.velocity = velocity * speed;
+        Vector2 movement = ConvertToFourDirections(inputVector);
+        rb.velocity = movement * speed;
+#endif
     }
+
+#if FORCE_MOVEMENT
+    private void Movement(InputAction.CallbackContext context) {
+        movement = ConvertToFourDirections(context.ReadValue<Vector2>());
+    }
+#endif
 
     private void Attack(InputAction.CallbackContext context) {
         Debug.Log("Attack!");

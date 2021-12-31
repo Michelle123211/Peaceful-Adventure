@@ -19,6 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     PlayerInputActions playerInputActions;
     Rigidbody2D rb;
+    Animator animator;
 
 #if FORCE_MOVEMENT
     Vector2 movement;
@@ -38,6 +39,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate() {
@@ -49,6 +51,20 @@ public class PlayerBehaviour : MonoBehaviour
         Vector2 movement = ConvertToFourDirections(inputVector);
         rb.velocity = movement * speed;
 #endif
+        if (movement == Vector2.zero) {
+#if VELOCITY_MOVEMENT
+            animator.SetBool("IsWalking", false);
+#endif
+#if FORCE_MOVEMENT
+            if (rb.velocity.x < 0.1 && rb.velocity.y < 0.1) { // switch animation to idle when the character is actually stopped
+                animator.SetBool("IsWalking", false);
+            }
+#endif
+        } else {
+            animator.SetBool("IsWalking", true);
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+        }
     }
 
 #if FORCE_MOVEMENT

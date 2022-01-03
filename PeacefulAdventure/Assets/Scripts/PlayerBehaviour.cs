@@ -17,7 +17,7 @@ public class PlayerBehaviour : MonoBehaviour
     public float force = 25f;
 #endif
 
-    PlayerInputActions playerInputActions;
+    public static PlayerInputActions playerInputActions;
     Rigidbody2D rb;
     Animator animator;
 

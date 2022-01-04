@@ -56,9 +56,9 @@ public class PlayerBehaviour : MonoBehaviour
             animator.SetBool("IsWalking", false);
 #endif
 #if FORCE_MOVEMENT
-            if (rb.velocity.x < 0.1 && rb.velocity.y < 0.1) { // switch animation to idle when the character is actually stopped
-                animator.SetBool("IsWalking", false);
-            }
+        if (rb.velocity.x < 0.1 && rb.velocity.y < 0.1) { // switch animation to idle when the character is actually stopped
+            animator.SetBool("IsWalking", false);
+        }
 #endif
         } else {
             animator.SetBool("IsWalking", true);
@@ -75,6 +75,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Attack(InputAction.CallbackContext context) {
         Debug.Log("Attack!");
+        animator.SetTrigger("Attack");
     }
 
     private void Inventory(InputAction.CallbackContext ocontext) {

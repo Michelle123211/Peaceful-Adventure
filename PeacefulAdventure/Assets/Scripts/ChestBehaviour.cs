@@ -12,14 +12,6 @@ public class ChestBehaviour : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-
-        //PlayerBehaviour.playerInputActions.Player.Interaction.performed += OpenOrClose;
-    }
-
-    void Update() {
-        //if (Input.GetKeyDown(KeyCode.H)) {
-        //    OpenOrClose();
-        //}
     }
 
     void OpenOrClose(InputAction.CallbackContext context) {
@@ -33,14 +25,12 @@ public class ChestBehaviour : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("Trigger triggered!");
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
             PlayerBehaviour.playerInputActions.Player.Interaction.performed += OpenOrClose;
         }
     }
 
     void OnTriggerExit2D(Collider2D other) {
-        Debug.Log("Trigger detriggered!");
         if (other.gameObject.layer == LayerMask.NameToLayer("Player")) {
             PlayerBehaviour.playerInputActions.Player.Interaction.performed -= OpenOrClose;
         }

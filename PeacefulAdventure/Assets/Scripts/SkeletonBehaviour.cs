@@ -40,6 +40,7 @@ public class SkeletonBehaviour : MonoBehaviour
     }
 
     private void Update() {
+        // attack
         Vector3 dir = this.player.transform.position - this.transform.position;
         if (canAttack) {
             if (dir.magnitude < 1.5) {
@@ -51,7 +52,7 @@ public class SkeletonBehaviour : MonoBehaviour
             attackDelta += Time.deltaTime;
             if (attackDelta > attackCooldown) canAttack = true;
         }
-        // sorting layers
+        // sorting layers - to appear in front of the player or behind
         if (dir.magnitude < 4) {
             if (dir.y < 0)
                 spriteRenderer.sortingLayerName = "EnemyBack";
@@ -69,8 +70,6 @@ public class SkeletonBehaviour : MonoBehaviour
         else
             movement.y = dir.y / Mathf.Abs(dir.y);
 
-        Debug.Log(dir.magnitude);
-
 #if FORCE_MOVEMENT
         rb.AddForce(movement * force);
 #endif
@@ -82,7 +81,6 @@ public class SkeletonBehaviour : MonoBehaviour
     }
 
     private void Attack() {
-        Debug.Log("Attack!");
         animator.Attack();
     }
 }

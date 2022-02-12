@@ -1,86 +1,38 @@
-//#define VELOCITY_MOVEMENT
-#define FORCE_MOVEMENT
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterAnimation))]
-public class SkeletonBehaviour : MonoBehaviour
+public class SkeletonBehaviour : EnemyBehaviour
 {
-#if VELOCITY_MOVEMENT
-    public float speed = 2.5f;
-#endif
-#if FORCE_MOVEMENT
-    public float force = 25f;
-#endif
+    public bool IsFollowing { get; set; }
 
-    private PlayerBehaviour player;
-
-    Rigidbody2D rb;
-    CharacterAnimation animator;
-    SpriteRenderer spriteRenderer;
-
-#if FORCE_MOVEMENT
-    Vector2 movement;
-#endif
-
-    [Tooltip("Attack every x seconds")]
-    public float attackCooldown = 3;
-    private bool canAttack = true;
-    private float attackDelta = 0;
-
-    // Start is called before the first frame update
-    void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<CharacterAnimation>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        player = FindObjectOfType<PlayerBehaviour>();
-    }
-
-    private void Update() {
-        // attack
-        Vector3 dir = this.player.transform.position - this.transform.position;
-        if (canAttack) {
-            if (dir.magnitude < 1.5) {
-                canAttack = false;
-                attackDelta = 0;
-                Attack();
-            }
-        } else {
-            attackDelta += Time.deltaTime;
-            if (attackDelta > attackCooldown) canAttack = true;
-        }
-        // sorting layers - to appear in front of the player or behind
-        if (dir.magnitude < 4) {
-            if (dir.y < 0)
-                spriteRenderer.sortingLayerName = "EnemyBack";
+    protected override void ComputeMovement() {
+        movement = Vector2.zero;
+        if (this.IsFollowing && !this.player.isDead) {
+            Vector3 dir = this.player.transform.position - this.transform.position;
+            if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
+                movement.x = dir.x / Mathf.Abs(dir.x);
             else
-                spriteRenderer.sortingLayerName = "EnemyFront";
+                movement.y = dir.y / Mathf.Abs(dir.y);
         }
     }
 
-    void FixedUpdate()
-    {
-        Vector2 movement = Vector2.zero;
-        Vector3 dir = this.player.transform.position - this.transform.position;
-        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
-            movement.x = dir.x / Mathf.Abs(dir.x);
-        else
-            movement.y = dir.y / Mathf.Abs(dir.y);
+    //protected override void Start() {
+    //    base.Start();
+    //}
 
-#if FORCE_MOVEMENT
-        rb.AddForce(movement * force);
-#endif
-#if VELOCITY_MOVEMENT
-        rb.velocity = movement * speed;
-#endif
+    //protected override void Update() {
+    //    base.Update();
+    //}
 
-        animator.Move(movement);
-    }
+    //protected override void FixedUpdate()
+    //{
+    //    base.FixedUpdate();
+    //}
 
-    private void Attack() {
-        animator.Attack();
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(this.transform.position, attackRange);
     }
 }

@@ -18,6 +18,8 @@ public class PlayerBehaviour : MonoBehaviour
     public float force = 25f;
 #endif
 
+    public bool isDead = false;
+
     public static PlayerInputActions playerInputActions;
     Rigidbody2D rb;
     CharacterAnimation animator;
@@ -25,6 +27,27 @@ public class PlayerBehaviour : MonoBehaviour
 #if FORCE_MOVEMENT
     Vector2 movement;
 #endif
+
+    private float nextAttackTime = 0f;
+
+    public void TakeDamage(float damage) {
+        Debug.Log("Player damage taken " + damage);
+        PlayerStats.instance.UpdateHealth(-damage);
+        // TODO: play sound effect
+        if (PlayerStats.instance.currentHealth <= 0) {
+            Die();
+        } else {
+            animator.TakeDamage();
+            // TODO: play sound effect
+        }
+    }
+
+    public void Die() {
+        Debug.Log("Player died.");
+        animator.Die();
+        // TODO: play sound effect
+        this.isDead = true;
+    }
 
     private void Awake() {
         playerInputActions = new PlayerInputActions();
@@ -44,8 +67,9 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if (!this.isDead) {
 #if FORCE_MOVEMENT
-        rb.AddForce(movement * force);
+            rb.AddForce(movement * force);
 #endif
 #if VELOCITY_MOVEMENT
         Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
@@ -53,7 +77,8 @@ public class PlayerBehaviour : MonoBehaviour
         rb.velocity = movement * speed;
 #endif
 
-        animator.Move(movement);
+            animator.Move(movement);
+        }
     }
 
 #if FORCE_MOVEMENT
@@ -63,8 +88,10 @@ public class PlayerBehaviour : MonoBehaviour
 #endif
 
     private void Attack(InputAction.CallbackContext context) {
-        Debug.Log("Attack!");
-        animator.Attack();
+        if (!this.isDead && Time.time > this.nextAttackTime) {
+            this.nextAttackTime = Time.time + PlayerStats.instance.attackCooldown;
+            animator.Attack();
+        }
     }
 
     private void Inventory(InputAction.CallbackContext ocontext) {

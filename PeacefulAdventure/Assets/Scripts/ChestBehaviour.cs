@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ChestBehaviour : MonoBehaviour
+public class ChestBehaviour : Interactable
 {
     Animator animator;
     bool isOpen = false;
@@ -14,25 +14,13 @@ public class ChestBehaviour : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void OpenOrClose(InputAction.CallbackContext context) {
+    protected override void OnInteraction(InputAction.CallbackContext context) {
         this.isOpen = !this.isOpen;
         animator.SetBool("IsOpen", this.isOpen);
         if (this.isOpen) {
             // TODO: show content
-        } else { 
+        } else {
             // TODO
-        }
-    }
-
-    void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            PlayerBehaviour.playerInputActions.Player.Interaction.performed += OpenOrClose;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            PlayerBehaviour.playerInputActions.Player.Interaction.performed -= OpenOrClose;
         }
     }
 }

@@ -32,9 +32,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void TakeDamage(float damage) {
         Debug.Log("Player damage taken " + damage);
-        PlayerStats.instance.UpdateHealth(-damage);
+        PlayerState.Instance.UpdateHealth(-damage);
         // TODO: play sound effect
-        if (PlayerStats.instance.currentHealth <= 0) {
+        if (PlayerState.Instance.CurrentHealth <= 0) {
             Die();
         } else {
             animator.TakeDamage();
@@ -89,7 +89,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Attack(InputAction.CallbackContext context) {
         if (!this.isDead && Time.time > this.nextAttackTime) {
-            this.nextAttackTime = Time.time + PlayerStats.instance.attackCooldown;
+            this.nextAttackTime = Time.time + PlayerState.Instance.attackCooldown.Value;
             animator.Attack();
         }
     }

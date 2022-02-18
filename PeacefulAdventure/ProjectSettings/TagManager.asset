@@ -15,7 +15,7 @@ TagManager:
   - Player
   - Chest
   - Enemy
-  - 
+  - Items
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Top
     uniqueID: 3357062039
+    locked: 0
+  - name: Items
+    uniqueID: 669604795
     locked: 0
   - name: EnemyBack
     uniqueID: 1028679995

@@ -83,7 +83,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 #if FORCE_MOVEMENT
     private void Movement(InputAction.CallbackContext context) {
-        movement = ConvertToFourDirections(context.ReadValue<Vector2>());
+        movement = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());
     }
 #endif
 
@@ -106,19 +106,5 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Interaction(InputAction.CallbackContext ocontext) {
         Debug.Log("Interaction!");
-    }
-
-    private Vector2 ConvertToFourDirections(Vector2 inputVector) {
-        float xAbs = Mathf.Abs(inputVector.x);
-        float yAbs = Mathf.Abs(inputVector.y);
-        if (xAbs < 0.1 && yAbs < 0.1)
-            return Vector2.zero;
-        if (xAbs > yAbs) {
-            if (inputVector.x < 0) return Vector2.left;
-            else return Vector2.right;
-        } else {
-            if (inputVector.y < 0) return Vector2.down;
-            else return Vector2.up;
-        }
     }
 }

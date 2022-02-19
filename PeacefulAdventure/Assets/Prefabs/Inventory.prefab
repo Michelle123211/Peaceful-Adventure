@@ -1260,6 +1260,7 @@ MonoBehaviour:
   nameText: {fileID: 3930453065311464528}
   descText: {fileID: 5815285954160096041}
   useButton: {fileID: 4376112835836409350}
+  inventoryUI: {fileID: 7704075334096999003}
 --- !u!114 &4080663792187893496
 MonoBehaviour:
   m_ObjectHideFlags: 0

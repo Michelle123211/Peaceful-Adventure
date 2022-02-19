@@ -14,6 +14,20 @@ public static class Utils
     public static Color WithB(this Color c, float b)
         => new Color(c.r, c.g, b, c.a);
 
+    public static Vector2 ConvertToFourDirections(Vector2 inputVector) {
+        float xAbs = Mathf.Abs(inputVector.x);
+        float yAbs = Mathf.Abs(inputVector.y);
+        if (xAbs < 0.1 && yAbs < 0.1)
+            return Vector2.zero;
+        if (xAbs > yAbs) {
+            if (inputVector.x < 0) return Vector2.left;
+            else return Vector2.right;
+        } else {
+            if (inputVector.y < 0) return Vector2.down;
+            else return Vector2.up;
+        }
+    }
+
     public static List<T> FindObject<T>() where T : Component {
         List<T> result = new List<T>();
         foreach (GameObject root in SceneManager.GetActiveScene().GetRootGameObjects()) {

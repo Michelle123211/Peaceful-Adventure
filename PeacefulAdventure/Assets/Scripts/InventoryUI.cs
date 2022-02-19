@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(AppearHideComponent))]
 public class InventoryUI : MonoBehaviour {
@@ -12,13 +13,20 @@ public class InventoryUI : MonoBehaviour {
 
     private ItemSlotUI[,] slots;
 
+    private int selectedRow = 0;
+    private int selectedColumn = 0;
+
     public void Open() {
+        PlayerBehaviour.playerInputActions.Player.Disable();
+        PlayerBehaviour.playerInputActions.Inventory.Enable();
         Refresh();
         GetComponent<AppearHideComponent>().Do();
         itemDetailsUI.gameObject.SetActive(false);
     }
 
     public void Close() {
+        PlayerBehaviour.playerInputActions.Inventory.Disable();
+        PlayerBehaviour.playerInputActions.Player.Enable();
         GetComponent<AppearHideComponent>().Undo();
     }
 
@@ -37,6 +45,11 @@ public class InventoryUI : MonoBehaviour {
         for (int i = 0; i < items.Length; i++) {
             this.slots[i / columns, i % columns].SetItem(items[i]);
         }
+        // select first slot
+        this.slots[selectedRow, selectedColumn].Deselect();
+        selectedRow = 0;
+        selectedColumn = 0;
+        this.slots[selectedRow, selectedColumn].Select();
     }
 
     public void Clear() {
@@ -71,5 +84,34 @@ public class InventoryUI : MonoBehaviour {
 
     private void Start() {
         PlayerState.Instance.inventory.onInventoryChangedCallback += Refresh;
+        PlayerBehaviour.playerInputActions.Inventory.Navigation.performed += Navigate;
+        PlayerBehaviour.playerInputActions.Inventory.Select.performed += Select;
+        PlayerBehaviour.playerInputActions.Inventory.Close.performed += CloseInventory;
+        PlayerBehaviour.playerInputActions.Inventory.Back.performed += CloseInventory;
+    }
+
+    private void Navigate(InputAction.CallbackContext context) {
+        this.slots[selectedRow, selectedColumn].Deselect();
+        Vector2 delta = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());
+        selectedRow -= (int)delta.y;
+        selectedColumn += (int)delta.x;
+        if (selectedRow < 0)
+            selectedRow = this.slots.GetLength(0) - 1;
+        if (selectedRow >= this.slots.GetLength(0))
+            selectedRow = 0;
+        if (selectedColumn < 0)
+            selectedColumn = this.slots.GetLength(1) - 1;
+        if (selectedColumn >= this.slots.GetLength(1))
+            selectedColumn = 0;
+        this.slots[selectedRow, selectedColumn].Select();
+    }
+
+    private void Select(InputAction.CallbackContext context) {
+        this.slots[selectedRow, selectedColumn].ShowDetails();
+    }
+
+    private void CloseInventory(InputAction.CallbackContext context) {
+        itemDetailsUI.Close();
+        Close();
     }
 }

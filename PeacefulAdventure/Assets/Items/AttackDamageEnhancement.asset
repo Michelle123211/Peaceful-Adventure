@@ -18,8 +18,8 @@ MonoBehaviour:
   isUsable: 1
   attackDamageModifier:
     type: 0
-    value: 0
+    value: 10
   attackCooldownModifier:
     type: 0
     value: 0
-  duration: 3
+  duration: 10

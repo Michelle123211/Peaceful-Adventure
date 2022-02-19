@@ -1,13 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ItemSlotUI : MonoBehaviour
 {
+    [SerializeField] private Image icon;
+    [SerializeField] private TextMeshProUGUI count;
+
     private InventoryItem item;
+    private InventoryUI inventoryUI;
 
     public void SetItem(InventoryItem item) {
-        this.item = item;
+        if (item == null) {
+            Clear();
+        } else {
+            this.item = item;
+            this.icon.sprite = item.item.icon;
+            this.count.gameObject.SetActive(true);
+            this.count.text = item.count.ToString();
+        }
+    }
+
+    public void SetInventoryUI(InventoryUI inventoryUI) {
+        this.inventoryUI = inventoryUI;
+    }
+
+    public void ShowDetails() {
+        if (this.inventoryUI != null)
+            inventoryUI.ShowDetails(this.item);
+    }
+
+    private void Clear() {
+        this.item = null;
+        this.icon.sprite = null;
+        this.count.gameObject.SetActive(false);
     }
 
     // Start is called before the first frame update

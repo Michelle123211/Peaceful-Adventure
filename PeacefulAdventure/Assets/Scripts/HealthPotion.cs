@@ -8,7 +8,7 @@ public class HealthPotion : Item {
 
     [SerializeField] float value;
 
-    public override void Use() {
-        throw new System.NotImplementedException();
+    protected override void ApplyEffect() {
+        PlayerState.Instance.UpdateHealth(value);
     }
 }

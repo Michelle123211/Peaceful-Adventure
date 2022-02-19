@@ -5,8 +5,8 @@ using UnityEngine;
 public class AndroidOnly : MonoBehaviour
 {
     private void Awake() {
-#if !(UNITY_ANDROID || UNITY_EDITOR)
-        this.gameObject.SetActive(false);
-#endif
+        if (!Application.isMobilePlatform) {
+            this.gameObject.SetActive(false);
+        }
     }
 }

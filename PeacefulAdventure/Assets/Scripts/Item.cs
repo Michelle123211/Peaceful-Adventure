@@ -12,5 +12,13 @@ public abstract class Item : ScriptableObject
     public Sprite icon;
     public bool isUsable;
 
-    public abstract void Use();
+    public bool Use() {
+        if (this.isUsable && PlayerState.Instance.inventory.TakeFromInventory(this)) {
+            ApplyEffect();
+            return true;
+        }
+        return false;
+    }
+
+    protected abstract void ApplyEffect();
 }

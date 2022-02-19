@@ -34,6 +34,7 @@ public class PlayerState : MonoBehaviour {
 
     [Tooltip("Number of slots in the inventory")]
     [SerializeField] private int inventorySlots = 18;
+    public int InventorySlots { get => inventorySlots; }
     public Inventory inventory;
 
     public void UpdateHealth(float delta) {

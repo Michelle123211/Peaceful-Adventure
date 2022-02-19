@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Inventory
 {
+    public delegate void OnInventoryChanged();
+    public OnInventoryChanged onInventoryChangedCallback;
+
     private InventoryItem[] items;
     private int freeSlots;
 
@@ -13,12 +16,18 @@ public class Inventory
         freeSlots = slots;
     }
 
+    public InventoryItem[] GetItems() {
+        return this.items;
+    }
+
     public bool AddToInventory(Item item, int count = 1) {
+        bool itemAdded = false;
         for (int i = 0; i < items.Length; ++i) {
             if (items[i] == null) continue;
             if (items[i].item == item) {
                 items[i].count += count;
-                return true;
+                itemAdded = true;
+                break;
             }
         }
         if (freeSlots > 0) {
@@ -26,14 +35,18 @@ public class Inventory
                 if (items[i] == null) {
                     items[i] = new InventoryItem(item, count);
                     --freeSlots;
-                    return true;
+                    itemAdded = true;
+                    break;
                 }
             }
         }
-        return false;
+        if (itemAdded && onInventoryChangedCallback != null)
+            onInventoryChangedCallback.Invoke();
+        return itemAdded;
     }
 
     public bool TakeFromInventory(Item item, int count = 1) {
+        bool itemTaken = false;
         for (int i = 0; i < items.Length; ++i) {
             if (items[i] == null) continue;
             if (items[i].item == item && items[i].count >= count) {
@@ -42,13 +55,16 @@ public class Inventory
                     items[i] = null;
                     ++freeSlots;
                 }
-                return true;
+                itemTaken = true;
+                break;
             }
         }
-        return false;
+        if (itemTaken && onInventoryChangedCallback != null)
+            onInventoryChangedCallback.Invoke();
+        return itemTaken;
     }
 
-    public bool HasIninventory(Item item, int count = 1) {
+    public bool HasInInventory(Item item, int count = 1) {
         for (int i = 0; i < items.Length; ++i) {
             if (items[i] == null) continue;
             if (items[i].item == item && items[i].count >= count) {

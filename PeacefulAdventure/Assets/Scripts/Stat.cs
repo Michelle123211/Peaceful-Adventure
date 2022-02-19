@@ -27,6 +27,7 @@ public class Stat {
     }
 
     public void RemoveModifier(StatModifier modifier) {
+        isCached = false;
         for (int i = modifiers.Count - 1; i >= 0; i--) {
             if (modifiers[i] == modifier) {
                 modifiers.RemoveAt(i);

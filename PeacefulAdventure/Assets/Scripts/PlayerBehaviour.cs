@@ -96,6 +96,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Inventory(InputAction.CallbackContext ocontext) {
         Debug.Log("Inventory!");
+        InventoryUI invUI = Utils.FindObject<InventoryUI>()[0];
+        if (invUI != null) {
+            invUI.Open();
+        } else {
+            Debug.LogWarning("Missing InventoryUI in the scene.");
+        }
     }
 
     private void Interaction(InputAction.CallbackContext ocontext) {

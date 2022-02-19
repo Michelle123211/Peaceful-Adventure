@@ -18,6 +18,7 @@ public class ItemSlotUI : MonoBehaviour
         } else {
             this.item = item;
             this.icon.sprite = item.item.icon;
+            this.icon.color = this.icon.color.WithA(1f);
             this.count.gameObject.SetActive(true);
             this.count.text = item.count.ToString();
         }
@@ -35,6 +36,7 @@ public class ItemSlotUI : MonoBehaviour
     private void Clear() {
         this.item = null;
         this.icon.sprite = null;
+        this.icon.color = this.icon.color.WithA(0f);
         this.count.gameObject.SetActive(false);
     }
 

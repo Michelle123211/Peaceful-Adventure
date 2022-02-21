@@ -40,11 +40,13 @@ public class ItemSlotUI : MonoBehaviour
     }
 
     public void Select() {
+        if (Application.isMobilePlatform) return;
         this.origColor = this.frame.color;
         this.frame.color = this.selectedColor;
     }
 
     public void Deselect() {
+        if (Application.isMobilePlatform) return;
         if (this.frame.color == this.selectedColor)
             this.frame.color = this.origColor;
     }

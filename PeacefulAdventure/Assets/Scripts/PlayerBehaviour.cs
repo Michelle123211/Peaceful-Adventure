@@ -99,12 +99,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void Inventory(InputAction.CallbackContext context) {
         Debug.Log("Inventory!");
         if (this.inventoryUI == null) {
-            List<InventoryUI> inventoryUIs = Utils.FindObject<InventoryUI>();
-            foreach (var i in inventoryUIs) {
-                if (i.isInteractive) {
-                    this.inventoryUI = i;
-                }
-            }
+            this.inventoryUI = Utils.FindObject<InventoryUI>()[0];
         }
         if (this.inventoryUI != null) {
             this.inventoryUI.Open();

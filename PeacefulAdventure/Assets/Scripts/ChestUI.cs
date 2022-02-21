@@ -9,7 +9,6 @@ public class ChestUI : MonoBehaviour
 {
     [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private GridLayoutGroup itemsGrid;
-    [SerializeField] private InventoryUI inventoryUI;
 
     private ChestBehaviour chest;
 
@@ -20,7 +19,6 @@ public class ChestUI : MonoBehaviour
     public void Open(ChestBehaviour chest) {
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.Chest.Enable();
-        inventoryUI.Refresh();
         this.chest = chest;
         Refresh();
         GetComponent<AppearHideComponent>().Do();

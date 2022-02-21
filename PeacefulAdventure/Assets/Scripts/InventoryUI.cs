@@ -7,8 +7,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(AppearHideComponent))]
 public class InventoryUI : MonoBehaviour {
 
-    public bool isInteractive = true;
-
     [SerializeField] private GameObject itemSlotPrefab;
     [SerializeField] private GridLayoutGroup itemsGrid;
     [SerializeField] private ItemDetailsUI itemDetailsUI;
@@ -19,20 +17,16 @@ public class InventoryUI : MonoBehaviour {
     private int selectedColumn = 0;
 
     public void Open() {
-        if (isInteractive) {
-            PlayerBehaviour.playerInputActions.Player.Disable();
-            PlayerBehaviour.playerInputActions.Inventory.Enable();
-        }
+        PlayerBehaviour.playerInputActions.Player.Disable();
+        PlayerBehaviour.playerInputActions.Inventory.Enable();
         Refresh();
         GetComponent<AppearHideComponent>().Do();
         itemDetailsUI.gameObject.SetActive(false);
     }
 
     public void Close() {
-        if (isInteractive) {
-            PlayerBehaviour.playerInputActions.Inventory.Disable();
-            PlayerBehaviour.playerInputActions.Player.Enable();
-        }
+        PlayerBehaviour.playerInputActions.Inventory.Disable();
+        PlayerBehaviour.playerInputActions.Player.Enable();
         GetComponent<AppearHideComponent>().Undo();
     }
 
@@ -49,15 +43,12 @@ public class InventoryUI : MonoBehaviour {
         InventoryItem[] items = PlayerState.Instance.inventory.GetItems();
         for (int i = 0; i < items.Length; i++) {
             this.slots[i / columns, i % columns].SetItem(items[i]);
-            if (!isInteractive) this.slots[i / columns, i % columns].Deactivate();
         }
         // select first slot
-        if (isInteractive) {
-            this.slots[selectedRow, selectedColumn].Deselect();
-            selectedRow = 0;
-            selectedColumn = 0;
-            this.slots[selectedRow, selectedColumn].Select();
-        }
+        this.slots[selectedRow, selectedColumn].Deselect();
+        selectedRow = 0;
+        selectedColumn = 0;
+        this.slots[selectedRow, selectedColumn].Select();
     }
 
     public void Clear() {

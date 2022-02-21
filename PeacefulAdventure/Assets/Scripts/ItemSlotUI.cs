@@ -23,7 +23,6 @@ public class ItemSlotUI : MonoBehaviour
             Clear();
         } else {
             this.Item = item;
-            Debug.Log(item.item.itemName);
             this.icon.sprite = item.item.icon;
             this.icon.color = this.icon.color.WithA(1f);
             this.count.gameObject.SetActive(true);
@@ -38,10 +37,6 @@ public class ItemSlotUI : MonoBehaviour
 
     public void SetChestUI(ChestUI chestUI) {
         this.chestUI = chestUI;
-    }
-
-    public void Deactivate() {
-        this.detailsButton.interactable = false;
     }
 
     public void Select() {

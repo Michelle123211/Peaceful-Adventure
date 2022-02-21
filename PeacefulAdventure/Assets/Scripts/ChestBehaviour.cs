@@ -7,7 +7,7 @@ public class ChestBehaviour : Interactable
 {
     public List<Item> items = new List<Item>(5);
     [Tooltip("Time in seconds between start of animation and UI appearing")]
-    [SerializeField] private float lag = 0.5f;
+    [SerializeField] private float lag = 0.4f;
 
     Animator animator;
     bool isOpen = false;

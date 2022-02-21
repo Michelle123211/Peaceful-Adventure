@@ -45,6 +45,10 @@ public class Inventory
         return itemAdded;
     }
 
+    public bool AddToInventory(InventoryItem item) {
+        return AddToInventory(item.item, item.count);
+    }
+
     public bool TakeFromInventory(Item item, int count = 1) {
         bool itemTaken = false;
         for (int i = 0; i < items.Length; ++i) {
@@ -64,6 +68,10 @@ public class Inventory
         return itemTaken;
     }
 
+    public bool TakeFromInventory(InventoryItem item) {
+        return TakeFromInventory(item.item, item.count);
+    }
+
     public bool HasInInventory(Item item, int count = 1) {
         for (int i = 0; i < items.Length; ++i) {
             if (items[i] == null) continue;
@@ -72,6 +80,10 @@ public class Inventory
             }
         }
         return false;
+    }
+
+    public bool HasInInventory(InventoryItem item) {
+        return HasInInventory(item.item, item.count);
     }
 
 }
@@ -83,5 +95,19 @@ public class InventoryItem {
     public InventoryItem(Item item, int count = 1) {
         this.item = item;
         this.count = count;
+    }
+
+    public override bool Equals(object obj) {
+        if (obj == null) return false;
+        InventoryItem other = obj as InventoryItem;
+        if (other == null) return false;
+        else return Equals(other);
+    }
+    public override int GetHashCode() {
+        return item.GetHashCode() * 13 + count;
+    }
+    public bool Equals(InventoryItem other) {
+        if (other == null) return false;
+        return (this.item.Equals(other.item) && this.count == other.count);
     }
 }

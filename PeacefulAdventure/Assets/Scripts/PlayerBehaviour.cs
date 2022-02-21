@@ -30,6 +30,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private float nextAttackTime = 0f;
 
+    private InventoryUI inventoryUI;
+
     public void TakeDamage(float damage) {
         Debug.Log("Player damage taken " + damage);
         PlayerState.Instance.UpdateHealth(-damage);
@@ -94,11 +96,18 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    private void Inventory(InputAction.CallbackContext ocontext) {
+    private void Inventory(InputAction.CallbackContext context) {
         Debug.Log("Inventory!");
-        InventoryUI invUI = Utils.FindObject<InventoryUI>()[0];
-        if (invUI != null) {
-            invUI.Open();
+        if (this.inventoryUI == null) {
+            List<InventoryUI> inventoryUIs = Utils.FindObject<InventoryUI>();
+            foreach (var i in inventoryUIs) {
+                if (i.isInteractive) {
+                    this.inventoryUI = i;
+                }
+            }
+        }
+        if (this.inventoryUI != null) {
+            this.inventoryUI.Open();
         } else {
             Debug.LogWarning("Missing InventoryUI in the scene.");
         }

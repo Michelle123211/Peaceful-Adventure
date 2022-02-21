@@ -14,14 +14,16 @@ public class ItemSlotUI : MonoBehaviour
 
     private Color origColor;
 
-    private InventoryItem item;
+    public InventoryItem Item { get;  private set; }
     private InventoryUI inventoryUI;
+    private ChestUI chestUI;
 
     public void SetItem(InventoryItem item) {
-        if (item == null) {
+        if (item == null || item.item == null) {
             Clear();
         } else {
-            this.item = item;
+            this.Item = item;
+            Debug.Log(item.item.itemName);
             this.icon.sprite = item.item.icon;
             this.icon.color = this.icon.color.WithA(1f);
             this.count.gameObject.SetActive(true);
@@ -32,6 +34,14 @@ public class ItemSlotUI : MonoBehaviour
 
     public void SetInventoryUI(InventoryUI inventoryUI) {
         this.inventoryUI = inventoryUI;
+    }
+
+    public void SetChestUI(ChestUI chestUI) {
+        this.chestUI = chestUI;
+    }
+
+    public void Deactivate() {
+        this.detailsButton.interactable = false;
     }
 
     public void Select() {
@@ -45,27 +55,20 @@ public class ItemSlotUI : MonoBehaviour
     }
 
     public void ShowDetails() {
-        if (this.item != null && this.inventoryUI != null)
-            inventoryUI.ShowDetails(this.item);
+        if (this.Item != null && this.inventoryUI != null)
+            inventoryUI.ShowDetails(this.Item);
+    }
+
+    public void TakeFromChest() {
+        if (this.Item != null && this.chestUI != null)
+            chestUI.TakeItem(this.Item);
     }
 
     private void Clear() {
-        this.item = null;
+        this.Item = null;
         this.icon.sprite = null;
         this.icon.color = this.icon.color.WithA(0f);
         this.count.gameObject.SetActive(false);
         this.detailsButton.interactable = false;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

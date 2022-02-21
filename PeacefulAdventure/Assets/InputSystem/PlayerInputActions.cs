@@ -455,6 +455,148 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Chest"",
+            ""id"": ""d44bcab9-9f71-4b34-b812-4ed1df869ea1"",
+            ""actions"": [
+                {
+                    ""name"": ""Navigation"",
+                    ""type"": ""Value"",
+                    ""id"": ""9c252bd5-452f-443e-bf53-e5c6c488e92f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""fedacc18-d547-4764-849a-86087633186b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""b61015a0-8df7-47a8-800f-bb8f63dec89b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""cbfbef14-3fb5-4d49-becd-fcdc86c4144f"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""336eda93-da51-4a87-95ab-c375ef137a8f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""aeb8cf67-6994-4bec-98a5-4d2491065284"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""506b8971-69fe-4b37-be43-d96379c0b5b6"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""7e76ebd0-4a6c-4bbd-ba9d-f986eeebc84a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37d89e73-d548-4456-9204-25b260231d15"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Navigation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""439f3d02-4228-41f8-9fe0-268acd3e6780"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0dec5747-7a17-4f76-b1e4-94fcbe9aab2a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c53f984-620c-4205-85fe-05eac7b6c367"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a8a3ed3-8a07-4bfa-937b-6895d646e07e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -499,6 +641,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_ItemDetails_Use = m_ItemDetails.FindAction("Use", throwIfNotFound: true);
         m_ItemDetails_CloseInventory = m_ItemDetails.FindAction("CloseInventory", throwIfNotFound: true);
         m_ItemDetails_Back = m_ItemDetails.FindAction("Back", throwIfNotFound: true);
+        // Chest
+        m_Chest = asset.FindActionMap("Chest", throwIfNotFound: true);
+        m_Chest_Navigation = m_Chest.FindAction("Navigation", throwIfNotFound: true);
+        m_Chest_Select = m_Chest.FindAction("Select", throwIfNotFound: true);
+        m_Chest_Close = m_Chest.FindAction("Close", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -707,6 +854,55 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public ItemDetailsActions @ItemDetails => new ItemDetailsActions(this);
+
+    // Chest
+    private readonly InputActionMap m_Chest;
+    private IChestActions m_ChestActionsCallbackInterface;
+    private readonly InputAction m_Chest_Navigation;
+    private readonly InputAction m_Chest_Select;
+    private readonly InputAction m_Chest_Close;
+    public struct ChestActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public ChestActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Navigation => m_Wrapper.m_Chest_Navigation;
+        public InputAction @Select => m_Wrapper.m_Chest_Select;
+        public InputAction @Close => m_Wrapper.m_Chest_Close;
+        public InputActionMap Get() { return m_Wrapper.m_Chest; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ChestActions set) { return set.Get(); }
+        public void SetCallbacks(IChestActions instance)
+        {
+            if (m_Wrapper.m_ChestActionsCallbackInterface != null)
+            {
+                @Navigation.started -= m_Wrapper.m_ChestActionsCallbackInterface.OnNavigation;
+                @Navigation.performed -= m_Wrapper.m_ChestActionsCallbackInterface.OnNavigation;
+                @Navigation.canceled -= m_Wrapper.m_ChestActionsCallbackInterface.OnNavigation;
+                @Select.started -= m_Wrapper.m_ChestActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_ChestActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_ChestActionsCallbackInterface.OnSelect;
+                @Close.started -= m_Wrapper.m_ChestActionsCallbackInterface.OnClose;
+                @Close.performed -= m_Wrapper.m_ChestActionsCallbackInterface.OnClose;
+                @Close.canceled -= m_Wrapper.m_ChestActionsCallbackInterface.OnClose;
+            }
+            m_Wrapper.m_ChestActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Navigation.started += instance.OnNavigation;
+                @Navigation.performed += instance.OnNavigation;
+                @Navigation.canceled += instance.OnNavigation;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Close.started += instance.OnClose;
+                @Close.performed += instance.OnClose;
+                @Close.canceled += instance.OnClose;
+            }
+        }
+    }
+    public ChestActions @Chest => new ChestActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -744,5 +940,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnUse(InputAction.CallbackContext context);
         void OnCloseInventory(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+    }
+    public interface IChestActions
+    {
+        void OnNavigation(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
     }
 }

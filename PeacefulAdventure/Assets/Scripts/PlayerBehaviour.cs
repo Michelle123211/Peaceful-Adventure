@@ -63,6 +63,16 @@ public class PlayerBehaviour : MonoBehaviour
 #endif
     }
 
+    private void OnDestroy() {
+        playerInputActions.Player.Attack.performed -= Attack;
+        playerInputActions.Player.Inventory.performed -= Inventory;
+        playerInputActions.Player.Interaction.performed -= Interaction;
+#if FORCE_MOVEMENT
+        playerInputActions.Player.Movement.performed -= Movement;
+        playerInputActions.Player.Movement.canceled -= Movement;
+#endif
+    }
+
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<CharacterAnimation>();

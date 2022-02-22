@@ -75,6 +75,12 @@ public class ChestUI : MonoBehaviour
         PlayerBehaviour.playerInputActions.Chest.Select.performed += Select;
     }
 
+    private void OnDestroy() {
+        PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
+        PlayerBehaviour.playerInputActions.Chest.Navigation.performed -= Navigate;
+        PlayerBehaviour.playerInputActions.Chest.Select.performed -= Select;
+    }
+
     private void Navigate(InputAction.CallbackContext context) {
         this.slots[selectedIndex].Deselect();
         Vector2 delta = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());

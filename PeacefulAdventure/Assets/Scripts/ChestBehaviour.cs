@@ -54,4 +54,8 @@ public class ChestBehaviour : Interactable
         animator = GetComponent<Animator>();
         PlayerBehaviour.playerInputActions.Chest.Close.performed += OnInteraction;
     }
+
+    void OnDestroy() {
+        PlayerBehaviour.playerInputActions.Chest.Close.performed -= OnInteraction;
+    }
 }

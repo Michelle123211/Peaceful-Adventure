@@ -89,6 +89,14 @@ public class InventoryUI : MonoBehaviour {
         PlayerBehaviour.playerInputActions.Inventory.Back.performed += CloseInventory;
     }
 
+    private void OnDestroy() {
+        PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
+        PlayerBehaviour.playerInputActions.Inventory.Navigation.performed -= Navigate;
+        PlayerBehaviour.playerInputActions.Inventory.Select.performed -= Select;
+        PlayerBehaviour.playerInputActions.Inventory.Close.performed -= CloseInventory;
+        PlayerBehaviour.playerInputActions.Inventory.Back.performed -= CloseInventory;
+    }
+
     private void Navigate(InputAction.CallbackContext context) {
         this.slots[selectedRow, selectedColumn].Deselect();
         Vector2 delta = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());

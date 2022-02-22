@@ -44,6 +44,12 @@ public class ItemDetailsUI : MonoBehaviour {
         PlayerBehaviour.playerInputActions.ItemDetails.Back.performed += CloseDetails;
     }
 
+    private void OnDestroy() {
+        PlayerBehaviour.playerInputActions.ItemDetails.Use.performed -= Use;
+        PlayerBehaviour.playerInputActions.ItemDetails.CloseInventory.performed -= CloseInventory;
+        PlayerBehaviour.playerInputActions.ItemDetails.Back.performed -= CloseDetails;
+    }
+
     private void Use(InputAction.CallbackContext context) {
         UseItem();
     }

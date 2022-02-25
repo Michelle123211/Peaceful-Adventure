@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f26559a7c3dc31448a12133d8f13dfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextScene: HouseIndoor
 --- !u!1 &129397087
 GameObject:
   m_ObjectHideFlags: 0

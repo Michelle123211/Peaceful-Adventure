@@ -7,6 +7,7 @@ using UnityEngine;
 public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
 
     private PositionID ID;
+    private bool idInitialized = false;
 
     public bool IsFollowing { get; set; }
 
@@ -22,6 +23,7 @@ public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
     }
 
     public PositionID GetID() {
+        if (!this.idInitialized) InitializeID();
         return this.ID;
     }
 
@@ -40,7 +42,7 @@ public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
 
     protected override void Start() {
         base.Start();
-        this.ID = new PositionID { x = (int)transform.position.x, y = (int)transform.position.y };
+        if (!this.idInitialized) InitializeID();
     }
 
     //protected override void Update() {
@@ -51,6 +53,11 @@ public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
     //{
     //    base.FixedUpdate();
     //}
+
+    private void InitializeID() {
+        this.ID = new PositionID { x = (int)transform.position.x, y = (int)transform.position.y };
+        this.idInitialized = true;
+    }
 
     private void OnDrawGizmos() {
         Gizmos.DrawWireSphere(this.transform.position, attackRange);

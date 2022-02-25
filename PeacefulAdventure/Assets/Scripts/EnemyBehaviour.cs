@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EnemyBehaviour : MonoBehaviour
-{
+public abstract class EnemyBehaviour : MonoBehaviour {
+
     public float maxHealth = 60;
     protected float currentHealth;
 
@@ -18,6 +18,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     protected Vector2 movement;
 
+    public bool isDead = false;
+
     protected PlayerBehaviour player;
 
     protected Rigidbody2D rb;
@@ -27,13 +29,15 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected abstract void ComputeMovement();
 
     public virtual void TakeDamage(float damage) {
-        Debug.Log("Damage taken " + damage);
-        currentHealth -= damage;
-        if (currentHealth <= 0) {
-            Die();
-        } else {
-            animator.TakeDamage();
-            // TODO: play sound effect
+        if (!this.isDead) {
+            Debug.Log("Damage taken " + damage);
+            currentHealth -= damage;
+            if (currentHealth <= 0) {
+                Die();
+            } else {
+                animator.TakeDamage();
+                // TODO: play sound effect
+            }
         }
     }
 
@@ -41,11 +45,15 @@ public abstract class EnemyBehaviour : MonoBehaviour
         animator.Die();
         // TODO: play sound effect
         spriteRenderer.sortingLayerName = "EnemyBack";
-        this.enabled = false;
+        this.isDead = true;
     }
 
     protected virtual void Attack() {
         animator.Attack();
+    }
+
+    protected virtual void Awake() {
+        currentHealth = maxHealth;
     }
 
     // Start is called before the first frame update
@@ -54,14 +62,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
         animator = GetComponent<CharacterAnimation>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = FindObjectOfType<PlayerBehaviour>();
-        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
     protected virtual void Update() {
         Vector3 dir = this.player.transform.position - this.transform.position;
         // attack
-        if (!this.player.isDead && Time.time > this.nextAttackTime) {
+        if (!this.isDead && !this.player.isDead && Time.time > this.nextAttackTime) {
             if (dir.magnitude < attackRange) {
                 this.nextAttackTime = Time.time + this.attackCooldown;
                 Attack();
@@ -77,9 +84,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
 
     protected virtual void FixedUpdate() {
-        ComputeMovement();
-        if (movement != Vector2.zero)
-            rb.AddForce(movement * force);
-        animator.Move(movement);
+        if (!isDead) {
+            ComputeMovement();
+            if (movement != Vector2.zero)
+                rb.AddForce(movement * force);
+            animator.Move(movement);
+        }
     }
 }

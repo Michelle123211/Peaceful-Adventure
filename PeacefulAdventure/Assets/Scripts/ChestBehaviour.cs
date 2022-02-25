@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ChestBehaviour : Interactable
-{
+public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
+
     public List<Item> items = new List<Item>(5);
     [Tooltip("Time in seconds between start of animation and UI appearing")]
     [SerializeField] private float lag = 0.4f;
@@ -57,5 +57,17 @@ public class ChestBehaviour : Interactable
 
     void OnDestroy() {
         PlayerBehaviour.playerInputActions.Chest.Close.performed -= OnInteraction;
+    }
+
+    public PositionID GetID() {
+        return new PositionID { x = (int)transform.position.x, y = (int)transform.position.y };
+    }
+
+    public List<Item> SaveState() {
+        return this.items;
+    }
+
+    public void LoadState(List<Item> model) {
+        this.items = model;
     }
 }

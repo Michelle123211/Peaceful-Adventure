@@ -8,7 +8,7 @@ public class DoorBehaviour : Interactable
 {
     [SerializeField] string nextScene;
     protected override void OnInteraction(InputAction.CallbackContext context) {
-        SceneManager.LoadScene(this.nextScene);
-        string sceneName = SceneManager.GetActiveScene().name;
+        FindObjectOfType<SceneLoader>().LoadScene(this.nextScene);
+        //SceneManager.LoadScene(this.nextScene);
     }
 }

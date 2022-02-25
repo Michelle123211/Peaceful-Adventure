@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PickableItem : Interactable
-{
+public class PickableItem : Interactable, ISaveable<bool> {
+
     public Item item;
 
     private SpriteRenderer spriteRenderer;
@@ -21,5 +21,18 @@ public class PickableItem : Interactable
         this.spriteRenderer = GetComponent<SpriteRenderer>();
         if (this.spriteRenderer != null)
             this.spriteRenderer.sprite = item.icon;
+    }
+
+    public PositionID GetID() {
+        return new PositionID { x = (int)transform.position.x, y = (int)transform.position.y };
+    }
+
+    public bool SaveState() {
+        return true;
+    }
+
+    public void LoadState(bool model) {
+        if (!model)
+            Destroy(gameObject); // TODO: some effects
     }
 }

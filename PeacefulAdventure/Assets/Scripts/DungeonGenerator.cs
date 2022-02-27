@@ -24,7 +24,33 @@ public class DungeonGenerator : MonoBehaviour
         // TODO: Uncomment
         //DirectionPicker.Initialize();
 
+        GenerateRoomsAndCorridors();
+        
+        DrawDungeon();
+    }
 
+    // TODO: Would be called directly from SceneLoader, if previous state should be loaded?
+    public void DrawDungeon() {
+        groundTilemap.ClearAllTiles();
+        wallTilemap.ClearAllTiles();
+
+        DrawFloor();
+        DrawWalls();
+    }
+
+    public void SetState(DungeonState state) {
+        this.ground = state.ground;
+    }
+
+    private void AddRoom(BoundsInt room) {
+        for (int x = room.min.x; x < room.min.x + room.size.x; x++) {
+            for (int y = room.min.y; y < room.min.y + room.size.y; y++) {
+                this.ground.Add(new Vector2Int(x, y));
+            }
+        }
+    }
+
+    private void GenerateRoomsAndCorridors() {
         this.ground = new HashSet<Vector2Int>();
 
         // generate rooms, one after another, rooms will be adjacent, divided only by one row of wall (no corridors, tileset is not prepared for corridors going down)
@@ -34,7 +60,7 @@ public class DungeonGenerator : MonoBehaviour
         BoundsInt currentRoom = new BoundsInt(position, size);
         AddRoom(currentRoom);
 
-        BoundsInt previousRoom;
+        BoundsInt previousRoom, corridor = new BoundsInt();
         Direction direction;
         int numOfRooms = Random.Range(minNumOfRooms - 1, maxNumOfRooms);
         for (int i = 0; i < numOfRooms; i++) {
@@ -43,36 +69,38 @@ public class DungeonGenerator : MonoBehaviour
             // then continue by selecting random direction (not opposite the 2 last selected, for the first room only right or bottom)
             direction = DirectionPicker.GetNextDirection();
             // select, where there will be opening to the next room (horizontal may be only 1 high, vertical must be at least 2 wide)
+            // and add corridor
             int ySplit, xSplit;
             switch (direction) {
                 case Direction.Left:
                     ySplit = previousRoom.min.y + Random.Range(1, previousRoom.size.y);
                     position = new Vector3Int(previousRoom.min.x - 1 - size.x, ySplit - Random.Range(1, size.y - 1), 0);
+                    corridor = new BoundsInt(new Vector3Int(previousRoom.min.x - 1, ySplit, 0), new Vector3Int(1, 1, 0));
                     break;
                 case Direction.Right:
                     ySplit = previousRoom.min.y + Random.Range(1, previousRoom.size.y);
                     position = new Vector3Int(previousRoom.max.x + 1, ySplit - Random.Range(1, size.y - 1), 0);
+                    corridor = new BoundsInt(new Vector3Int(previousRoom.max.x, ySplit, 0), new Vector3Int(1, 1, 0));
                     break;
                 case Direction.Up:
                     xSplit = previousRoom.min.x + Random.Range(1, previousRoom.size.x);
-                    position = new Vector3Int(xSplit - Random.Range(1, size.x - 1), previousRoom.max.y + 1, 0);
+                    position = new Vector3Int(xSplit - Random.Range(1, size.x - 1), previousRoom.max.y + 2, 0);
+                    corridor = new BoundsInt(new Vector3Int(xSplit - 1, previousRoom.max.y, 0), new Vector3Int(2, 2, 0));
                     break;
                 case Direction.Down:
                     xSplit = previousRoom.min.x + Random.Range(1, previousRoom.size.x);
-                    position = new Vector3Int(xSplit - Random.Range(1, size.x - 1), previousRoom.min.y - 1 - size.y, 0);
+                    position = new Vector3Int(xSplit - Random.Range(1, size.x - 1), previousRoom.min.y - 2 - size.y, 0);
+                    corridor = new BoundsInt(new Vector3Int(xSplit - 1, previousRoom.min.y - 2, 0), new Vector3Int(2, 2, 0));
                     break;
             }
             // generate a new room adjacent to the previous one, in the selected direction and with the selected opening
             currentRoom = new BoundsInt(position, size);
             AddRoom(currentRoom);
+            AddRoom(corridor);
         }
-        DrawDungeon();
     }
 
-    // TODO: Would be called directly from SceneLoader, if previous state should be loaded?
-    public void DrawDungeon() {
-        groundTilemap.ClearAllTiles();
-        wallTilemap.ClearAllTiles();
+    private void DrawFloor() {
         foreach (var position in this.ground) {
             //Debug.Log("Tile on position: " + position.x + "," + position.y);
             var tilePosition = groundTilemap.WorldToCell((Vector3Int)position);
@@ -80,16 +108,8 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public void SetArea(HashSet<Vector2Int> ground) {
-        this.ground = ground;
-    }
-
-    private void AddRoom(BoundsInt room) {
-        for (int x = room.min.x; x < room.min.x + room.size.x; x++) {
-            for (int y = room.min.y; y < room.min.y + room.size.y; y++) {
-                this.ground.Add(new Vector2Int(x, y));
-            }
-        }
+    private void DrawWalls() { 
+    
     }
 }
 
@@ -122,6 +142,10 @@ static class DirectionPicker {
         Debug.Log("Picked direction: " + ((Direction)index).ToString());
         return (Direction)index;
     }
+}
+
+public class DungeonState {
+    public HashSet<Vector2Int> ground = new HashSet<Vector2Int>();
 }
 
 // TODO: Enums for ground and wall tiles - with numbers corresponding to bitmasks of neighbours

@@ -9,22 +9,26 @@ public class DungeonGenerator : MonoBehaviour
     public int minNumOfRooms, maxNumOfRooms;
 
     [SerializeField] private Tilemap wallTilemap;
+    [SerializeField] private Tilemap outterWallTilemap;
     [SerializeField] private Tilemap groundTilemap;
 
     [SerializeField] private TileBase voidTile;
 
-    [SerializeField] private List<TileBase> groundTile;
-    [SerializeField] private List<TileBase> wallTile;
+    [SerializeField] private TileBase groundTile;
+    [SerializeField] private TileBase wallTile;
+    [SerializeField] private TileBase outterWallTile;
 
     private HashSet<Vector2Int> ground;
+    private HashSet<Vector2Int> walls;
+    private HashSet<Vector2Int> outterWalls;
 
     // TODO: Would be called from SceneLoader, if new state should not be loaded?
     public void GenerateDungeon() {
 
-        // TODO: Uncomment
-        //DirectionPicker.Initialize();
+        DirectionPicker.Initialize();
 
         GenerateRoomsAndCorridors();
+        GenerateWalls();
         
         DrawDungeon();
     }
@@ -33,13 +37,15 @@ public class DungeonGenerator : MonoBehaviour
     public void DrawDungeon() {
         groundTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
+        outterWallTilemap.ClearAllTiles();
 
-        DrawFloor();
+        DrawGround();
         DrawWalls();
     }
 
     public void SetState(DungeonState state) {
         this.ground = state.ground;
+        // TODO: Set other things as well
     }
 
     private void AddRoom(BoundsInt room) {
@@ -100,16 +106,60 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void DrawFloor() {
+    private void GenerateWalls() {
+        this.walls = new HashSet<Vector2Int>();
+        this.outterWalls = new HashSet<Vector2Int>();
+        Vector2Int[] directions = { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left,
+            Vector2Int.up+Vector2Int.right, Vector2Int.right+Vector2Int.down , Vector2Int.down+Vector2Int.left, Vector2Int.left+Vector2Int.up };
         foreach (var position in this.ground) {
-            //Debug.Log("Tile on position: " + position.x + "," + position.y);
-            var tilePosition = groundTilemap.WorldToCell((Vector3Int)position);
-            groundTilemap.SetTile(tilePosition, voidTile);
+            foreach (var direction in directions) {
+                var neighbourPos = position + direction;
+                if (!this.ground.Contains(neighbourPos)) {
+                    if (direction == Vector2Int.up) { // in the up direction the walls have height 2
+                        this.walls.Add(neighbourPos);
+                        this.outterWalls.Add(neighbourPos + Vector2Int.up);
+                    } else {
+                        this.outterWalls.Add(neighbourPos);
+                        neighbourPos += Vector2Int.up;
+                        if (direction.y == Vector2Int.up.y && !this.ground.Contains(neighbourPos)) { // in the up direction the walls have height 2
+                            this.outterWalls.Add(neighbourPos);
+                        }
+                    }
+                }
+            }
+        }
+        // remove floor underneath a wall if necessary
+        foreach (var position in this.walls) {
+            if (this.ground.Contains(position)) {
+                this.ground.Remove(position);
+            }
+        }
+        foreach (var position in this.outterWalls) {
+            if (this.ground.Contains(position)) {
+                this.ground.Remove(position);
+            }
         }
     }
 
-    private void DrawWalls() { 
-    
+    // TODO: Predelat, aby byla jedna obecna metoda, predam Tilemap, TileBase a HasSet, vykresli to
+
+    private void DrawGround() {
+        foreach (var position in this.ground) {
+            //Debug.Log("Tile on position: " + position.x + "," + position.y);
+            var tilePosition = groundTilemap.WorldToCell((Vector3Int)position);
+            groundTilemap.SetTile(tilePosition, groundTile);
+        }
+    }
+
+    private void DrawWalls() {
+        foreach (var position in this.walls) {
+            var tilePosition = wallTilemap.WorldToCell((Vector3Int)position);
+            wallTilemap.SetTile(tilePosition, wallTile);
+        }
+        foreach (var position in this.outterWalls) {
+            var tilePosition = outterWallTilemap.WorldToCell((Vector3Int)position);
+            outterWallTilemap.SetTile(tilePosition, outterWallTile);
+        }
     }
 }
 

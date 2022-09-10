@@ -3,44 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DungeonGenerator : MonoBehaviour
-{
+public class DungeonGenerator : MonoBehaviour {
     public int minRoomWidth, maxRoomWidth, minRoomHeight, maxRoomHeight;
     public int minNumOfRooms, maxNumOfRooms;
 
     [SerializeField] private Tilemap wallTilemap;
-    [SerializeField] private Tilemap outterWallTilemap;
     [SerializeField] private Tilemap groundTilemap;
-
-    [SerializeField] private TileBase voidTile;
 
     [SerializeField] private TileBase groundTile;
     [SerializeField] private TileBase wallTile;
     [SerializeField] private TileBase outterWallTile;
 
-    private HashSet<Vector2Int> ground;
-    private HashSet<Vector2Int> walls;
-    private HashSet<Vector2Int> outterWalls;
+    [SerializeField] private GameObject skeletonPrefab;
+    [SerializeField] private Transform skeletonsParent;
+    [SerializeField] private GameObject chestPrefab;
+    [SerializeField] private Transform chestsParent;
+
+    private HashSet<Vector2Int> ground = new HashSet<Vector2Int>();
+    private HashSet<Vector2Int> walls = new HashSet<Vector2Int>();
+    private HashSet<Vector2Int> outterWalls = new HashSet<Vector2Int>();
+
+    private HashSet<Vector2Int> skeletons = new HashSet<Vector2Int>();
+    private HashSet<Vector2Int> chests = new HashSet<Vector2Int>();
 
     // TODO: Would be called from SceneLoader, if new state should not be loaded?
     public void GenerateDungeon() {
 
         DirectionPicker.Initialize();
 
+        ClearEverything();
+
         GenerateRoomsAndCorridors();
         GenerateWalls();
-        
+
         DrawDungeon();
     }
 
     // TODO: Would be called directly from SceneLoader, if previous state should be loaded?
     public void DrawDungeon() {
-        groundTilemap.ClearAllTiles();
-        wallTilemap.ClearAllTiles();
-        outterWallTilemap.ClearAllTiles();
+        DrawTiles(groundTilemap, groundTile, ground);
+        DrawTiles(wallTilemap, outterWallTile, outterWalls);
+        DrawTiles(wallTilemap, wallTile, walls);
 
-        DrawGround();
-        DrawWalls();
+        DrawGameObjects(skeletonsParent, skeletonPrefab, skeletons);
+        DrawGameObjects(chestsParent, chestPrefab, chests);
     }
 
     public void SetState(DungeonState state) {
@@ -48,16 +54,58 @@ public class DungeonGenerator : MonoBehaviour
         // TODO: Set other things as well
     }
 
-    private void AddRoom(BoundsInt room) {
+    private void ClearEverything() {
+        groundTilemap.ClearAllTiles();
+        wallTilemap.ClearAllTiles();
+        RemoveGameObjects(skeletonsParent);
+        RemoveGameObjects(chestsParent);
+
+        this.ground = new HashSet<Vector2Int>();
+        this.skeletons = new HashSet<Vector2Int>();
+        this.chests = new HashSet<Vector2Int>();
+        this.walls = new HashSet<Vector2Int>();
+        this.outterWalls = new HashSet<Vector2Int>();
+    }
+
+    private void RemoveGameObjects(Transform parent) {
+        while (parent.childCount > 0) {
+            DestroyImmediate(parent.GetChild(0).gameObject);
+        }
+    }
+
+    private void AddRoom(BoundsInt room, bool addChest = false) {
         for (int x = room.min.x; x < room.min.x + room.size.x; x++) {
             for (int y = room.min.y; y < room.min.y + room.size.y; y++) {
                 this.ground.Add(new Vector2Int(x, y));
             }
         }
+        // if the room is big enough, add skeletons and chests
+        int size = room.size.x * room.size.y;
+        if (size > 20) {
+            int numOfSkeletons = size / 30;
+            int numOfChests = addChest ? 1 : 0;
+            // select a random placement for everything
+            List<int> positionIndex = new List<int>();
+            while (positionIndex.Count < numOfSkeletons + numOfChests) { 
+                int r = Random.Range(0, size - 1);
+                if (!positionIndex.Contains(r))
+                    positionIndex.Add(r);
+            }
+            // store positions of the skeletons and chests
+            for (int i = 0; i < positionIndex.Count; ++i) {
+                int posIdx = positionIndex[i];
+                Vector2Int position = new Vector2Int(room.min.x + (posIdx % room.size.x), room.min.y + (posIdx / room.size.x));
+                if (i < numOfSkeletons) {
+                    if (Vector2Int.Distance(Vector2Int.zero, position) > 5) // not too close to the player's initial position
+                        this.skeletons.Add(position);
+                } else {
+                    this.chests.Add(position);
+                }
+            }
+        }
     }
 
     private void GenerateRoomsAndCorridors() {
-        this.ground = new HashSet<Vector2Int>();
 
         // generate rooms, one after another, rooms will be adjacent, divided only by one row of wall (no corridors, tileset is not prepared for corridors going down)
         // first room should contain 0,0 (starting position of player) in the top left corner
@@ -101,14 +149,15 @@ public class DungeonGenerator : MonoBehaviour
             }
             // generate a new room adjacent to the previous one, in the selected direction and with the selected opening
             currentRoom = new BoundsInt(position, size);
-            AddRoom(currentRoom);
+            if (i < numOfRooms - 1)
+                AddRoom(currentRoom);
+            else
+                AddRoom(currentRoom, true); // add a chest to the last room
             AddRoom(corridor);
         }
     }
 
     private void GenerateWalls() {
-        this.walls = new HashSet<Vector2Int>();
-        this.outterWalls = new HashSet<Vector2Int>();
         Vector2Int[] directions = { Vector2Int.up, Vector2Int.right, Vector2Int.down, Vector2Int.left,
             Vector2Int.up+Vector2Int.right, Vector2Int.right+Vector2Int.down , Vector2Int.down+Vector2Int.left, Vector2Int.left+Vector2Int.up };
         foreach (var position in this.ground) {
@@ -128,37 +177,25 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-        // remove floor underneath a wall if necessary
-        foreach (var position in this.walls) {
-            if (this.ground.Contains(position)) {
-                this.ground.Remove(position);
-            }
-        }
-        foreach (var position in this.outterWalls) {
-            if (this.ground.Contains(position)) {
-                this.ground.Remove(position);
-            }
+        // remove floor or other objects underneath a wall if necessary
+        this.ground.Subtract(this.walls);
+        this.ground.Subtract(this.outterWalls);
+        this.skeletons.Subtract(this.walls);
+        this.skeletons.Subtract(this.outterWalls);
+        this.chests.Subtract(this.walls);
+        this.chests.Subtract(this.outterWalls);
+    }
+
+    private void DrawTiles(Tilemap tilemap, TileBase tile, HashSet<Vector2Int> positions) {
+        foreach (var position in positions) {
+            var tilePosition = tilemap.WorldToCell((Vector3Int)position);
+            tilemap.SetTile(tilePosition, tile);
         }
     }
 
-    // TODO: Predelat, aby byla jedna obecna metoda, predam Tilemap, TileBase a HasSet, vykresli to
-
-    private void DrawGround() {
-        foreach (var position in this.ground) {
-            //Debug.Log("Tile on position: " + position.x + "," + position.y);
-            var tilePosition = groundTilemap.WorldToCell((Vector3Int)position);
-            groundTilemap.SetTile(tilePosition, groundTile);
-        }
-    }
-
-    private void DrawWalls() {
-        foreach (var position in this.walls) {
-            var tilePosition = wallTilemap.WorldToCell((Vector3Int)position);
-            wallTilemap.SetTile(tilePosition, wallTile);
-        }
-        foreach (var position in this.outterWalls) {
-            var tilePosition = outterWallTilemap.WorldToCell((Vector3Int)position);
-            outterWallTilemap.SetTile(tilePosition, outterWallTile);
+    private void DrawGameObjects(Transform parent, GameObject original, HashSet<Vector2Int> positions) {
+        foreach (var position in positions) {
+            Instantiate(original, (Vector3)((Vector2)position + Vector2.one * 0.5f), Quaternion.identity, parent);
         }
     }
 }
@@ -176,59 +213,24 @@ static class DirectionPicker {
         if (prohibited[0] == prohibited[1]) numOfAllowed = 3;
         else numOfAllowed = 2;
         // get next direction
-        //Debug.Log("Prohibited: " + ((Direction)prohibited[0]).ToString() + " and " + ((Direction)prohibited[1]).ToString());
         int next = Random.Range(0, numOfAllowed);
-        //Debug.Log("Generated next: " + next);
         int index = next;
         if (next >= prohibited[0]) index++;
         if (prohibited[0] != prohibited[1] && next >= prohibited[1]) index++;
-        //for (int i = 0; i <= next; i++) {
-        //    if (prohibited[0] == i || prohibited[1] == i) index++;
-        //}
         // update fields
         prohibited[0] = prohibited[1];
         prohibited[1] = (index + 2) % 4; // prohibit the opposite direction
         // return the direction
-        Debug.Log("Picked direction: " + ((Direction)index).ToString());
         return (Direction)index;
     }
 }
-
-public class DungeonState {
-    public HashSet<Vector2Int> ground = new HashSet<Vector2Int>();
-}
-
-// TODO: Enums for ground and wall tiles - with numbers corresponding to bitmasks of neighbours
-
-enum Direction { 
+enum Direction {
     Up,
     Right,
     Down,
     Left
 }
 
-enum GroundTile {
-    TopLeftCorner,
-    TopRightCorner,
-    TopEdge,
-    RightEdge,
-    LeftEdge,
-    Middle,
-    LeftInnerCorner,
-    RightInnerCorner//,
-    //LeftRightInnerCorner,
-    //VerticalCorridor
-}
-
-
-enum WallTile { 
-    Top,
-    Bottom,
-    Horizontal,
-    LeftEnd,
-    Crossroad,
-    TopCrossroad,
-    RightCrossroad,
-    BottomCrossroad,
-    LeftCrossroad,
+public class DungeonState {
+    public HashSet<Vector2Int> ground = new HashSet<Vector2Int>();
 }

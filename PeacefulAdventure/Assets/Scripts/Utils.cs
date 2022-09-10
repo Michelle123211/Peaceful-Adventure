@@ -62,4 +62,12 @@ public static class Utils
         else
             go.SetActive(false);
     }
+
+    public static void Subtract<T>(this HashSet<T> subtractFrom, HashSet<T> subtractWhat) {
+        foreach (var item in subtractWhat) {
+            if (subtractFrom.Contains(item)) {
+                subtractFrom.Remove(item);
+            }
+        }
+    }
 }

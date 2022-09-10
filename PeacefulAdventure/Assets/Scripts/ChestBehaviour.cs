@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
 
-    public List<Item> items = new List<Item>(5);
+    public List<Item> items = new List<Item>();
     [Tooltip("Time in seconds between start of animation and UI appearing")]
     [SerializeField] private float lag = 0.4f;
 

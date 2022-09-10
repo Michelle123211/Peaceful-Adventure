@@ -47,10 +47,10 @@ public class ChestUI : MonoBehaviour
         }
         // select first slot
         if (selectedIndex >= this.slots.Length) {
-            this.slots[selectedIndex].Deselect();
             selectedIndex = 0;
         }
-        this.slots[selectedIndex].Select();
+        if (selectedIndex < this.slots.Length)
+            this.slots[selectedIndex].Select();
     }
 
     public void Clear() {
@@ -82,14 +82,16 @@ public class ChestUI : MonoBehaviour
     }
 
     private void Navigate(InputAction.CallbackContext context) {
-        this.slots[selectedIndex].Deselect();
+        if (selectedIndex < this.slots.Length)
+            this.slots[selectedIndex].Deselect();
         Vector2 delta = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());
         selectedIndex += (int)delta.x;
         if (selectedIndex < 0)
-            selectedIndex = this.slots.Length - 1;
+            selectedIndex = Mathf.Max(this.slots.Length - 1, 0);
         if (selectedIndex >= this.slots.Length)
             selectedIndex = 0;
-        this.slots[selectedIndex].Select();
+        if (selectedIndex < this.slots.Length)
+            this.slots[selectedIndex].Select();
     }
 
     private void Select(InputAction.CallbackContext context) {

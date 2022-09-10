@@ -47,6 +47,7 @@ public class DungeonGenerator : MonoBehaviour {
 
         DrawGameObjects(skeletonsParent, skeletonPrefab, skeletons);
         DrawGameObjects(chestsParent, chestPrefab, chests);
+        InitializeChests();
     }
 
     public void SetState(DungeonState state) {
@@ -196,6 +197,17 @@ public class DungeonGenerator : MonoBehaviour {
     private void DrawGameObjects(Transform parent, GameObject original, HashSet<Vector2Int> positions) {
         foreach (var position in positions) {
             Instantiate(original, (Vector3)((Vector2)position + Vector2.one * 0.5f), Quaternion.identity, parent);
+        }
+    }
+
+    private void InitializeChests() {
+        foreach (Transform chest in chestsParent) {
+            ChestBehaviour chestBeh = chest.gameObject.GetComponent<ChestBehaviour>();
+            if (chestBeh != null) {
+                int minCount = 3;
+                int maxCount = Mathf.Min(Mathf.Max(skeletons.Count, 1) * 2, 12);
+                chestBeh.InitializeItemsRandomly(Random.Range(minCount, maxCount));
+            }
         }
     }
 }

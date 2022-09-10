@@ -8,12 +8,22 @@ public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
     public List<Item> items = new List<Item>();
     [Tooltip("Time in seconds between start of animation and UI appearing")]
     [SerializeField] private float lag = 0.4f;
+    [Tooltip("A list of items which will be used for random initialization")]
+    [SerializeField] private List<Item> itemsToPickRandomly = new List<Item>();
 
     Animator animator;
     bool isOpen = false;
 
     public void Close() {
         OnInteraction(new InputAction.CallbackContext());
+    }
+
+    public void InitializeItemsRandomly(int count) {
+        items.Clear();
+        Debug.Log("Creating " + count + " items.");
+        for (int i = 0; i < count; ++i) {
+            items.Add(itemsToPickRandomly[Random.Range(0, itemsToPickRandomly.Count - 1)]);
+        }
     }
 
     public void RemoveItem(Item item) {

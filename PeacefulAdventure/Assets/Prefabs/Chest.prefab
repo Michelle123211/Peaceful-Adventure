@@ -120,6 +120,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   lag: 0.4
+  itemsToPickRandomly:
+  - {fileID: 11400000, guid: 3d2f4cfa0b85c774482d7166ac3a2b80, type: 2}
+  - {fileID: 11400000, guid: 1ec017c9e6e816d4a9f5a90819e5c6c4, type: 2}
+  - {fileID: 11400000, guid: e9cf6ca807ed9f546b1f3cf07a1c8c05, type: 2}
+  - {fileID: 11400000, guid: 22f946eb93fafab4bb39beceb74a2140, type: 2}
+  - {fileID: 11400000, guid: 59bc64332f3d215458b6f1bb468fa267, type: 2}
+  - {fileID: 11400000, guid: cfb5898d06ca3db499c745dd998fd3fa, type: 2}
 --- !u!58 &5556638608422060348
 CircleCollider2D:
   m_ObjectHideFlags: 0

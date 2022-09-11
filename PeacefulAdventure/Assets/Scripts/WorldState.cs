@@ -27,6 +27,7 @@ public class WorldStateRepresentation {
     public Dictionary<PositionID, List<Item>> chests = new Dictionary<PositionID, List<Item>>();
     public Dictionary<PositionID, SkeletonState> skeletons = new Dictionary<PositionID, SkeletonState>();
     public Dictionary<PositionID, bool> items = new Dictionary<PositionID, bool>();
+    public DungeonState dungeonState = null;
 }
 
 public interface ISaveable<State> {

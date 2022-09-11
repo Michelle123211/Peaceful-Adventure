@@ -26,12 +26,8 @@ public class DungeonGenerator : MonoBehaviour {
     private HashSet<Vector2Int> skeletons = new HashSet<Vector2Int>();
     private HashSet<Vector2Int> chests = new HashSet<Vector2Int>();
 
-    // TODO: Would be called from SceneLoader, if new state should not be loaded?
     public void GenerateDungeon() {
-
-        DirectionPicker.Initialize();
-
-        ClearEverything();
+        Initialize();
 
         GenerateRoomsAndCorridors();
         GenerateWalls();
@@ -39,8 +35,9 @@ public class DungeonGenerator : MonoBehaviour {
         DrawDungeon();
     }
 
-    // TODO: Would be called directly from SceneLoader, if previous state should be loaded?
     public void DrawDungeon() {
+        ClearEverything();
+
         DrawTiles(groundTilemap, groundTile, ground);
         DrawTiles(wallTilemap, outterWallTile, outterWalls);
         DrawTiles(wallTilemap, wallTile, walls);
@@ -50,22 +47,43 @@ public class DungeonGenerator : MonoBehaviour {
         InitializeChests();
     }
 
-    public void SetState(DungeonState state) {
-        this.ground = state.ground;
-        // TODO: Set other things as well
+    public DungeonState GetState() {
+        DungeonState state = new DungeonState();
+        state.ground = this.ground;
+        state.walls = this.walls;
+        state.outterWalls = this.outterWalls;
+        state.skeletons = this.skeletons;
+        state.chests = this.chests;
+        return state;
     }
+
+    public void SetState(DungeonState state) {
+        if (state == null) {
+            Initialize();
+            return;
+        }
+        this.ground = state.ground;
+        this.walls = state.walls;
+        this.outterWalls = state.outterWalls;
+        this.skeletons = state.skeletons;
+        this.chests = state.chests;
+}
 
     private void ClearEverything() {
         groundTilemap.ClearAllTiles();
         wallTilemap.ClearAllTiles();
         RemoveGameObjects(skeletonsParent);
         RemoveGameObjects(chestsParent);
+    }
 
+    private void Initialize() {
         this.ground = new HashSet<Vector2Int>();
         this.skeletons = new HashSet<Vector2Int>();
         this.chests = new HashSet<Vector2Int>();
         this.walls = new HashSet<Vector2Int>();
         this.outterWalls = new HashSet<Vector2Int>();
+
+        DirectionPicker.Initialize();
     }
 
     private void RemoveGameObjects(Transform parent) {
@@ -245,4 +263,9 @@ enum Direction {
 
 public class DungeonState {
     public HashSet<Vector2Int> ground = new HashSet<Vector2Int>();
+    public HashSet<Vector2Int> walls = new HashSet<Vector2Int>();
+    public HashSet<Vector2Int> outterWalls = new HashSet<Vector2Int>();
+
+    public HashSet<Vector2Int> skeletons = new HashSet<Vector2Int>();
+    public HashSet<Vector2Int> chests = new HashSet<Vector2Int>();
 }

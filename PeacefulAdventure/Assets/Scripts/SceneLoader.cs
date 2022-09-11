@@ -26,10 +26,19 @@ public class SceneLoader : MonoBehaviour {
     private void LoadState(string currentScene) {
         WorldStateRepresentation state;
         if (WorldState.Instance.sceneStates.TryGetValue(currentScene, out state)) {
+            if (currentScene == "Dungeon") {
+                DungeonGenerator dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+                dungeonGenerator?.SetState(state.dungeonState);
+                dungeonGenerator?.DrawDungeon();
+            }
             FindObjectOfType<PlayerBehaviour>().gameObject.transform.position = state.playerPosition; // player's position
             LoadBehaviour<ChestBehaviour, List<Item>>(state.chests); // chests
             LoadBehaviour<SkeletonBehaviour, SkeletonState>(state.skeletons); // skeletons
             LoadBehaviour<PickableItem, bool>(state.items); // items
+        } else if (currentScene == "Dungeon") {
+            // generate a new dungeon
+            DungeonGenerator dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+            dungeonGenerator?.GenerateDungeon();
         }
     }
 
@@ -48,6 +57,10 @@ public class SceneLoader : MonoBehaviour {
 
     private void SaveState(string currentScene) {
         WorldStateRepresentation state = new WorldStateRepresentation();
+        if (currentScene == "Dungeon") {
+            DungeonGenerator dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+            state.dungeonState = dungeonGenerator?.GetState();
+        }
         state.playerPosition = FindObjectOfType<PlayerBehaviour>().gameObject.transform.position; // player's position
         SaveBehaviour<ChestBehaviour, List<Item>>(state.chests); // chests
         SaveBehaviour<SkeletonBehaviour, SkeletonState>(state.skeletons); // skeletons

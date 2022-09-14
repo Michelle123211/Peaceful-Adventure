@@ -24,8 +24,10 @@ public class CharacterAnimation : MonoBehaviour
             animator.SetBool("IsWalking", false);
 #endif
 #if FORCE_MOVEMENT
-            if (rb.velocity.x < 0.1 && rb.velocity.y < 0.1) { // switch animation to idle when the character is actually stopped
-                animator.SetBool("IsWalking", false);
+            if (rb != null) { // sometimes this method is called from FixedUpdate even before an initialization
+                if (rb.velocity.x < 0.1 && rb.velocity.y < 0.1) { // switch animation to idle when the character is actually stopped
+                    animator.SetBool("IsWalking", false);
+                }
             }
 #endif
         } else {

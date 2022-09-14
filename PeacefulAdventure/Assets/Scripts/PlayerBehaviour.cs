@@ -20,7 +20,12 @@ public class PlayerBehaviour : MonoBehaviour
 
     public bool isDead = false;
 
+    [Tooltip("The minimum time between two consecutive damages.")]
+    public float damageCooldown = 1f;
+    float previousDamage = 0f;
+
     public static PlayerInputActions playerInputActions;
+
     Rigidbody2D rb;
     CharacterAnimation animator;
 
@@ -33,14 +38,19 @@ public class PlayerBehaviour : MonoBehaviour
     private InventoryUI inventoryUI;
 
     public void TakeDamage(float damage) {
-        Debug.Log("Player damage taken " + damage);
-        PlayerState.Instance.UpdateHealth(-damage);
-        // TODO: play sound effect
-        if (PlayerState.Instance.CurrentHealth <= 0) {
-            Die();
-        } else {
-            animator.TakeDamage();
+        if (Time.time - previousDamage > damageCooldown) { // the current damage has not come too soon after the last one
+            Debug.Log("Player damage taken " + damage);
+            PlayerState.Instance.UpdateHealth(-damage);
             // TODO: play sound effect
+            if (PlayerState.Instance.CurrentHealth <= 0) {
+                Die();
+            } else {
+                animator.TakeDamage();
+                // TODO: play sound effect
+            }
+            previousDamage = Time.time;
+        } else {
+            Debug.Log("Player did not take damage (it is too early).");
         }
     }
 

@@ -28,9 +28,13 @@ public class PlayerState : MonoBehaviour {
     public Stat attackCooldown = new Stat(0.5f);
     //public float attackCooldown = 0.5f;
 
-    private int level = 1;
-    private float experience = 0;
-    private float experienceStep = 100;
+    public AnimationCurve experienceNeeded;
+    [Min(1)]
+    public int MaxLevel = 30;
+    public int MaxExperience = 2700;
+
+    public int Level { get; private set; } = 0;
+    public int Experience { get; private set; } = 0;
 
     [Tooltip("Number of slots in the inventory")]
     [SerializeField] private int inventorySlots = 18;
@@ -43,12 +47,22 @@ public class PlayerState : MonoBehaviour {
         if (CurrentHealth > maxHealth) CurrentHealth = maxHealth;
     }
 
-    public void UpdateExperience(float delta) {
-        experience += delta;
-        if (experience > experienceStep * level) {
-            experience -= experienceStep * level;
-            level++;
+    public void UpdateExperience(int delta) {
+        if (Level >= MaxLevel) return;
+        Experience += delta;
+        int nextLevelExperience = GetExperienceNeededForLevel(Level + 1);
+        // level up if needed
+        while (nextLevelExperience - Experience <= 0 && Level < MaxLevel) {
+            Level++;
+            nextLevelExperience = GetExperienceNeededForLevel(Level + 1);
         }
+        Debug.Log($"Current level: {Level}");
+        Debug.Log($"Current XP: {Experience}");
+        Debug.Log($"XP needed: {nextLevelExperience}");
+    }
+
+    public int GetExperienceNeededForLevel(int level) {
+        return (int)(experienceNeeded.Evaluate(level / (float)MaxLevel) * MaxExperience);
     }
 
     private void Start() {

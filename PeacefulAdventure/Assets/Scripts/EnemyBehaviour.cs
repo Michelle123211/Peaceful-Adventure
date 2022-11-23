@@ -43,6 +43,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void Die() {
         animator.Die();
+        PlayerState.Instance.UpdateExperience(3); // add experience points
         // TODO: play sound effect
         spriteRenderer.sortingLayerName = "EnemyBack";
         this.isDead = true;

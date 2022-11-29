@@ -32,7 +32,7 @@ public class SceneLoader : MonoBehaviour {
                 dungeonGenerator?.DrawDungeon();
             }
             FindObjectOfType<PlayerBehaviour>().gameObject.transform.position = state.playerPosition; // player's position
-            LoadBehaviour<ChestBehaviour, List<Item>>(state.chests); // chests
+            LoadBehaviour<ChestBehaviour, List<InventoryItem>>(state.chests); // chests
             LoadBehaviour<SkeletonBehaviour, SkeletonState>(state.skeletons); // skeletons
             LoadBehaviour<PickableItem, bool>(state.items); // items
         } else if (currentScene == "Dungeon") {
@@ -62,7 +62,7 @@ public class SceneLoader : MonoBehaviour {
             state.dungeonState = dungeonGenerator?.GetState();
         }
         state.playerPosition = FindObjectOfType<PlayerBehaviour>().gameObject.transform.position; // player's position
-        SaveBehaviour<ChestBehaviour, List<Item>>(state.chests); // chests
+        SaveBehaviour<ChestBehaviour, List<InventoryItem>>(state.chests); // chests
         SaveBehaviour<SkeletonBehaviour, SkeletonState>(state.skeletons); // skeletons
         SaveBehaviour<PickableItem, bool>(state.items); // items
         WorldState.Instance.sceneStates[currentScene] = state;

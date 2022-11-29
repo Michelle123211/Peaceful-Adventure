@@ -20,6 +20,7 @@ public class ChestUI : MonoBehaviour
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.Chest.Enable();
         this.chest = chest;
+        Debug.Log("Opening a chest");
         Refresh();
         GetComponent<AppearHideComponent>().Do();
     }
@@ -36,13 +37,14 @@ public class ChestUI : MonoBehaviour
 
     public void Refresh() {
         Clear();
+        // add slots for the items
         for (int i = 0; i < this.chest.items.Count; ++i) {
             GameObject newSlot = Instantiate(itemSlotPrefab);
             newSlot.SetActive(true);
             newSlot.transform.SetParent(itemsGrid.transform, false);
             ItemSlotUI slotUI = newSlot.GetComponent<ItemSlotUI>();
             this.slots[i] = slotUI;
-            this.slots[i].SetItem(new InventoryItem(chest.items[i]));
+            this.slots[i].SetItem(chest.items[i]);
             this.slots[i].SetChestUI(this);
         }
         // select first slot
@@ -58,6 +60,11 @@ public class ChestUI : MonoBehaviour
         for (int i = c - 1; i >= 1; --i) { // 0th item is template
             GameObject.Destroy(itemsGrid.transform.GetChild(i).gameObject);
         }
+        // make sure at least one empty slot is displayed
+        if (this.chest.items == null)
+            this.chest.items = new List<InventoryItem>();
+        if (this.chest.items.Count == 0)
+            this.chest.items.Add(null);
         this.slots = new ItemSlotUI[chest.items.Count];
     }
 

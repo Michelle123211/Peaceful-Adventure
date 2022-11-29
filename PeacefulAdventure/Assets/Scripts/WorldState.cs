@@ -24,7 +24,7 @@ public class WorldState : MonoBehaviour
 
 public class WorldStateRepresentation {
     public Vector2 playerPosition = Vector2.zero;
-    public Dictionary<PositionID, List<Item>> chests = new Dictionary<PositionID, List<Item>>();
+    public Dictionary<PositionID, List<InventoryItem>> chests = new Dictionary<PositionID, List<InventoryItem>>();
     public Dictionary<PositionID, SkeletonState> skeletons = new Dictionary<PositionID, SkeletonState>();
     public Dictionary<PositionID, bool> items = new Dictionary<PositionID, bool>();
     public DungeonState dungeonState = null;

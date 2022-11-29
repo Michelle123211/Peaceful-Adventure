@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
+public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
 
-    public List<Item> items = new List<Item>();
+    public List<InventoryItem> items = new List<InventoryItem>();
     [Tooltip("Time in seconds between start of animation and UI appearing")]
     [SerializeField] private float lag = 0.4f;
     [Tooltip("A list of items which will be used for random initialization")]
@@ -21,15 +21,26 @@ public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
     public void InitializeItemsRandomly(int count) {
         items.Clear();
         Debug.Log("Creating " + count + " items.");
+        int[] itemCounts = new int[itemsToPickRandomly.Count];
+        // how many of each item will be selected
         for (int i = 0; i < count; ++i) {
-            items.Add(itemsToPickRandomly[Random.Range(0, itemsToPickRandomly.Count - 1)]);
+            itemCounts[Random.Range(0, itemsToPickRandomly.Count - 1)]++;
+        }
+        // add the corresponding number of items to the chest
+        for (int i = 0; i < itemCounts.Length; ++i) {
+            if (itemCounts[i] > 0) {
+                items.Add(new InventoryItem(itemsToPickRandomly[i], itemCounts[i]));
+            }
         }
     }
 
     public void RemoveItem(Item item) {
         for (int i = 0; i < this.items.Count; ++i) {
-            if (this.items[i] == item) {
-                this.items[i] = null;
+            if (this.items[i].item == item) {
+                // remove one item
+                this.items[i].count--;
+                if (this.items[i].count <= 0) // remove if none are left
+                    this.items[i] = null;
             }
         }
     }
@@ -44,6 +55,7 @@ public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
     }
 
     public IEnumerator OpenChest() {
+        PlayerBehaviour.playerInputActions.Chest.Close.performed += OnInteraction;
         animator.SetBool("IsOpen", true);
         // wait for a moment to allow the animation to finish
         yield return new WaitForSeconds(this.lag);
@@ -52,6 +64,7 @@ public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
     }
 
     public IEnumerator CloseChest() {
+        PlayerBehaviour.playerInputActions.Chest.Close.performed -= OnInteraction;
         // close UI
         Utils.FindObject<ChestUI>()[0].Close();
         // wait for a moment to allow UI to disappear
@@ -62,22 +75,17 @@ public class ChestBehaviour : Interactable, ISaveable<List<Item>> {
     // Start is called before the first frame update
     void Start() {
         animator = GetComponent<Animator>();
-        PlayerBehaviour.playerInputActions.Chest.Close.performed += OnInteraction;
-    }
-
-    void OnDestroy() {
-        PlayerBehaviour.playerInputActions.Chest.Close.performed -= OnInteraction;
     }
 
     public PositionID GetID() {
         return new PositionID { x = (int)transform.position.x, y = (int)transform.position.y };
     }
 
-    public List<Item> SaveState() {
+    public List<InventoryItem> SaveState() {
         return this.items;
     }
 
-    public void LoadState(List<Item> model) {
+    public void LoadState(List<InventoryItem> model) {
         this.items = model;
     }
 }

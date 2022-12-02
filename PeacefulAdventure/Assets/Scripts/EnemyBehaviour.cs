@@ -55,15 +55,12 @@ public abstract class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void Awake() {
         currentHealth = maxHealth;
-    }
-
-    // Start is called before the first frame update
-    protected virtual void Start() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<CharacterAnimation>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = FindObjectOfType<PlayerBehaviour>();
     }
+    
 
     // Update is called once per frame
     protected virtual void Update() {

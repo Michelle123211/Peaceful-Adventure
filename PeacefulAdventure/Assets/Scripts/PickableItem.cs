@@ -17,7 +17,7 @@ public class PickableItem : Interactable, ISaveable<bool> {
         }
     }
 
-    private void Start() {
+    private void Awake() {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
         if (this.spriteRenderer != null)
             this.spriteRenderer.sprite = item.icon;

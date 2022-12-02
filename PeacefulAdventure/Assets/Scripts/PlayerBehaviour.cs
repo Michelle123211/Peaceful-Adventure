@@ -70,6 +70,9 @@ public class PlayerBehaviour : MonoBehaviour
 #if FORCE_MOVEMENT
         playerInputActions.Player.Movement.performed += Movement;
         playerInputActions.Player.Movement.canceled += Movement;
+
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<CharacterAnimation>();
 #endif
     }
 
@@ -81,11 +84,6 @@ public class PlayerBehaviour : MonoBehaviour
         playerInputActions.Player.Movement.performed -= Movement;
         playerInputActions.Player.Movement.canceled -= Movement;
 #endif
-    }
-
-    private void Start() {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<CharacterAnimation>();
     }
 
     private void FixedUpdate() {

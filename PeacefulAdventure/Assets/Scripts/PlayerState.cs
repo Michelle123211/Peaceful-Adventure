@@ -65,7 +65,7 @@ public class PlayerState : MonoBehaviour {
         return (int)(experienceNeeded.Evaluate(level / (float)MaxLevel) * MaxExperience);
     }
 
-    private void Start() {
+    private void Awake() {
         CurrentHealth = maxHealth;
         inventory = new Inventory(inventorySlots);
     }

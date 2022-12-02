@@ -40,8 +40,8 @@ public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
         return new SkeletonState { position = transform.position, isDead = this.isDead, currentHealth = this.currentHealth };
     }
 
-    protected override void Start() {
-        base.Start();
+    protected override void Awake() {
+        base.Awake();
         if (!this.idInitialized) InitializeID();
     }
 

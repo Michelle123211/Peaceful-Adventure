@@ -90,7 +90,8 @@ public class InventoryUI : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
+        if (PlayerState.Instance.inventory != null) // might have been destroyed already
+            PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
         PlayerBehaviour.playerInputActions.Inventory.Navigation.performed -= Navigate;
         PlayerBehaviour.playerInputActions.Inventory.Select.performed -= Select;
         PlayerBehaviour.playerInputActions.Inventory.Close.performed -= CloseInventory;

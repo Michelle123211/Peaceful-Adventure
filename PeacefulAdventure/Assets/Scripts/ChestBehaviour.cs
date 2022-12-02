@@ -34,15 +34,19 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
         }
     }
 
-    public void RemoveItem(Item item) {
+    public void RemoveItem(Item item, int count = 1) {
         for (int i = 0; i < this.items.Count; ++i) {
-            if (this.items[i].item == item) {
+            if (this.items[i] != null && this.items[i].item == item) {
                 // remove one item
-                this.items[i].count--;
+                this.items[i].count -= count;
                 if (this.items[i].count <= 0) // remove if none are left
                     this.items[i] = null;
             }
         }
+    }
+
+    public void RemoveItem(InventoryItem item) {
+        RemoveItem(item.item, item.count);
     }
 
     protected override void OnInteraction(InputAction.CallbackContext context) {
@@ -72,8 +76,7 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
         animator.SetBool("IsOpen", false);
     }
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         animator = GetComponent<Animator>();
     }
 

@@ -70,8 +70,8 @@ public class ChestUI : MonoBehaviour
 
     public void TakeItem(InventoryItem item) {
         // remove from chest and add to inventory
-        if (PlayerState.Instance.inventory.AddToInventory(item.item)) {
-            chest.RemoveItem(item.item);
+        if (PlayerState.Instance.inventory.AddToInventory(item)) {
+            chest.RemoveItem(item);
         }
         Refresh();
     }
@@ -83,7 +83,8 @@ public class ChestUI : MonoBehaviour
     }
 
     private void OnDestroy() {
-        PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
+        if (PlayerState.Instance.inventory != null) // might have been destroyed already
+            PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
         PlayerBehaviour.playerInputActions.Chest.Navigation.performed -= Navigate;
         PlayerBehaviour.playerInputActions.Chest.Select.performed -= Select;
     }

@@ -1,5 +1,8 @@
-//#define VELOCITY_MOVEMENT
-#define FORCE_MOVEMENT
+#define VELOCITY_MOVEMENT
+//#define FORCE_MOVEMENT
+
+//#define FORCE_MOVEMENT_ALL_DIR // without restriction to only 4 directions
+#define VELOCITY_MOVEMENT_ALL_DIR // without restriction to only 4 directions
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +15,7 @@ using UnityEngine.InputSystem;
 public class PlayerBehaviour : MonoBehaviour
 {
 #if VELOCITY_MOVEMENT
-    public float speed = 2.5f;
+    public float speed = 5f;
 #endif
 #if FORCE_MOVEMENT
     public float force = 25f;
@@ -70,10 +73,10 @@ public class PlayerBehaviour : MonoBehaviour
 #if FORCE_MOVEMENT
         playerInputActions.Player.Movement.performed += Movement;
         playerInputActions.Player.Movement.canceled += Movement;
+#endif
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<CharacterAnimation>();
-#endif
     }
 
     private void OnDestroy() {
@@ -92,9 +95,12 @@ public class PlayerBehaviour : MonoBehaviour
             rb.AddForce(movement * force);
 #endif
 #if VELOCITY_MOVEMENT
-        Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
-        Vector2 movement = ConvertToFourDirections(inputVector);
-        rb.velocity = movement * speed;
+            Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
+            Vector2 movement = Utils.ConvertToFourDirections(inputVector);
+#if VELOCITY_MOVEMENT_ALL_DIR
+            movement = Utils.ConvertToMovement(inputVector);
+#endif
+            rb.velocity = movement * speed;
 #endif
 
             animator.Move(movement);
@@ -104,10 +110,13 @@ public class PlayerBehaviour : MonoBehaviour
 #if FORCE_MOVEMENT
     private void Movement(InputAction.CallbackContext context) {
         movement = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());
+#if FORCE_MOVEMENT_ALL_DIR
+        movement = Utils.ConvertToMovement(context.ReadValue<Vector2>());
+#endif
     }
 #endif
 
-    private void Attack(InputAction.CallbackContext context) {
+        private void Attack(InputAction.CallbackContext context) {
         if (!this.isDead && Time.time > this.nextAttackTime) {
             this.nextAttackTime = Time.time + PlayerState.Instance.attackCooldown.Value;
             animator.Attack();

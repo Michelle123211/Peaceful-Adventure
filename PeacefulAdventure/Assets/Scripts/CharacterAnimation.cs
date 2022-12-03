@@ -1,5 +1,5 @@
-//#define VELOCITY_MOVEMENT
-#define FORCE_MOVEMENT
+#define VELOCITY_MOVEMENT
+//#define FORCE_MOVEMENT
 
 using System.Collections;
 using System.Collections.Generic;

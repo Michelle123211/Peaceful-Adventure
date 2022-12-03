@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bc275b2dc2bf8545b43445541fb03ae, type: 3}
-  m_Name: AttackDamageEnhancement
+  m_Name: SpeedPotion
   m_EditorClassIdentifier: 
-  itemName: Attack damage enhancement
-  description: Increases attack damage
-  icon: {fileID: -3065595510956808684, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
+  itemName: Potion of Speed
+  description: Increases attack speed
+  icon: {fileID: 1185527514606905908, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
   isUsable: 1
   attackDamageModifier:
     type: 0
-    value: 10
-  attackCooldownModifier:
-    type: 0
     value: 0
+  attackCooldownModifier:
+    type: 1
+    value: 0.7
   duration: 10

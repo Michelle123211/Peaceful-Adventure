@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22bf6dff6717a784887cb48d32be38fe, type: 3}
-  m_Name: MediumHealthPotion
+  m_Name: LifePotion
   m_EditorClassIdentifier: 
-  itemName: Medium health potion
+  itemName: Potion of Life
   description: Adds more health
   icon: {fileID: 8618505411793156745, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
   isUsable: 1

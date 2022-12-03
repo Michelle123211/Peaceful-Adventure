@@ -76,13 +76,13 @@ public class ChestUI : MonoBehaviour
         Refresh();
     }
 
-    private void Start() {
+    private void OnEnable() {
         PlayerState.Instance.inventory.onInventoryChangedCallback += Refresh;
         PlayerBehaviour.playerInputActions.Chest.Navigation.performed += Navigate;
         PlayerBehaviour.playerInputActions.Chest.Select.performed += Select;
     }
 
-    private void OnDestroy() {
+    private void OnDisable() {
         if (PlayerState.Instance.inventory != null) // might have been destroyed already
             PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
         PlayerBehaviour.playerInputActions.Chest.Navigation.performed -= Navigate;

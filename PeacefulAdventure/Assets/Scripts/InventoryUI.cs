@@ -81,7 +81,7 @@ public class InventoryUI : MonoBehaviour {
         }
     }
 
-    private void Start() {
+    private void OnEnable() {
         PlayerState.Instance.inventory.onInventoryChangedCallback += Refresh;
         PlayerBehaviour.playerInputActions.Inventory.Navigation.performed += Navigate;
         PlayerBehaviour.playerInputActions.Inventory.Select.performed += Select;
@@ -89,7 +89,7 @@ public class InventoryUI : MonoBehaviour {
         PlayerBehaviour.playerInputActions.Inventory.Back.performed += CloseInventory;
     }
 
-    private void OnDestroy() {
+    private void OnDisable() {
         if (PlayerState.Instance.inventory != null) // might have been destroyed already
             PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
         PlayerBehaviour.playerInputActions.Inventory.Navigation.performed -= Navigate;

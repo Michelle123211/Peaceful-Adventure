@@ -38,13 +38,13 @@ public class ItemDetailsUI : MonoBehaviour {
         Close();
     }
 
-    private void Start() {
+    private void OnEnable() {
         PlayerBehaviour.playerInputActions.ItemDetails.Use.performed += Use;
         PlayerBehaviour.playerInputActions.ItemDetails.CloseInventory.performed += CloseInventory;
         PlayerBehaviour.playerInputActions.ItemDetails.Back.performed += CloseDetails;
     }
 
-    private void OnDestroy() {
+    private void OnDisable() {
         PlayerBehaviour.playerInputActions.ItemDetails.Use.performed -= Use;
         PlayerBehaviour.playerInputActions.ItemDetails.CloseInventory.performed -= CloseInventory;
         PlayerBehaviour.playerInputActions.ItemDetails.Back.performed -= CloseDetails;

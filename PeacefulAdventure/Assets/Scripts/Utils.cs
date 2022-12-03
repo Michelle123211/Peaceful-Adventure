@@ -28,14 +28,6 @@ public static class Utils
         }
     }
 
-    public static Vector2 ConvertToMovement(Vector2 inputVector) {
-        float xAbs = Mathf.Abs(inputVector.x);
-        float yAbs = Mathf.Abs(inputVector.y);
-        if (xAbs < 0.1 && yAbs < 0.1)
-            return Vector2.zero;
-        return inputVector;
-    }
-
     public static List<T> FindObject<T>() where T : Component {
         List<T> result = new List<T>();
         foreach (GameObject root in SceneManager.GetActiveScene().GetRootGameObjects()) {

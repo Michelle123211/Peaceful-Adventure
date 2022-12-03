@@ -1,6 +1,3 @@
-#define VELOCITY_MOVEMENT
-//#define FORCE_MOVEMENT
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,16 +16,7 @@ public class CharacterAnimation : MonoBehaviour
 
     public void Move(Vector2 movement) {
         if (movement == Vector2.zero) {
-#if VELOCITY_MOVEMENT
             animator.SetBool("IsWalking", false);
-#endif
-#if FORCE_MOVEMENT
-            if (rb != null) { // sometimes this method is called from FixedUpdate even before an initialization
-                if (rb.velocity.x < 0.1 && rb.velocity.y < 0.1) { // switch animation to idle when the character is actually stopped
-                    animator.SetBool("IsWalking", false);
-                }
-            }
-#endif
         } else {
             animator.SetBool("IsWalking", true);
             animator.SetFloat("Horizontal", movement.x);

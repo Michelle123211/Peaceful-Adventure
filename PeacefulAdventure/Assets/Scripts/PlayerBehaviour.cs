@@ -1,9 +1,3 @@
-#define VELOCITY_MOVEMENT
-//#define FORCE_MOVEMENT
-
-//#define FORCE_MOVEMENT_ALL_DIR // without restriction to only 4 directions
-#define VELOCITY_MOVEMENT_ALL_DIR // without restriction to only 4 directions
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +8,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterAnimation))]
 public class PlayerBehaviour : MonoBehaviour
 {
-#if VELOCITY_MOVEMENT
     public float speed = 5f;
-#endif
-#if FORCE_MOVEMENT
-    public float force = 25f;
-#endif
 
     public bool isDead = false;
 
@@ -31,10 +20,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     Rigidbody2D rb;
     CharacterAnimation animator;
-
-#if FORCE_MOVEMENT
-    Vector2 movement;
-#endif
 
     private float nextAttackTime = 0f;
 
@@ -70,10 +55,6 @@ public class PlayerBehaviour : MonoBehaviour
         playerInputActions.Player.Attack.performed += Attack;
         playerInputActions.Player.Inventory.performed += Inventory;
         playerInputActions.Player.Interaction.performed += Interaction;
-#if FORCE_MOVEMENT
-        playerInputActions.Player.Movement.performed += Movement;
-        playerInputActions.Player.Movement.canceled += Movement;
-#endif
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<CharacterAnimation>();
@@ -83,40 +64,20 @@ public class PlayerBehaviour : MonoBehaviour
         playerInputActions.Player.Attack.performed -= Attack;
         playerInputActions.Player.Inventory.performed -= Inventory;
         playerInputActions.Player.Interaction.performed -= Interaction;
-#if FORCE_MOVEMENT
-        playerInputActions.Player.Movement.performed -= Movement;
-        playerInputActions.Player.Movement.canceled -= Movement;
-#endif
     }
 
     private void FixedUpdate() {
         if (!this.isDead) {
-#if FORCE_MOVEMENT
-            rb.AddForce(movement * force);
-#endif
-#if VELOCITY_MOVEMENT
-            Vector2 inputVector = playerInputActions.Player.Movement.ReadValue<Vector2>();
-            Vector2 movement = Utils.ConvertToFourDirections(inputVector);
-#if VELOCITY_MOVEMENT_ALL_DIR
-            movement = Utils.ConvertToMovement(inputVector);
-#endif
+            Vector2 movement = playerInputActions.Player.Movement.ReadValue<Vector2>();
+            if (Mathf.Abs(movement.x) < 0.1 && Mathf.Abs(movement.y) < 0.1)
+                movement = Vector2.zero;
             rb.velocity = movement * speed;
-#endif
 
             animator.Move(movement);
         }
     }
 
-#if FORCE_MOVEMENT
-    private void Movement(InputAction.CallbackContext context) {
-        movement = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());
-#if FORCE_MOVEMENT_ALL_DIR
-        movement = Utils.ConvertToMovement(context.ReadValue<Vector2>());
-#endif
-    }
-#endif
-
-        private void Attack(InputAction.CallbackContext context) {
+    private void Attack(InputAction.CallbackContext context) {
         if (!this.isDead && Time.time > this.nextAttackTime) {
             this.nextAttackTime = Time.time + PlayerState.Instance.attackCooldown.Value;
             animator.Attack();

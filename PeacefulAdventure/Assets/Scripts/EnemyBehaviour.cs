@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public abstract class EnemyBehaviour : MonoBehaviour {
 
@@ -19,6 +20,8 @@ public abstract class EnemyBehaviour : MonoBehaviour {
     protected Vector2 movement;
 
     public bool isDead = false;
+
+    public Light2D enemyLight;
 
     protected PlayerBehaviour player;
 
@@ -43,6 +46,9 @@ public abstract class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void Die() {
         animator.Die();
+        if (enemyLight != null) {
+            enemyLight.enabled = false; // turn off the light
+        }
         PlayerState.Instance.levelSystem.UpdateExperience(3); // add experience points
         // TODO: play sound effect
         spriteRenderer.sortingLayerName = "EnemyBack";

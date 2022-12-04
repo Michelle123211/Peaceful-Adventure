@@ -14,12 +14,16 @@ public class PlayerStateEditor : Editor
         EditorGUILayout.Space();
         PlayerState state = (PlayerState)target;
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(300));
-        for (int i = 0; i <= state.MaxLevel; ++i) {
-            EditorGUILayout.BeginHorizontal("box");
-            EditorGUILayout.LabelField($"Level {i}");
-            EditorGUILayout.LabelField($"{state.GetExperienceNeededForLevel(i)} XP");
-            EditorGUILayout.EndHorizontal();
+
+        if (state.levelSystem != null) {
+            for (int i = 0; i <= state.levelSystem.MaxLevel; ++i) {
+                EditorGUILayout.BeginHorizontal("box");
+                EditorGUILayout.LabelField($"Level {i}");
+                EditorGUILayout.LabelField($"{state.levelSystem.GetExperienceNeededForLevel(i)} XP");
+                EditorGUILayout.EndHorizontal();
+            }
         }
+
         EditorGUILayout.EndScrollView();
     }
 }

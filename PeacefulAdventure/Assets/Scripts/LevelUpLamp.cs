@@ -2,21 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Experimental.Rendering.Universal;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class LevelUpLamp : Interactable
 {
 
-    SpriteRenderer spriteRenderer;
+    public Light2D lampLight;
 
     protected override void OnInteraction(InputAction.CallbackContext context) {
         // level the player up if they have enough XP
         if (PlayerState.Instance.levelSystem.TryLevelUp()) {
             // TODO: Display the level up UI
         }
-    }
-    private void Awake() {
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Start() {
@@ -37,9 +34,9 @@ public class LevelUpLamp : Interactable
 
     private void UpdateState() {
         if (PlayerState.Instance.levelSystem.CanLevelUp()) {
-            spriteRenderer.color = Color.green;
+            lampLight.color = Color.green;
         } else {
-            spriteRenderer.color = Color.red;
+            lampLight.color = Color.red;
         }
     }
 }

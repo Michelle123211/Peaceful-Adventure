@@ -141,19 +141,19 @@ public class DungeonGenerator : MonoBehaviour {
             size = new Vector3Int(Random.Range(minRoomWidth, maxRoomWidth + 1), Random.Range(minRoomHeight, maxRoomHeight + 1), 0);
             // then continue by selecting random direction (not opposite the 2 last selected, for the first room only right or bottom)
             direction = DirectionPicker.GetNextDirection();
-            // select, where there will be opening to the next room (horizontal may be only 1 high, vertical must be at least 2 wide)
+            // select, where there will be opening to the next room (horizontal should be at least 1 high, but 2 is better, vertical must be at least 2 wide)
             // and add corridor
             int ySplit, xSplit;
             switch (direction) {
                 case Direction.Left:
                     ySplit = previousRoom.min.y + Random.Range(1, previousRoom.size.y);
                     position = new Vector3Int(previousRoom.min.x - 1 - size.x, ySplit - Random.Range(1, size.y - 1), 0);
-                    corridor = new BoundsInt(new Vector3Int(previousRoom.min.x - 1, ySplit, 0), new Vector3Int(1, 1, 0));
+                    corridor = new BoundsInt(new Vector3Int(previousRoom.min.x - 1, ySplit - 1, 0), new Vector3Int(1, 2, 0));
                     break;
                 case Direction.Right:
                     ySplit = previousRoom.min.y + Random.Range(1, previousRoom.size.y);
                     position = new Vector3Int(previousRoom.max.x + 1, ySplit - Random.Range(1, size.y - 1), 0);
-                    corridor = new BoundsInt(new Vector3Int(previousRoom.max.x, ySplit, 0), new Vector3Int(1, 1, 0));
+                    corridor = new BoundsInt(new Vector3Int(previousRoom.max.x, ySplit - 1, 0), new Vector3Int(1, 2, 0));
                     break;
                 case Direction.Up:
                     xSplit = previousRoom.min.x + Random.Range(1, previousRoom.size.x);

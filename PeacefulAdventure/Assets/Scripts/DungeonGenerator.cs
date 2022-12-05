@@ -105,20 +105,26 @@ public class DungeonGenerator : MonoBehaviour {
             int numOfChests = addChest ? 1 : 0;
             // select a random placement for everything
             List<int> positionIndex = new List<int>();
-            while (positionIndex.Count < numOfSkeletons + numOfChests) { 
-                int r = Random.Range(0, size - 1);
-                if (!positionIndex.Contains(r))
+            int r;
+            while (positionIndex.Count < numOfSkeletons + numOfChests) {
+                if (positionIndex.Count < numOfChests) {
+                    r = (room.size.y / 2) * room.size.x + (room.size.x / 2); // place the chest in the middle of the room
+                } else {
+                    r = Random.Range(room.size.x, size - 1); // random position in the room except the last row (skeletons would be burried in the wall)
+                }
+                if (!positionIndex.Contains(r)) {
                     positionIndex.Add(r);
+                }
             }
             // store positions of the skeletons and chests
             for (int i = 0; i < positionIndex.Count; ++i) {
                 int posIdx = positionIndex[i];
                 Vector2Int position = new Vector2Int(room.min.x + (posIdx % room.size.x), room.min.y + (posIdx / room.size.x));
-                if (i < numOfSkeletons) {
+                if (i < numOfChests) {
+                    this.chests.Add(position);
+                } else {
                     if (Vector2Int.Distance(Vector2Int.zero, position) > 5) // not too close to the player's initial position
                         this.skeletons.Add(position);
-                } else {
-                    this.chests.Add(position);
                 }
             }
         }

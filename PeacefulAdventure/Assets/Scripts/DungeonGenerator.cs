@@ -26,7 +26,13 @@ public class DungeonGenerator : MonoBehaviour {
     private HashSet<Vector2Int> skeletons = new HashSet<Vector2Int>();
     private HashSet<Vector2Int> chests = new HashSet<Vector2Int>();
 
-    public void GenerateDungeon() {
+    private bool levelDriven = false;
+
+    public void GenerateDungeon(bool levelDriven = true) {
+        // levelDriven = true means it is invoked during the gameplay and the dungeon parameters should correspond to the player's level
+        // levelDriven = false is only for testing purposes from the editor
+        this.levelDriven = levelDriven;
+
         Initialize();
 
         GenerateRoomsAndCorridors();
@@ -92,7 +98,7 @@ public class DungeonGenerator : MonoBehaviour {
         }
     }
 
-    private void AddRoom(BoundsInt room, bool addChest = false) {
+    private void AddRoom(BoundsInt room, bool addSkeletons = true, bool addChest = false) {
         for (int x = room.min.x; x < room.min.x + room.size.x; x++) {
             for (int y = room.min.y; y < room.min.y + room.size.y; y++) {
                 this.ground.Add(new Vector2Int(x, y));
@@ -101,7 +107,11 @@ public class DungeonGenerator : MonoBehaviour {
         // if the room is big enough, add skeletons and chests
         int size = room.size.x * room.size.y;
         if (size > 20) {
-            int numOfSkeletons = size / 30;
+            int numOfSkeletons = addSkeletons 
+                ? (levelDriven 
+                    ? Mathf.Min(1, Mathf.Max(PlayerState.Instance.levelSystem.Level + 1, size / 30)) // at least 1, at most player's level + 1
+                    : size / 30) 
+                : 0;
             int numOfChests = addChest ? 1 : 0;
             // select a random placement for everything
             List<int> positionIndex = new List<int>();
@@ -132,12 +142,17 @@ public class DungeonGenerator : MonoBehaviour {
 
     private void GenerateRoomsAndCorridors() {
 
+        if (levelDriven) { // set parameters according to the player's level
+            minNumOfRooms = Mathf.Max(PlayerState.Instance.levelSystem.Level, 2); 
+            maxNumOfRooms = Mathf.Max(PlayerState.Instance.levelSystem.Level + 3, 2);
+        }
+
         // generate rooms, one after another, rooms will be adjacent, divided only by one row of wall (no corridors, tileset is not prepared for corridors going down)
         // first room should contain 0,0 (starting position of player) in the top left corner
         Vector3Int size = new Vector3Int(Random.Range(minRoomWidth, maxRoomWidth + 1), Random.Range(minRoomHeight, maxRoomHeight + 1), 0);
         Vector3Int position = new Vector3Int(-1, -size.y, 0);
         BoundsInt currentRoom = new BoundsInt(position, size);
-        AddRoom(currentRoom);
+        AddRoom(currentRoom, addSkeletons: false); // no skeletons in the first room
 
         BoundsInt previousRoom, corridor = new BoundsInt();
         Direction direction;
@@ -177,8 +192,8 @@ public class DungeonGenerator : MonoBehaviour {
             if (i < numOfRooms - 1)
                 AddRoom(currentRoom);
             else
-                AddRoom(currentRoom, true); // add a chest to the last room
-            AddRoom(corridor);
+                AddRoom(currentRoom, addChest: true); // add a chest to the last room
+            AddRoom(corridor, addSkeletons: false);
         }
     }
 
@@ -229,7 +244,7 @@ public class DungeonGenerator : MonoBehaviour {
             ChestBehaviour chestBeh = chest.gameObject.GetComponent<ChestBehaviour>();
             if (chestBeh != null) {
                 int minCount = 3;
-                int maxCount = Mathf.Min(Mathf.Max(skeletons.Count, 1) * 2, 12);
+                int maxCount = Mathf.Min(Mathf.Max(skeletons.Count, 2) * 2, 12);
                 chestBeh.InitializeItemsRandomly(Random.Range(minCount, maxCount));
             }
         }

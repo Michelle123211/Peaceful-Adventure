@@ -16,7 +16,7 @@ public class PlayerStateEditor : Editor
         scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.MaxHeight(300));
 
         if (state.levelSystem != null) {
-            for (int i = 0; i <= state.levelSystem.MaxLevel; ++i) {
+            for (int i = 0; i <= state.levelSystem.maxLevel; ++i) {
                 EditorGUILayout.BeginHorizontal("box");
                 EditorGUILayout.LabelField($"Level {i}");
                 EditorGUILayout.LabelField($"{state.levelSystem.GetExperienceNeededForLevel(i)} XP");

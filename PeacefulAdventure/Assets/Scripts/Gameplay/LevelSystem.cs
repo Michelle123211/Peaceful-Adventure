@@ -13,8 +13,8 @@ public class LevelSystem
 
     public AnimationCurve experienceNeeded;
     [Min(1)]
-    public int MaxLevel = 30;
-    public int MaxExperience = 2700;
+    public int maxLevel = 30;
+    public int maxExperience = 2700;
 
     public int Level { get; private set; } = 0;
     public int Experience { get; private set; } = 0;
@@ -23,8 +23,8 @@ public class LevelSystem
         Debug.Log($"Current level: {Level}");
         Debug.Log($"Current XP: {Experience}");
         Experience += delta;
-        if (Experience >= MaxExperience) {
-            Experience = MaxExperience;
+        if (Experience >= maxExperience) {
+            Experience = maxExperience;
         }
         if (onExperiencePointsChangedCallback != null)
             onExperiencePointsChangedCallback.Invoke();
@@ -32,7 +32,7 @@ public class LevelSystem
     }
 
     public int GetExperienceNeededForLevel(int level) {
-        return (int)(experienceNeeded.Evaluate(level / (float)MaxLevel) * MaxExperience);
+        return (int)(experienceNeeded.Evaluate(level / (float)maxLevel) * maxExperience);
     }
 
     public bool TryLevelUp() {
@@ -50,7 +50,7 @@ public class LevelSystem
     }
 
     public bool CanLevelUp() {
-        if (Level >= MaxLevel) {
+        if (Level >= maxLevel) {
             Debug.Log("Already at max level.");
             return false;
         }
@@ -62,5 +62,21 @@ public class LevelSystem
         } else {
             return false;
         }
+    }
+
+    public void ResetCompletely() {
+        maxLevel = 30;
+        maxExperience = 2700;
+        Level = 0;
+        Experience = 0;
+        Debug.Log("LevelSystem reset completely.");
+    }
+
+    public void LoadState(int maxLevel, int maxExperience, int level, int experience) {
+        this.maxLevel = maxLevel;
+        this.maxExperience = maxExperience;
+        this.Level = level;
+        this.Experience = experience;
+        Debug.Log("LevelSystem state loaded.");
     }
 }

@@ -20,6 +20,10 @@ public class Inventory
         return this.items;
     }
 
+    public int GetDistinctItemsCount() {
+        return items.Length - freeSlots;
+    }
+
     public bool AddToInventory(Item item, int count = 1) {
         bool itemAdded = false;
         for (int i = 0; i < items.Length; ++i) {
@@ -84,6 +88,26 @@ public class Inventory
 
     public bool HasInInventory(InventoryItem item) {
         return HasInInventory(item.item, item.count);
+    }
+
+    public Inventory Copy() {
+        Inventory result = new Inventory(items.Length);
+        foreach (InventoryItem item in items) {
+            if (item != null && item.item != null) {
+                result.AddToInventory(item.item, item.count);
+            }
+        }
+        Debug.Log($"Inventory copied with the following results:");
+        Debug.Log($"Inventory: {result == this}.");
+        Debug.Log($"Inventory items: {result.items == this.items}.");
+        if (result.items[0] == null) {
+            Debug.Log($"Inventory items[0] is null, so: {result.items[0] == this.items[0]}.");
+        } else {
+            Debug.Log($"Inventory items[0]: {result.items[0] == this.items[0]}.");
+        }
+        if (result.items[0] != null)
+            Debug.Log($"Inventory items[0].item: {result.items[0].item == this.items[0].item}.");
+        return result;
     }
 
 }

@@ -37,12 +37,15 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
     public void RemoveItem(Item item, int count = 1) {
         for (int i = 0; i < this.items.Count; ++i) {
             if (this.items[i] != null && this.items[i].item == item) {
-                // remove one item
+                // remove the given count of the given item
                 this.items[i].count -= count;
+                Debug.Log("Item removed from the chest.");
                 if (this.items[i].count <= 0) // remove if none are left
                     this.items[i] = null;
+                return;
             }
         }
+        Debug.Log("Item NOT removed from the chest.");
     }
 
     public void RemoveItem(InventoryItem item) {

@@ -15,17 +15,17 @@ public class ControlHintTrigger : MonoBehaviour
 
     private ControlHintUI hintUI;
 
-    private void Start() {
+    private void Awake() {
         // Create an instance of the ControlHintUI prefab and store it into a data field
         GameObject prefab = Resources.Load("Prefabs/ControlHintUI") as GameObject;
         hintUI = Instantiate(prefab, transform).GetComponent<ControlHintUI>();
+        // Hide it by default
+        hintUI.gameObject.SetActive(false);
         // Set its properties
         if (buttonImage == null) {
             buttonImage = Resources.Load("Sprites/interaction") as Sprite;
         }
         hintUI.SetContent(buttonImage, key, description);
-        // Hide it by default
-        hintUI.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

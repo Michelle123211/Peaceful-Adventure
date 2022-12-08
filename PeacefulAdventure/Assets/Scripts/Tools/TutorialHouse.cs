@@ -16,10 +16,10 @@ public class TutorialHouse : MonoBehaviour
         // show part of the tutorial corresponding to the player's progress
         if (PlayerState.Instance.tutorialCompleted) {
             part3.SetActive(true);
-        } else if (PlayerState.Instance.levelSystem.Experience < PlayerState.Instance.levelSystem.GetExperienceNeededForLevel(1)) {
-            part1.SetActive(true);
-        } else {
+        } else if (PlayerState.Instance.levelSystem.Experience >= PlayerState.Instance.levelSystem.GetExperienceNeededForLevel(1)) {
             part2.SetActive(true);
+        } else {
+            part1.SetActive(true);
         }
     }
 

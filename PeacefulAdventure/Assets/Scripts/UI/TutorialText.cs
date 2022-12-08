@@ -5,6 +5,7 @@ using TMPro;
 
 public class TutorialText : MonoBehaviour
 {
+    [TextArea]
     public string text;
 
     [SerializeField] TextMeshProUGUI textField;
@@ -15,10 +16,14 @@ public class TutorialText : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        textField.gameObject.SetActive(true);
+        if (collision.CompareTag("Player")) {
+            textField.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        textField.gameObject.SetActive(false);
+        if (collision.CompareTag("Player")) {
+            textField.gameObject.SetActive(false);
+        }
     }
 }

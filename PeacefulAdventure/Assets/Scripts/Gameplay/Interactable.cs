@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(ControlHintTrigger))]
 public abstract class Interactable : MonoBehaviour
 {
     private bool callbackRegistered = false;

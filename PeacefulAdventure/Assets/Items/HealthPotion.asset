@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   itemName: Potion of Health
-  description: Adds a little more health
+  description: Adds some health.
   icon: {fileID: 6997616985800771554, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
   isUsable: 1
   value: 20

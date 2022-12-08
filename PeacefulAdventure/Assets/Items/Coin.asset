@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Coin
   m_EditorClassIdentifier: 
   itemName: Coin
-  description: Just an ordinary coin
+  description: Just an ordinary coin.
   icon: {fileID: -3338749442709606003, guid: eed331c581c6b37479d63753a007876d, type: 3}
   isUsable: 0
   value: 1

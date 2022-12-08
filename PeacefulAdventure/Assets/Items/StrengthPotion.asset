@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StrengthPotion
   m_EditorClassIdentifier: 
   itemName: Potion of Strength
-  description: Increases attack damage
+  description: Increases attack damage.
   icon: {fileID: -3065595510956808684, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
   isUsable: 1
   attackDamageModifier:

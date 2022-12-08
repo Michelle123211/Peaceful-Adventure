@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DexterityPotion
   m_EditorClassIdentifier: 
   itemName: Potion of Dexterity
-  description: Increases both attack damage and attack speed
+  description: Increases both attack damage and attack speed.
   icon: {fileID: -1972361127685065434, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
   isUsable: 1
   attackDamageModifier:

@@ -13,6 +13,8 @@ public class ProgressBar : MonoBehaviour
     int currentValue = 0;
     int maximumValue = 0;
 
+    RectTransform rectTransform;
+
     public void RefreshValues(int current, int maximum, string label = null) {
         currentValue = current;
         maximumValue = maximum;
@@ -22,5 +24,10 @@ public class ProgressBar : MonoBehaviour
         if (label != null) {
             labelTMP.text = label;
         }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
+    }
+
+    private void Awake() {
+        rectTransform = GetComponent<RectTransform>();
     }
 }

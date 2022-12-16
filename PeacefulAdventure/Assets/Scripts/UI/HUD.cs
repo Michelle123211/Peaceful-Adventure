@@ -8,6 +8,8 @@ public class HUD : MonoBehaviour
     [SerializeField] ProgressBar healthBar;
     [SerializeField] ProgressBar experienceBar;
 
+    RectTransform rectTransform;
+
     public void RefreshHealth() {
         healthBar.RefreshValues(PlayerState.Instance.CurrentHealth, PlayerState.Instance.MaxHealth);
     }
@@ -20,6 +22,9 @@ public class HUD : MonoBehaviour
             $"LVL {level}"
         );
     }
+    private void Awake() {
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     private void Start() {
         PlayerState.Instance.onHealthChangedCallback += RefreshHealth;
@@ -27,6 +32,8 @@ public class HUD : MonoBehaviour
         PlayerState.Instance.levelSystem.onLevelChangedCallback += RefreshExperience;
         RefreshHealth();
         RefreshExperience();
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
     }
 
     private void OnDestroy() {

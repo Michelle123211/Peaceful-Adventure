@@ -13,22 +13,14 @@ public class ProgressBar : MonoBehaviour
     int currentValue = 0;
     int maximumValue = 0;
 
-    public void SetCurrent(int value) {
-        currentValue = value;
-        RefreshValues();
-    }
-
-    public void SetMaximum(int maximum) {
+    public void RefreshValues(int current, int maximum, string label = null) {
+        currentValue = current;
         maximumValue = maximum;
-        RefreshValues();
-    }
-
-    public void SetLabel(string label) {
-        labelTMP.text = label;
-    }
-
-    private void RefreshValues() {
-        fillImage.fillAmount = (float) Mathf.Min(currentValue, maximumValue) / maximumValue;
+        // TODO: Tweening
+        fillImage.fillAmount = (float)Mathf.Min(currentValue, maximumValue) / maximumValue;
         valueTMP.text = $"{currentValue}/{maximumValue}";
+        if (label != null) {
+            labelTMP.text = label;
+        }
     }
 }

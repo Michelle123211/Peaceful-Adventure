@@ -9,14 +9,16 @@ public class HUD : MonoBehaviour
     [SerializeField] ProgressBar experienceBar;
 
     public void RefreshHealth() {
-        healthBar.SetMaximum(PlayerState.Instance.MaxHealth);
-        healthBar.SetCurrent(PlayerState.Instance.CurrentHealth);
+        healthBar.RefreshValues(PlayerState.Instance.CurrentHealth, PlayerState.Instance.MaxHealth);
     }
 
     public void RefreshExperience() {
-        experienceBar.SetMaximum(PlayerState.Instance.levelSystem.GetExperienceNeededForLevel(PlayerState.Instance.levelSystem.Level + 1));
-        experienceBar.SetCurrent(PlayerState.Instance.levelSystem.Experience);
-        experienceBar.SetLabel($"LVL {PlayerState.Instance.levelSystem.Level}");
+        int level = PlayerState.Instance.levelSystem.Level;
+        experienceBar.RefreshValues(
+            PlayerState.Instance.levelSystem.Experience,
+            PlayerState.Instance.levelSystem.GetExperienceNeededForLevel(level + 1),
+            $"LVL {level}"
+        );
     }
 
     private void Start() {

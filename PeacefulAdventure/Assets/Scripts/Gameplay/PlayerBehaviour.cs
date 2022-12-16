@@ -28,7 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(float damage) {
         if (Time.time - previousDamage > damageCooldown) { // the current damage has not come too soon after the last one
             Debug.Log("Player damage taken " + damage);
-            PlayerState.Instance.UpdateHealth(-damage);
+            PlayerState.Instance.UpdateHealth((int) -damage);
             // TODO: play sound effect
             if (PlayerState.Instance.CurrentHealth <= 0) {
                 Die();

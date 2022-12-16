@@ -20,8 +20,12 @@ public class PlayerState : MonoBehaviour {
         }
     }
 
-    [SerializeField] private float maxHealth = 100;
-    public float CurrentHealth { get; private set; }
+    [field:SerializeField] public int MaxHealth { get; private set; } = 100;
+    public int CurrentHealth { get; private set; }
+
+    public delegate void OnHealthChanged();
+    public OnHealthChanged onHealthChangedCallback;
+
 
     public Stat attackDamage = new Stat(20f);
     //public float attackDamage = 20;
@@ -42,16 +46,23 @@ public class PlayerState : MonoBehaviour {
     public bool tutorialCompleted = false;
 
 
-    public void UpdateHealth(float delta) {
+    public void UpdateHealth(int delta) {
         CurrentHealth += delta;
         if (CurrentHealth < 0) CurrentHealth = 0;
-        if (CurrentHealth > maxHealth) CurrentHealth = maxHealth;
+        if (CurrentHealth > MaxHealth) CurrentHealth = MaxHealth;
+        onHealthChangedCallback?.Invoke();
+    }
+
+    public void UpdateMaxHealth(int newValue) {
+        int delta = newValue - MaxHealth;
+        MaxHealth = newValue;
+        UpdateHealth(delta);
     }
 
     public static void ResetCompletely() {
         if (instance != null) {
-            instance.maxHealth = 100;
-            instance.CurrentHealth = instance.maxHealth;
+            instance.MaxHealth = 100;
+            instance.CurrentHealth = instance.MaxHealth;
             instance.attackDamage = new Stat(20f);
             instance.attackCooldown = new Stat(0.5f);
             instance.inventorySlots = 18;
@@ -72,7 +83,7 @@ public class PlayerState : MonoBehaviour {
     }
 
     public static void LoadState(PlayerStateData stateData) {
-        Instance.maxHealth = stateData.maxHealth;
+        Instance.MaxHealth = stateData.maxHealth;
         Instance.CurrentHealth = stateData.currentHealth;
         Instance.attackDamage = new Stat(stateData.attackDamage.Value);
         Instance.attackCooldown = new Stat(stateData.attackCooldown.Value);
@@ -86,7 +97,7 @@ public class PlayerState : MonoBehaviour {
     public static PlayerStateData SaveState() {
         if (Instance != null && Instance.levelSystem != null && Instance.inventory != null) {
             PlayerStateData result = new PlayerStateData {
-                maxHealth = Instance.maxHealth,
+                maxHealth = Instance.MaxHealth,
                 currentHealth = Instance.CurrentHealth,
                 attackDamage = Instance.attackDamage,
                 attackCooldown = Instance.attackCooldown,
@@ -106,7 +117,8 @@ public class PlayerState : MonoBehaviour {
     }
 
     private void Initialize() {
-        CurrentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
+        onHealthChangedCallback?.Invoke(); // update the UI
         inventory = new Inventory(inventorySlots);
         initialState = SaveState();
     }
@@ -115,8 +127,8 @@ public class PlayerState : MonoBehaviour {
 
 
 public class PlayerStateData {
-    public float maxHealth = 100;
-    public float currentHealth = 100;
+    public int maxHealth = 100;
+    public int currentHealth = 100;
     public Stat attackDamage = new Stat(20f);
     public Stat attackCooldown = new Stat(0.5f);
     public int inventorySlots = 18;

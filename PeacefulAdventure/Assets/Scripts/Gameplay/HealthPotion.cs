@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewHealthPotion", menuName = "Inventory/Health Potion")]
 public class HealthPotion : Item {
 
-    [SerializeField] float value;
+    [SerializeField] int value;
 
     protected override void ApplyEffect() {
         PlayerState.Instance.UpdateHealth(value);

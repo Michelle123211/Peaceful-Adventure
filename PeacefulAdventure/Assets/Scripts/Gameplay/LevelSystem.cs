@@ -26,8 +26,7 @@ public class LevelSystem
         if (Experience >= maxExperience) {
             Experience = maxExperience;
         }
-        if (onExperiencePointsChangedCallback != null)
-            onExperiencePointsChangedCallback.Invoke();
+        onExperiencePointsChangedCallback?.Invoke();
         Debug.Log($"XP increased by {delta} to {Experience}");
     }
 
@@ -39,8 +38,7 @@ public class LevelSystem
         if (CanLevelUp()) {
             Debug.Log($"Leveled up from {Level} to {Level + 1}");
             Level++;
-            if (onLevelChangedCallback != null)
-                onLevelChangedCallback.Invoke();
+            onLevelChangedCallback?.Invoke();
             return true;
         } else {
 
@@ -69,6 +67,8 @@ public class LevelSystem
         maxExperience = 2700;
         Level = 0;
         Experience = 0;
+        onExperiencePointsChangedCallback?.Invoke();
+        onLevelChangedCallback?.Invoke();
         Debug.Log("LevelSystem reset completely.");
     }
 
@@ -77,6 +77,8 @@ public class LevelSystem
         this.maxExperience = maxExperience;
         this.Level = level;
         this.Experience = experience;
+        onExperiencePointsChangedCallback?.Invoke();
+        onLevelChangedCallback?.Invoke();
         Debug.Log("LevelSystem state loaded.");
     }
 }

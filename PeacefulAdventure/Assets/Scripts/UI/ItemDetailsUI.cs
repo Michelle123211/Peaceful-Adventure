@@ -11,6 +11,7 @@ public class ItemDetailsUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descText;
     [SerializeField] private Button useButton;
+    [SerializeField] private GameObject useControl;
     [SerializeField] private InventoryUI inventoryUI;
 
     private InventoryItem item;
@@ -21,6 +22,8 @@ public class ItemDetailsUI : MonoBehaviour {
         // TODO: maybe add image and count
         nameText.text = item.item.itemName;
         descText.text = item.item.description;
+        if (!Application.isMobilePlatform)
+            useControl.SetActive(item.item.isUsable);
         useButton.interactable = item.item.isUsable;
         GetComponent<AppearHideComponent>().Do();
     }

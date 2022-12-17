@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public abstract class EnemyBehaviour : MonoBehaviour {
@@ -22,6 +23,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
     public bool isDead = false;
 
     public Light2D enemyLight;
+    public TextMeshProUGUI healthText;
 
     protected PlayerBehaviour player;
 
@@ -35,6 +37,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
         if (!this.isDead) {
             Debug.Log("Damage taken " + damage);
             currentHealth -= damage;
+            healthText.text = $"{Mathf.Max(0, currentHealth)}/{maxHealth}";
             if (currentHealth <= 0) {
                 Die();
             } else {
@@ -49,6 +52,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
         if (enemyLight != null) {
             enemyLight.enabled = false; // turn off the light
         }
+        healthText.gameObject.SetActive(false); // hide the health
         PlayerState.Instance.levelSystem.UpdateExperience(3); // add experience points
         // TODO: play sound effect
         spriteRenderer.sortingLayerName = "EnemyBack";
@@ -61,6 +65,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void Awake() {
         currentHealth = maxHealth;
+        healthText.text = $"{Mathf.Max(0, currentHealth)}/{maxHealth}";
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<CharacterAnimation>();
         spriteRenderer = GetComponent<SpriteRenderer>();

@@ -18,7 +18,7 @@ public class ChestUI : MonoBehaviour
 
     public void Open(ChestBehaviour chest) {
         PlayerBehaviour.playerInputActions.Player.Disable();
-        PlayerBehaviour.playerInputActions.Chest.Enable();
+        PlayerBehaviour.playerInputActions.UI.Enable();
         this.chest = chest;
         Debug.Log("Opening a chest");
         Refresh();
@@ -26,7 +26,7 @@ public class ChestUI : MonoBehaviour
     }
 
     public void Close() {
-        PlayerBehaviour.playerInputActions.Chest.Disable();
+        PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
         GetComponent<AppearHideComponent>().Undo();
     }
@@ -78,15 +78,15 @@ public class ChestUI : MonoBehaviour
 
     private void OnEnable() {
         PlayerState.Instance.inventory.onInventoryChangedCallback += Refresh;
-        PlayerBehaviour.playerInputActions.Chest.Navigation.performed += Navigate;
-        PlayerBehaviour.playerInputActions.Chest.Select.performed += Select;
+        PlayerBehaviour.playerInputActions.UI.Navigation.performed += Navigate;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed += Select;
     }
 
     private void OnDisable() {
         if (PlayerState.Instance.inventory != null) // might have been destroyed already
             PlayerState.Instance.inventory.onInventoryChangedCallback -= Refresh;
-        PlayerBehaviour.playerInputActions.Chest.Navigation.performed -= Navigate;
-        PlayerBehaviour.playerInputActions.Chest.Select.performed -= Select;
+        PlayerBehaviour.playerInputActions.UI.Navigation.performed -= Navigate;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed -= Select;
     }
 
     private void Navigate(InputAction.CallbackContext context) {

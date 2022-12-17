@@ -16,8 +16,6 @@ public class ItemDetailsUI : MonoBehaviour {
     private InventoryItem item;
 
     public void Open(InventoryItem item) {
-        PlayerBehaviour.playerInputActions.Inventory.Disable();
-        PlayerBehaviour.playerInputActions.ItemDetails.Enable();
         this.item = item;
         // TODO: maybe display item
         // TODO: maybe add image and count
@@ -28,8 +26,6 @@ public class ItemDetailsUI : MonoBehaviour {
     }
 
     public void Close() {
-        PlayerBehaviour.playerInputActions.ItemDetails.Disable();
-        PlayerBehaviour.playerInputActions.Inventory.Enable();
         GetComponent<AppearHideComponent>().Undo();
     }
 
@@ -39,15 +35,15 @@ public class ItemDetailsUI : MonoBehaviour {
     }
 
     private void OnEnable() {
-        PlayerBehaviour.playerInputActions.ItemDetails.Use.performed += Use;
-        PlayerBehaviour.playerInputActions.ItemDetails.CloseInventory.performed += CloseInventory;
-        PlayerBehaviour.playerInputActions.ItemDetails.Back.performed += CloseDetails;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed += Use;
+        PlayerBehaviour.playerInputActions.UI.Action2_I.performed += CloseInventory;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed += CloseDetails;
     }
 
     private void OnDisable() {
-        PlayerBehaviour.playerInputActions.ItemDetails.Use.performed -= Use;
-        PlayerBehaviour.playerInputActions.ItemDetails.CloseInventory.performed -= CloseInventory;
-        PlayerBehaviour.playerInputActions.ItemDetails.Back.performed -= CloseDetails;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed -= Use;
+        PlayerBehaviour.playerInputActions.UI.Action2_I.performed -= CloseInventory;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed -= CloseDetails;
     }
 
     private void Use(InputAction.CallbackContext context) {

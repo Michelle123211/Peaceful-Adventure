@@ -9,12 +9,12 @@ public class GameOverUI : MonoBehaviour
 {
     public void Open() {
         PlayerBehaviour.playerInputActions.Player.Disable();
-        PlayerBehaviour.playerInputActions.GameOver.Enable();
+        PlayerBehaviour.playerInputActions.UI.Enable();
         GetComponent<AppearHideComponent>().Do();
     }
 
     public void Close() {
-        PlayerBehaviour.playerInputActions.GameOver.Disable();
+        PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
         GetComponent<AppearHideComponent>().Undo();
     }
@@ -47,13 +47,13 @@ public class GameOverUI : MonoBehaviour
 
     private void OnEnable() {
         // register input callbacks
-        PlayerBehaviour.playerInputActions.GameOver.Restart.performed += RestartGame;
-        PlayerBehaviour.playerInputActions.GameOver.Quit.performed += QuitToMenu;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed += RestartGame;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed += QuitToMenu;
     }
 
     private void OnDisable() {
         // unregister input callbacks
-        PlayerBehaviour.playerInputActions.GameOver.Restart.performed -= RestartGame;
-        PlayerBehaviour.playerInputActions.GameOver.Quit.performed -= QuitToMenu;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed -= RestartGame;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed -= QuitToMenu;
     }
 }

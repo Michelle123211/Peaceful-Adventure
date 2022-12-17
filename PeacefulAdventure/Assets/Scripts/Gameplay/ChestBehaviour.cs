@@ -62,7 +62,7 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
     }
 
     public IEnumerator OpenChest() {
-        PlayerBehaviour.playerInputActions.Chest.Close.performed += OnInteraction;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed += OnInteraction;
         animator.SetBool("IsOpen", true);
         // wait for a moment to allow the animation to finish
         yield return new WaitForSeconds(this.lag);
@@ -71,7 +71,7 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
     }
 
     public IEnumerator CloseChest() {
-        PlayerBehaviour.playerInputActions.Chest.Close.performed -= OnInteraction;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed -= OnInteraction;
         // close UI
         Utils.FindObject<ChestUI>()[0].Close();
         // wait for a moment to allow UI to disappear

@@ -8121,9 +8121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
   attackDamage:
-    baseValue: 20
+    <BaseValue>k__BackingField: 20
   attackCooldown:
-    baseValue: 0.5
+    <BaseValue>k__BackingField: 0.5
   inventorySlots: 18
   levelSystem:
     experienceNeeded:

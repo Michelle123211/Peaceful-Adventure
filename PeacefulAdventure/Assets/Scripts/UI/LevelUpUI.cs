@@ -9,12 +9,12 @@ public class LevelUpUI : MonoBehaviour
 
     public void Open() {
         PlayerBehaviour.playerInputActions.Player.Disable();
-        PlayerBehaviour.playerInputActions.LevelUp.Enable();
+        PlayerBehaviour.playerInputActions.UI.Enable();
         GetComponent<AppearHideComponent>().Do();
     }
 
     public void Close() {
-        PlayerBehaviour.playerInputActions.LevelUp.Disable();
+        PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
         GetComponent<AppearHideComponent>().Undo();
     }
@@ -49,15 +49,15 @@ public class LevelUpUI : MonoBehaviour
 
     private void OnEnable() {
         // register input callbacks
-        PlayerBehaviour.playerInputActions.LevelUp.Reward1.performed += IncreaseAttackDamage;
-        PlayerBehaviour.playerInputActions.LevelUp.Reward2.performed += IncreaseAttackSpeed;
-        PlayerBehaviour.playerInputActions.LevelUp.Reward3.performed += IncreaseMaxHealth;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed += IncreaseAttackDamage;
+        PlayerBehaviour.playerInputActions.UI.Action2_I.performed += IncreaseAttackSpeed;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed += IncreaseMaxHealth;
     }
 
     private void OnDisable() {
         // unregister input callbacks
-        PlayerBehaviour.playerInputActions.LevelUp.Reward1.performed -= IncreaseAttackDamage;
-        PlayerBehaviour.playerInputActions.LevelUp.Reward2.performed -= IncreaseAttackSpeed;
-        PlayerBehaviour.playerInputActions.LevelUp.Reward3.performed -= IncreaseMaxHealth;
+        PlayerBehaviour.playerInputActions.UI.Action1_J.performed -= IncreaseAttackDamage;
+        PlayerBehaviour.playerInputActions.UI.Action2_I.performed -= IncreaseAttackSpeed;
+        PlayerBehaviour.playerInputActions.UI.Action3_L.performed -= IncreaseMaxHealth;
     }
 }

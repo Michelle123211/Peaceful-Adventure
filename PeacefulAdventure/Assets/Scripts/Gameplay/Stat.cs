@@ -4,6 +4,8 @@ using UnityEngine;
 
 [System.Serializable]
 public class Stat {
+    [field: SerializeField] public float BaseValue { get; private set; }
+
     public float Value {
         get {
             if (isCached) return modifiedValue;
@@ -12,13 +14,12 @@ public class Stat {
         }
     }
 
-    [SerializeField] private float baseValue;
     private float modifiedValue = 0;
     private bool isCached = false;
     private List<StatModifier> modifiers = new List<StatModifier>();
 
     public Stat(float baseValue) {
-        this.baseValue = baseValue;
+        this.BaseValue = baseValue;
     }
 
     public void AddModifier(StatModifier modifier) {
@@ -36,9 +37,14 @@ public class Stat {
         }
     }
 
+    public void ChangeBaseValue(float newValue) {
+        isCached = false;
+        BaseValue = newValue;
+    }
+
     public void RecomputeValue() {
         modifiers.Sort((a, b) => a.type.CompareTo(b.type));
-        float currentValue = baseValue;
+        float currentValue = BaseValue;
         foreach (StatModifier modifier in modifiers) {
             currentValue = modifier.GetModifiedValue(currentValue);
         }

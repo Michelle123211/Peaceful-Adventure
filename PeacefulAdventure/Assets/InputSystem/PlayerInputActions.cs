@@ -597,6 +597,104 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LevelUp"",
+            ""id"": ""9ddc6c0b-617c-4a1b-b24f-d1dd9d41d9fb"",
+            ""actions"": [
+                {
+                    ""name"": ""Reward1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab27cb4d-45a6-4206-87e0-f3761fb52702"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reward2"",
+                    ""type"": ""Button"",
+                    ""id"": ""95823d37-dfbc-49c7-aa0b-afd9d583208a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reward3"",
+                    ""type"": ""Button"",
+                    ""id"": ""943c9f02-4953-412a-832f-cf33eaa81584"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""37e06e64-1773-4946-8f41-c40f4268ad83"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reward1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7ac1759-9deb-429d-bc64-02e8b616304e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reward1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8680c99-370b-429c-b9d5-304cd62561d2"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reward2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3451ef9a-b9e7-4169-99da-eeb8e72e6231"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reward2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2284ea45-b2e8-4d9b-9aee-a6ae87a3b931"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reward3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ff3cffb-8607-43df-a476-f2bf3edb8285"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reward3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -646,6 +744,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Chest_Navigation = m_Chest.FindAction("Navigation", throwIfNotFound: true);
         m_Chest_Select = m_Chest.FindAction("Select", throwIfNotFound: true);
         m_Chest_Close = m_Chest.FindAction("Close", throwIfNotFound: true);
+        // LevelUp
+        m_LevelUp = asset.FindActionMap("LevelUp", throwIfNotFound: true);
+        m_LevelUp_Reward1 = m_LevelUp.FindAction("Reward1", throwIfNotFound: true);
+        m_LevelUp_Reward2 = m_LevelUp.FindAction("Reward2", throwIfNotFound: true);
+        m_LevelUp_Reward3 = m_LevelUp.FindAction("Reward3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -903,6 +1006,55 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public ChestActions @Chest => new ChestActions(this);
+
+    // LevelUp
+    private readonly InputActionMap m_LevelUp;
+    private ILevelUpActions m_LevelUpActionsCallbackInterface;
+    private readonly InputAction m_LevelUp_Reward1;
+    private readonly InputAction m_LevelUp_Reward2;
+    private readonly InputAction m_LevelUp_Reward3;
+    public struct LevelUpActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public LevelUpActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Reward1 => m_Wrapper.m_LevelUp_Reward1;
+        public InputAction @Reward2 => m_Wrapper.m_LevelUp_Reward2;
+        public InputAction @Reward3 => m_Wrapper.m_LevelUp_Reward3;
+        public InputActionMap Get() { return m_Wrapper.m_LevelUp; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LevelUpActions set) { return set.Get(); }
+        public void SetCallbacks(ILevelUpActions instance)
+        {
+            if (m_Wrapper.m_LevelUpActionsCallbackInterface != null)
+            {
+                @Reward1.started -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward1;
+                @Reward1.performed -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward1;
+                @Reward1.canceled -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward1;
+                @Reward2.started -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward2;
+                @Reward2.performed -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward2;
+                @Reward2.canceled -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward2;
+                @Reward3.started -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward3;
+                @Reward3.performed -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward3;
+                @Reward3.canceled -= m_Wrapper.m_LevelUpActionsCallbackInterface.OnReward3;
+            }
+            m_Wrapper.m_LevelUpActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Reward1.started += instance.OnReward1;
+                @Reward1.performed += instance.OnReward1;
+                @Reward1.canceled += instance.OnReward1;
+                @Reward2.started += instance.OnReward2;
+                @Reward2.performed += instance.OnReward2;
+                @Reward2.canceled += instance.OnReward2;
+                @Reward3.started += instance.OnReward3;
+                @Reward3.performed += instance.OnReward3;
+                @Reward3.canceled += instance.OnReward3;
+            }
+        }
+    }
+    public LevelUpActions @LevelUp => new LevelUpActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -946,5 +1098,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnNavigation(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnClose(InputAction.CallbackContext context);
+    }
+    public interface ILevelUpActions
+    {
+        void OnReward1(InputAction.CallbackContext context);
+        void OnReward2(InputAction.CallbackContext context);
+        void OnReward3(InputAction.CallbackContext context);
     }
 }

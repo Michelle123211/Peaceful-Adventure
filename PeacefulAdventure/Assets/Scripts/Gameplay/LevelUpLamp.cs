@@ -12,7 +12,8 @@ public class LevelUpLamp : Interactable
     protected override void OnInteraction(InputAction.CallbackContext context) {
         // level the player up if they have enough XP
         if (PlayerState.Instance.levelSystem.TryLevelUp()) {
-            // TODO: Display the level up UI
+            // display the level up UI
+            Utils.FindObject<LevelUpUI>()[0]?.Open();
         }
     }
 

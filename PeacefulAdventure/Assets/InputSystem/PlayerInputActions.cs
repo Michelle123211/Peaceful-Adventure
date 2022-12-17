@@ -695,6 +695,172 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GameOver"",
+            ""id"": ""a268b1ab-7795-4d72-b54b-cb8db34312c4"",
+            ""actions"": [
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""f33fa9d8-a956-49cf-af42-2e4a94d10020"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc80734e-239e-4e5f-a09e-1402e047a559"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3cc49549-9675-461a-8b26-1c3d836972a8"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e7169e0-7810-486d-bf08-903492e7051e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b44c9a16-d729-4b9e-9837-34dd6f0b3c8f"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0cf8d38-c95f-4c7d-b1b5-ac7cf88f9a03"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""079850da-ecd6-493d-bd78-71979746590d"",
+            ""actions"": [
+                {
+                    ""name"": ""Action1_J"",
+                    ""type"": ""Button"",
+                    ""id"": ""03c314e1-d1fb-400c-a86f-6eb908c77f9e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Action2_I"",
+                    ""type"": ""Button"",
+                    ""id"": ""26340255-d262-4567-8262-ee1e90ea388d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Action3_L"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c9259b9-97c8-494e-a7cf-cd8b2d7a8271"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""071cda20-b78b-40c9-83c4-cc7e49921e5c"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action1_J"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b75e8035-9de9-4c69-bf91-ee09134445b9"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action1_J"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80ce34af-95eb-46ae-b2c7-4a626b2b8b3c"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action2_I"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff580454-8be1-462e-b5c4-110cfeb3f784"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action2_I"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f10442a-3866-4e48-a1cf-586754500560"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action3_L"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15d6a297-65e3-4c93-840b-00a513ade17b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action3_L"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -749,6 +915,15 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_LevelUp_Reward1 = m_LevelUp.FindAction("Reward1", throwIfNotFound: true);
         m_LevelUp_Reward2 = m_LevelUp.FindAction("Reward2", throwIfNotFound: true);
         m_LevelUp_Reward3 = m_LevelUp.FindAction("Reward3", throwIfNotFound: true);
+        // GameOver
+        m_GameOver = asset.FindActionMap("GameOver", throwIfNotFound: true);
+        m_GameOver_Restart = m_GameOver.FindAction("Restart", throwIfNotFound: true);
+        m_GameOver_Quit = m_GameOver.FindAction("Quit", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Action1_J = m_UI.FindAction("Action1_J", throwIfNotFound: true);
+        m_UI_Action2_I = m_UI.FindAction("Action2_I", throwIfNotFound: true);
+        m_UI_Action3_L = m_UI.FindAction("Action3_L", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1055,6 +1230,96 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         }
     }
     public LevelUpActions @LevelUp => new LevelUpActions(this);
+
+    // GameOver
+    private readonly InputActionMap m_GameOver;
+    private IGameOverActions m_GameOverActionsCallbackInterface;
+    private readonly InputAction m_GameOver_Restart;
+    private readonly InputAction m_GameOver_Quit;
+    public struct GameOverActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public GameOverActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Restart => m_Wrapper.m_GameOver_Restart;
+        public InputAction @Quit => m_Wrapper.m_GameOver_Quit;
+        public InputActionMap Get() { return m_Wrapper.m_GameOver; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameOverActions set) { return set.Get(); }
+        public void SetCallbacks(IGameOverActions instance)
+        {
+            if (m_Wrapper.m_GameOverActionsCallbackInterface != null)
+            {
+                @Restart.started -= m_Wrapper.m_GameOverActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_GameOverActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_GameOverActionsCallbackInterface.OnRestart;
+                @Quit.started -= m_Wrapper.m_GameOverActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_GameOverActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_GameOverActionsCallbackInterface.OnQuit;
+            }
+            m_Wrapper.m_GameOverActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
+            }
+        }
+    }
+    public GameOverActions @GameOver => new GameOverActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Action1_J;
+    private readonly InputAction m_UI_Action2_I;
+    private readonly InputAction m_UI_Action3_L;
+    public struct UIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Action1_J => m_Wrapper.m_UI_Action1_J;
+        public InputAction @Action2_I => m_Wrapper.m_UI_Action2_I;
+        public InputAction @Action3_L => m_Wrapper.m_UI_Action3_L;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
+            {
+                @Action1_J.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAction1_J;
+                @Action1_J.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAction1_J;
+                @Action1_J.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAction1_J;
+                @Action2_I.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAction2_I;
+                @Action2_I.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAction2_I;
+                @Action2_I.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAction2_I;
+                @Action3_L.started -= m_Wrapper.m_UIActionsCallbackInterface.OnAction3_L;
+                @Action3_L.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnAction3_L;
+                @Action3_L.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnAction3_L;
+            }
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Action1_J.started += instance.OnAction1_J;
+                @Action1_J.performed += instance.OnAction1_J;
+                @Action1_J.canceled += instance.OnAction1_J;
+                @Action2_I.started += instance.OnAction2_I;
+                @Action2_I.performed += instance.OnAction2_I;
+                @Action2_I.canceled += instance.OnAction2_I;
+                @Action3_L.started += instance.OnAction3_L;
+                @Action3_L.performed += instance.OnAction3_L;
+                @Action3_L.canceled += instance.OnAction3_L;
+            }
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -1104,5 +1369,16 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnReward1(InputAction.CallbackContext context);
         void OnReward2(InputAction.CallbackContext context);
         void OnReward3(InputAction.CallbackContext context);
+    }
+    public interface IGameOverActions
+    {
+        void OnRestart(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnAction1_J(InputAction.CallbackContext context);
+        void OnAction2_I(InputAction.CallbackContext context);
+        void OnAction3_L(InputAction.CallbackContext context);
     }
 }

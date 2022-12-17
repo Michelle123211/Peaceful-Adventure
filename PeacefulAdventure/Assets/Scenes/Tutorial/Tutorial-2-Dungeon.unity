@@ -245,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1207544289245518066, guid: e958bc1fb4051b4498dfa006d77e705a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 27.785
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1207544289245518066, guid: e958bc1fb4051b4498dfa006d77e705a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -341,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5263894217106344069, guid: e958bc1fb4051b4498dfa006d77e705a, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23.88
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5263894217106344069, guid: e958bc1fb4051b4498dfa006d77e705a, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1207,7 +1207,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6459430635818133216, guid: 2d3b55bc6191ab64185bde36a80c6b0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000047683716
+      value: -0.00000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 6459430635818133216, guid: 2d3b55bc6191ab64185bde36a80c6b0d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3465,9 +3465,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
   attackDamage:
-    baseValue: 20
+    <BaseValue>k__BackingField: 20
   attackCooldown:
-    baseValue: 0.5
+    <BaseValue>k__BackingField: 0.5
   inventorySlots: 18
   levelSystem:
     experienceNeeded:
@@ -3672,7 +3672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560104326112609412, guid: b3b52974439a90442b60c69ea8b770b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000047683716
+      value: -0.00000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 7560104326112609412, guid: b3b52974439a90442b60c69ea8b770b5, type: 3}
       propertyPath: m_LocalPosition.y

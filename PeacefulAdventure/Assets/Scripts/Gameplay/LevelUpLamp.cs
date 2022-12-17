@@ -13,7 +13,7 @@ public class LevelUpLamp : Interactable
         // level the player up if they have enough XP
         if (PlayerState.Instance.levelSystem.TryLevelUp()) {
             // display the level up UI
-            Utils.FindObject<LevelUpUI>()[0]?.Open();
+            Utils.FindObject<LevelUpUI>()[0].Open();
         }
     }
 

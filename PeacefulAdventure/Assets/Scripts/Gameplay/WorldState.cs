@@ -20,6 +20,11 @@ public class WorldState : MonoBehaviour
     }
 
     public Dictionary<string, WorldStateRepresentation> sceneStates = new Dictionary<string, WorldStateRepresentation>();
+
+    public static void Reset() {
+        if (instance != null)
+            instance.sceneStates.Clear();
+    }
 }
 
 public class WorldStateRepresentation {

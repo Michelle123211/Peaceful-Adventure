@@ -65,13 +65,14 @@ public abstract class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void Awake() {
         currentHealth = maxHealth;
-        healthText.text = $"{Mathf.Max(0, currentHealth)}/{maxHealth}";
+        if (healthText != null)
+            healthText.text = $"{Mathf.Max(0, currentHealth)}/{maxHealth}";
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<CharacterAnimation>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = FindObjectOfType<PlayerBehaviour>();
     }
-    
+
 
     // Update is called once per frame
     protected virtual void Update() {

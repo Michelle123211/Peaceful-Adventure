@@ -72,17 +72,17 @@ public class Cheats : MonoBehaviour {
             // Teleport to the town scene
             if (GUI.Button(new Rect(ColumnToX(-1), RowToY(3), width, height), "Town")) {
                 Debug.Log("Town");
-                FindObjectOfType<SceneLoader>().LoadScene("MainMap");
+                FindObjectOfType<SceneLoader>().LoadSceneWithState("MainMap");
             }
             // Teleport to the house scene
             if (GUI.Button(new Rect(ColumnToX(0), RowToY(3), width, height), "House")) {
                 Debug.Log("House");
-                FindObjectOfType<SceneLoader>().LoadScene("HouseIndoor");
+                FindObjectOfType<SceneLoader>().LoadSceneWithState("HouseIndoor");
             }
             // Teleport to the dungeon scene
             if (GUI.Button(new Rect(ColumnToX(1), RowToY(3), width, height), "Dungeon")) {
                 Debug.Log("Dungeon");
-                FindObjectOfType<SceneLoader>().LoadScene("Dungeon");
+                FindObjectOfType<SceneLoader>().LoadSceneWithState("Dungeon");
             }
 
         }

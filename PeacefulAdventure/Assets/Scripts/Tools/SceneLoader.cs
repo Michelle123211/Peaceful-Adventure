@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+using DG.Tweening;
+
 public class SceneLoader : MonoBehaviour {
 
+    public float fadeDuration = 0.3f;
+    public CanvasGroup fadeCanvasGroup;
+
     private void Start() {
+        fadeCanvasGroup.alpha = 1f;
         string currentScene = SceneManager.GetActiveScene().name;
         if (currentScene == "MainMap") {
             // delete Dungeon and HouseIndoor state if available
@@ -13,14 +19,23 @@ public class SceneLoader : MonoBehaviour {
             WorldState.Instance.sceneStates.Remove("Dungeon");
         }
         LoadState(currentScene); // load state if available
+        fadeCanvasGroup.DOFade(0f, fadeDuration).SetEase(Ease.InCubic);
     }
 
-    public void LoadScene(string sceneName) {
-        string currentScene = SceneManager.GetActiveScene().name;
-        // save the current state (rewriting any previous one)
-        SaveState(currentScene);
-        // load new scene
-        SceneManager.LoadScene(sceneName);
+    public void LoadSceneWithState(string sceneName) {
+        fadeCanvasGroup.DOFade(1f, fadeDuration).SetEase(Ease.OutCubic).OnComplete(() => {
+            string currentScene = SceneManager.GetActiveScene().name;
+            // save the current state (rewriting any previous one)
+            SaveState(currentScene);
+            // load new scene
+            SceneManager.LoadScene(sceneName);
+        });
+    }
+
+    public void LoadSceneWithoutState(string sceneName) {
+        fadeCanvasGroup.DOFade(1f, 0.5f).SetEase(Ease.OutCubic).OnComplete(() => {
+            SceneManager.LoadScene(sceneName);
+        });
     }
 
     private void LoadState(string currentScene) {

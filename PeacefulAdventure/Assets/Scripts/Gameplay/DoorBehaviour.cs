@@ -13,7 +13,6 @@ public class DoorBehaviour : Interactable
     }
 
     protected override void OnInteraction(InputAction.CallbackContext context) {
-        FindObjectOfType<SceneLoader>().LoadScene(this.nextScene);
-        //SceneManager.LoadScene(this.nextScene);
+        FindObjectOfType<SceneLoader>().LoadSceneWithState(this.nextScene);
     }
 }

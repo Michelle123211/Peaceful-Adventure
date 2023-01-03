@@ -29,9 +29,9 @@ public class GameOverUI : MonoBehaviour
         // if we are in the tutorial, reload the first scene of the tutorial
         // otherwise, reload the MainMap
         if (currentScene.name.Contains("Tutorial")) {
-            SceneManager.LoadScene("Tutorial-1-House");
+            FindObjectOfType<SceneLoader>().LoadSceneWithoutState("Tutorial-1-House");
         } else {
-            SceneManager.LoadScene("MainMap");
+            FindObjectOfType<SceneLoader>().LoadSceneWithoutState("MainMap");
         }
     }
     private void RestartGame(InputAction.CallbackContext context) => RestartGame();
@@ -41,7 +41,7 @@ public class GameOverUI : MonoBehaviour
         WorldState.Reset(); // saved states for all the scenes
         PlayerState.ResetToInitialState();
         Close();
-        SceneManager.LoadScene("MainMenu");
+        FindObjectOfType<SceneLoader>().LoadSceneWithoutState("MainMenu");
     }
     private void QuitToMenu(InputAction.CallbackContext context) => QuitToMenu();
 

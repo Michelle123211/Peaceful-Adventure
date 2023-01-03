@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public static class Utils
 {
@@ -69,5 +70,15 @@ public static class Utils
                 subtractFrom.Remove(item);
             }
         }
+    }
+
+    public static bool IsNullEvent(UnityEvent unityEvent) {
+        if (unityEvent == null) return true;
+        for (int i = 0; i < unityEvent.GetPersistentEventCount(); i++) {
+            if (unityEvent.GetPersistentTarget(i) != null) {
+                return false;
+            }
+        }
+        return true;
     }
 }

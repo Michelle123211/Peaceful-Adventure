@@ -181,9 +181,11 @@ public class TweenPropertyValuesColor : TweenPropertyValues<Color> {
 [System.Serializable]
 public class TweenVectorCurves {
     // TODO: if tweenComponentWise == false, show tweenCurve, otherwise tweenCurves
+    [ConditionalHide("tweenComponentWise", true)]
     public AnimationCurve tweenCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
     // TODO: show only if numOfComponents is > 1
     public bool tweenComponentWise; // true = work with the position as a vector, false = tween each axis separately
+    [ConditionalHide("tweenComponentWise")]
     public AnimationCurve[] tweenCurves;
 
     public TweenVectorCurves(int numOfComponents = 3) {

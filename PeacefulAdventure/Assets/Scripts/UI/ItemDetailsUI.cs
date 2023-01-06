@@ -16,6 +16,7 @@ public class ItemDetailsUI : MonoBehaviour {
     [SerializeField] private InventoryContentUI inventoryContent;
 
     private InventoryItem item;
+    private bool initialized = false;
 
     public void Open(InventoryItem item) {
         this.item = item;
@@ -26,43 +27,40 @@ public class ItemDetailsUI : MonoBehaviour {
         if (!Application.isMobilePlatform)
             useControl.SetActive(item.item.isUsable);
         useButton.interactable = item.item.isUsable;
-        inventoryContent.gameObject.TweenAwareDisable();
         gameObject.TweenAwareEnable();
     }
 
     public void Close() {
         gameObject.TweenAwareDisable();
-        inventoryContent.gameObject.TweenAwareEnable();
     }
 
     public void UseItem() {
-        item.item.Use(); // TODO: Show some popup if not possible to use (false returned)
-        Close();
+        if (item.item.Use()) // TODO: Show some popup if not possible to use (false returned)
+            inventoryUI.ShowInventoryContent();
+    }
+
+    public void SetInitialized() {
+        initialized = true;
     }
 
     private void OnEnable() {
+        initialized = false;
         PlayerBehaviour.playerInputActions.UI.Action1_J.performed += Use;
-        PlayerBehaviour.playerInputActions.UI.Action2_I.performed += CloseInventory;
         PlayerBehaviour.playerInputActions.UI.Action3_L.performed += CloseDetails;
     }
 
     private void OnDisable() {
         PlayerBehaviour.playerInputActions.UI.Action1_J.performed -= Use;
-        PlayerBehaviour.playerInputActions.UI.Action2_I.performed -= CloseInventory;
         PlayerBehaviour.playerInputActions.UI.Action3_L.performed -= CloseDetails;
     }
 
     private void Use(InputAction.CallbackContext context) {
-        UseItem();
-    }
-
-    private void CloseInventory(InputAction.CallbackContext context) {
-        Close();
-        inventoryUI.Close();
+        if (initialized)
+            UseItem();
     }
 
     private void CloseDetails(InputAction.CallbackContext context) {
-        Close();
+        inventoryUI.ShowInventoryContent();
     }
 
 }

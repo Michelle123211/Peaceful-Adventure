@@ -34,7 +34,7 @@ public class PlayerState : MonoBehaviour {
     //public float attackCooldown = 0.5f;
 
     [Tooltip("Number of slots in the inventory")]
-    [SerializeField] private int inventorySlots = 18;
+    [SerializeField] private int inventorySlots = 12;
     public int InventorySlots { get => inventorySlots; }
     public Inventory inventory;
 
@@ -65,7 +65,7 @@ public class PlayerState : MonoBehaviour {
             instance.CurrentHealth = instance.MaxHealth;
             instance.attackDamage = new Stat(20f);
             instance.attackCooldown = new Stat(0.5f);
-            instance.inventorySlots = 18;
+            instance.inventorySlots = 12;
             instance.inventory = new Inventory(instance.inventorySlots);
             instance.levelSystem.ResetCompletely();
             Debug.Log("PlayerState reset completely.");

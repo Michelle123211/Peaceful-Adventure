@@ -15,17 +15,26 @@ public class InventoryUI : MonoBehaviour {
         PlayerBehaviour.playerInputActions.UI.Enable();
         itemDetailsUI.gameObject.SetActive(false);
         inventoryContentUI.SetInventoryUI(this);
-        gameObject.TweenAwareEnable();
+        gameObject.SetActive(true);
+        //gameObject.TweenAwareEnable();
         inventoryContentUI.Open();
     }
 
     public void Close() {
         PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
-        gameObject.TweenAwareDisable();
+        inventoryContentUI.Close();
     }
 
     public void ShowDetails(InventoryItem item) {
         itemDetailsUI.Open(item);
+    }
+
+    public void ShowInventoryContent() {
+        itemDetailsUI.Close();
+    }
+
+    public void Log(string message) {
+        Debug.Log(message);
     }
 }

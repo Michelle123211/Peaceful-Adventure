@@ -16,6 +16,8 @@ public class InventoryContentUI : MonoBehaviour
 
     private InventoryUI inventoryUI;
 
+    private bool initialized = false;
+
     public void Open() {
         Refresh();
         gameObject.TweenAwareEnable();
@@ -76,7 +78,12 @@ public class InventoryContentUI : MonoBehaviour
         this.inventoryUI = inventoryUI;
     }
 
+    public void SetInitialized() {
+        initialized = true;
+    }
+
     private void OnEnable() {
+        initialized = false;
         PlayerState.Instance.inventory.onInventoryChangedCallback += Refresh;
         PlayerBehaviour.playerInputActions.UI.Navigation.performed += Navigate;
         PlayerBehaviour.playerInputActions.UI.Action1_J.performed += Select;
@@ -111,11 +118,11 @@ public class InventoryContentUI : MonoBehaviour
     }
 
     private void Select(InputAction.CallbackContext context) {
-        this.slots[selectedRow, selectedColumn].ShowDetails();
+        if (initialized)
+            this.slots[selectedRow, selectedColumn].ShowDetails();
     }
 
     private void CloseInventory(InputAction.CallbackContext context) {
-        Close();
         inventoryUI.Close();
     }
 }

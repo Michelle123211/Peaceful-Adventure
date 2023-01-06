@@ -48,7 +48,7 @@ public class GenericTween : MonoBehaviour {
     public void UndoTween() {
         tweenIsRunning = true;
         reversed = true;
-        FinalizeTween();
+        InitializeTween();
     }
 
     private void InitializeTween() {
@@ -91,6 +91,11 @@ public class GenericTween : MonoBehaviour {
                     reversed = false;
                     return;
                 }
+                if (reversed && !revertAfter) { // untween complete
+                    if (!Utils.IsNullEvent(onUntweenComplete)) onUntweenComplete.Invoke();
+                }
+                if ((!reversed) || (reversed && revertAfter)) // tween complete
+                    if (!Utils.IsNullEvent(onTweenComplete)) onTweenComplete.Invoke();
                 if (destroy) Invoke(nameof(DestroySelf), 0.5f);
             } else {
                 // perform a single step

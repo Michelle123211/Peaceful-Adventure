@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(AppearHideComponent))]
 public class InventoryContentUI : MonoBehaviour
 {
     [SerializeField] private GameObject itemSlotPrefab;
@@ -19,11 +18,11 @@ public class InventoryContentUI : MonoBehaviour
 
     public void Open() {
         Refresh();
-        GetComponent<AppearHideComponent>().Do();
+        gameObject.TweenAwareEnable();
     }
 
     public void Close() {
-        GetComponent<AppearHideComponent>().Undo();
+        gameObject.TweenAwareDisable();
     }
 
     public void Refresh() {

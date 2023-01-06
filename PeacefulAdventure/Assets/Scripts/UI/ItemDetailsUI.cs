@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(AppearHideComponent))]
 public class ItemDetailsUI : MonoBehaviour {
 
     [SerializeField] private TextMeshProUGUI nameText;
@@ -13,6 +12,8 @@ public class ItemDetailsUI : MonoBehaviour {
     [SerializeField] private Button useButton;
     [SerializeField] private GameObject useControl;
     [SerializeField] private InventoryUI inventoryUI;
+
+    [SerializeField] private InventoryContentUI inventoryContent;
 
     private InventoryItem item;
 
@@ -25,11 +26,13 @@ public class ItemDetailsUI : MonoBehaviour {
         if (!Application.isMobilePlatform)
             useControl.SetActive(item.item.isUsable);
         useButton.interactable = item.item.isUsable;
-        GetComponent<AppearHideComponent>().Do();
+        inventoryContent.gameObject.TweenAwareDisable();
+        gameObject.TweenAwareEnable();
     }
 
     public void Close() {
-        GetComponent<AppearHideComponent>().Undo();
+        gameObject.TweenAwareDisable();
+        inventoryContent.gameObject.TweenAwareEnable();
     }
 
     public void UseItem() {

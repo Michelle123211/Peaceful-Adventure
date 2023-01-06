@@ -50,28 +50,18 @@ public static class Utils
     }
 
     public static void TweenAwareEnable(this GameObject go) {
-        Tweenable tweenable = go.GetComponent<Tweenable>();
-        if (tweenable != null)
-            tweenable.Enable();
-        else {
-            GenericTween tween = go.GetComponent<GenericTween>();
-            if (tween != null)
-                tween.DoTween();
-            else
-                go.SetActive(true);
-        }
+        GenericTween tween = go.GetComponent<GenericTween>();
+        if (tween != null)
+            tween.DoTween();
+        else
+            go.SetActive(true);
     }
     public static void TweenAwareDisable(this GameObject go) {
-        Tweenable tweenable = go.GetComponent<Tweenable>();
-        if (tweenable != null)
-            tweenable.Disable();
-        else {
-            GenericTween tween = go.GetComponent<GenericTween>();
-            if (tween != null)
-                tween.UndoTween();
-            else
-                go.SetActive(false);
-        }
+        GenericTween tween = go.GetComponent<GenericTween>();
+        if (tween != null)
+            tween.UndoTween();
+        else
+            go.SetActive(false);
     }
 
     public static void Subtract<T>(this HashSet<T> subtractFrom, HashSet<T> subtractWhat) {

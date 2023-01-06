@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(AppearHideComponent))]
 public class ChestUI : MonoBehaviour
 {
     [SerializeField] private GameObject itemSlotPrefab;
@@ -22,13 +21,13 @@ public class ChestUI : MonoBehaviour
         this.chest = chest;
         Debug.Log("Opening a chest");
         Refresh();
-        GetComponent<AppearHideComponent>().Do();
+        gameObject.TweenAwareEnable();
     }
 
     public void Close() {
         PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
-        GetComponent<AppearHideComponent>().Undo();
+        gameObject.TweenAwareDisable();
     }
 
     public void CloseChest() {

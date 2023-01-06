@@ -4,25 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(AppearHideComponent))]
 public class InventoryUI : MonoBehaviour {
 
     [SerializeField] private ItemDetailsUI itemDetailsUI;
     [SerializeField] private InventoryContentUI inventoryContentUI;
 
     public void Open() {
+        Debug.Log("Opening inventory");
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.UI.Enable();
         itemDetailsUI.gameObject.SetActive(false);
         inventoryContentUI.SetInventoryUI(this);
-        GetComponent<AppearHideComponent>().Do();
+        gameObject.TweenAwareEnable();
         inventoryContentUI.Open();
     }
 
     public void Close() {
         PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
-        GetComponent<AppearHideComponent>().Undo();
+        gameObject.TweenAwareDisable();
     }
 
     public void ShowDetails(InventoryItem item) {

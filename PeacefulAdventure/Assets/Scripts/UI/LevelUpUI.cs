@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(AppearHideComponent))]
 public class LevelUpUI : MonoBehaviour
 {
 
     public void Open() {
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.UI.Enable();
-        GetComponent<AppearHideComponent>().Do();
+        gameObject.TweenAwareEnable();
     }
 
     public void Close() {
         PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
-        GetComponent<AppearHideComponent>().Undo();
+        gameObject.TweenAwareDisable();
     }
 
     public void IncreaseAttackDamage() {

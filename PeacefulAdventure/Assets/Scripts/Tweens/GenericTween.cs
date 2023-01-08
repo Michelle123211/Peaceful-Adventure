@@ -20,6 +20,7 @@ public class GenericTween : MonoBehaviour {
     public bool revertAfter = false;
 
     // position
+    [Tooltip("Start and end position are given as relative displacements.")]
     public TweenPropertyPosition positionTween = new TweenPropertyPosition();
     // scale
     public TweenPropertyScale scaleTween = new TweenPropertyScale();
@@ -32,6 +33,8 @@ public class GenericTween : MonoBehaviour {
 
     public UnityEvent onTweenComplete = null;
     public UnityEvent onUntweenComplete = null;
+
+    private Vector3 initialPosition;
 
 
     private bool tweenIsRunning = false;
@@ -70,6 +73,7 @@ public class GenericTween : MonoBehaviour {
     }
 
     private void Awake() {
+        positionTween.SetInitialPosition(transform.position);
         if (playOnAwake)
             DoTween();
     }

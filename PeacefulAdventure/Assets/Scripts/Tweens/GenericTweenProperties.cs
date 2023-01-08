@@ -24,11 +24,18 @@ public abstract class TweenProperty<TValue> {
 [System.Serializable]
 public class TweenPropertyPosition : TweenProperty<Vector3> {
     public TweenPropertyValuesVector3 tweenPropertyValues = new TweenPropertyValuesVector3();
+
+    private Vector3 initialPosition;
+
+    public void SetInitialPosition(Vector3 position) {
+        initialPosition = position;
+    }
+
     protected override TweenPropertyValues<Vector3> GetTweenPropertyValues() {
         return tweenPropertyValues;
     }
     protected override void SetTweenedPropertyInternal(GameObject target, float time) {
-        target.transform.position = tweenPropertyValues.GetTweenValue(time);
+        target.transform.position = initialPosition + tweenPropertyValues.GetTweenValue(time);
     }
 }
 

@@ -15,6 +15,8 @@ public class ChestUI : MonoBehaviour
 
     private int selectedIndex = 0;
 
+    private bool initialized = false;
+
     public void Open(ChestBehaviour chest) {
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.UI.Enable();
@@ -68,14 +70,21 @@ public class ChestUI : MonoBehaviour
     }
 
     public void TakeItem(InventoryItem item) {
-        // remove from chest and add to inventory
-        if (PlayerState.Instance.inventory.AddToInventory(item)) {
-            chest.RemoveItem(item);
+        if (initialized) {
+            // remove from chest and add to inventory
+            if (PlayerState.Instance.inventory.AddToInventory(item)) {
+                chest.RemoveItem(item);
+            }
+            Refresh();
         }
-        Refresh();
+    }
+
+    public void SetInitialized() {
+        initialized = true;
     }
 
     private void OnEnable() {
+        initialized = false;
         PlayerState.Instance.inventory.onInventoryChangedCallback += Refresh;
         PlayerBehaviour.playerInputActions.UI.Navigation.performed += Navigate;
         PlayerBehaviour.playerInputActions.UI.Action1_J.performed += Select;
@@ -102,6 +111,7 @@ public class ChestUI : MonoBehaviour
     }
 
     private void Select(InputAction.CallbackContext context) {
-        this.slots[selectedIndex].TakeFromChest();
+        if (initialized)
+            this.slots[selectedIndex].TakeFromChest();
     }
 }

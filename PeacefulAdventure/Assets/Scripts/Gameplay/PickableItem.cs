@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PickableItem : Interactable, ISaveable<bool> {
 
     public Item item;
 
+    [SerializeField] private Light2D light;
     private SpriteRenderer spriteRenderer;
 
     protected override void OnInteraction(InputAction.CallbackContext context) {
@@ -18,9 +20,8 @@ public class PickableItem : Interactable, ISaveable<bool> {
     }
 
     private void Awake() {
-        this.spriteRenderer = GetComponent<SpriteRenderer>();
-        if (this.spriteRenderer != null)
-            this.spriteRenderer.sprite = item.icon;
+        SetItemSprite();
+        SetLightColor();
     }
 
     public PositionID GetID() {
@@ -34,5 +35,19 @@ public class PickableItem : Interactable, ISaveable<bool> {
     public void LoadState(bool model) {
         if (!model)
             Destroy(gameObject); // TODO: some effects
+    }
+
+    [ContextMenu("Set item sprite")]
+    public void SetItemSprite() {
+        if (this.spriteRenderer == null)
+            this.spriteRenderer = GetComponent<SpriteRenderer>();
+        if (this.spriteRenderer != null)
+            this.spriteRenderer.sprite = item.icon;
+    }
+
+    [ContextMenu("Set light color")]
+    public void SetLightColor() {
+        if (this.light != null)
+            this.light.color = item.lightColor;
     }
 }

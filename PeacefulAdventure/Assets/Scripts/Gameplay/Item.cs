@@ -11,6 +11,7 @@ public abstract class Item : ScriptableObject
     public string description;
     public Sprite icon;
     public bool isUsable;
+    public Color lightColor;
 
     public bool Use() {
         if (this.isUsable && PlayerState.Instance.inventory.TakeFromInventory(this)) {

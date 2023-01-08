@@ -16,6 +16,7 @@ MonoBehaviour:
   description: Increases both attack damage and attack speed for 10 seconds.
   icon: {fileID: -1972361127685065434, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
   isUsable: 1
+  lightColor: {r: 0.227451, g: 0.6313726, b: 0.227451, a: 1}
   attackDamageModifier:
     type: 0
     value: 5

@@ -16,4 +16,5 @@ MonoBehaviour:
   description: Adds a significant amount health.
   icon: {fileID: 8618505411793156745, guid: 8cbda256217b12b479b9d40790301ee3, type: 3}
   isUsable: 1
+  lightColor: {r: 0.85098046, g: 0.41960788, b: 0.29803923, a: 1}
   value: 100

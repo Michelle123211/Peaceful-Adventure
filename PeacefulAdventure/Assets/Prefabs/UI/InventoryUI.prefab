@@ -1585,7 +1585,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -500, y: -260}
+  m_SizeDelta: {x: -500, y: -240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7704075333946556186
 CanvasRenderer:
@@ -2180,7 +2180,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &7704075334073564642
 GameObject:
@@ -2224,7 +2224,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -500, y: -260}
+  m_SizeDelta: {x: -500, y: -240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7704075334073564641
 CanvasRenderer:
@@ -2777,7 +2777,7 @@ CanvasGroup:
   m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &7704075334096998997
 GameObject:

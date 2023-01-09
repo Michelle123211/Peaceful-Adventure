@@ -4,6 +4,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Experimental.Rendering.Universal;
 
+using DG.Tweening;
+using DG.Tweening.Core;
+
 public abstract class EnemyBehaviour : MonoBehaviour {
 
     public float maxHealth = 60;
@@ -31,13 +34,28 @@ public abstract class EnemyBehaviour : MonoBehaviour {
     protected CharacterAnimation animator;
     protected SpriteRenderer spriteRenderer;
 
+    private float displayedHealth;
+    private TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> healthTween;
+
     protected abstract void ComputeMovement();
 
     public virtual void TakeDamage(float damage) {
         if (!this.isDead) {
             Debug.Log("Damage taken " + damage);
+            
             currentHealth -= damage;
-            healthText.text = $"{Mathf.Max(0, currentHealth)}/{maxHealth}";
+            if (healthTween != null && !healthTween.IsComplete()) {
+                healthTween.Complete();
+            }
+            healthTween = DOTween.To(() => displayedHealth,
+                x => {
+                    displayedHealth = x;
+                    healthText.text = $"{(int)displayedHealth}/{maxHealth}";
+                },
+                Mathf.Max(0, currentHealth),
+                0.5f);
+            healthText.gameObject.GetComponent<GenericTween>()?.DoTween();
+
             if (currentHealth <= 0) {
                 Die();
             } else {
@@ -65,8 +83,10 @@ public abstract class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void Awake() {
         currentHealth = maxHealth;
-        if (healthText != null)
-            healthText.text = $"{Mathf.Max(0, currentHealth)}/{maxHealth}";
+        if (healthText != null) {
+            displayedHealth = Mathf.Max(0, currentHealth);
+            healthText.text = $"{(int)displayedHealth}/{maxHealth}";
+        }
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<CharacterAnimation>();
         spriteRenderer = GetComponent<SpriteRenderer>();

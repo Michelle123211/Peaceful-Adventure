@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using DG.Tweening;
+using DG.Tweening.Core;
+
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI valueTMP;
@@ -18,8 +21,8 @@ public class ProgressBar : MonoBehaviour
     public void RefreshValues(int current, int maximum, string label = null) {
         currentValue = current;
         maximumValue = maximum;
-        // TODO: Tweening
-        fillImage.fillAmount = (float)Mathf.Min(currentValue, maximumValue) / maximumValue;
+        fillImage.DOComplete();
+        fillImage.DOFillAmount((float)Mathf.Min(currentValue, maximumValue) / maximumValue, 0.4f);
         valueTMP.text = $"{currentValue}/{maximumValue}";
         if (label != null) {
             labelTMP.text = label;

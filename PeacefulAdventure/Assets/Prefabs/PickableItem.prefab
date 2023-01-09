@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: cfb5898d06ca3db499c745dd998fd3fa, type: 2}
-  light: {fileID: 7752939050180835768}
+  backgroundLight: {fileID: 7752939050180835768}
 --- !u!212 &2691592055535390841
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class PickableItem : Interactable, ISaveable<bool> {
 
     public Item item;
 
-    [SerializeField] private Light2D light;
+    [SerializeField] private Light2D backgroundLight;
     private SpriteRenderer spriteRenderer;
 
     protected override void OnInteraction(InputAction.CallbackContext context) {
@@ -47,7 +47,7 @@ public class PickableItem : Interactable, ISaveable<bool> {
 
     [ContextMenu("Set light color")]
     public void SetLightColor() {
-        if (this.light != null)
-            this.light.color = item.lightColor;
+        if (this.backgroundLight != null)
+            this.backgroundLight.color = item.lightColor;
     }
 }

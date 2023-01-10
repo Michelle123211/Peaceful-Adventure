@@ -31,14 +31,14 @@ public class ControlHintTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         // Show the ControlHintUI
         if (collision.CompareTag("Player")) {
-            hintUI.gameObject.SetActive(true);
+            hintUI.gameObject.TweenAwareEnable();// SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         // Hide the ControlHintUI
         if (collision.CompareTag("Player")) {
-            hintUI.gameObject.SetActive(false);
+            hintUI.gameObject.TweenAwareDisable();// SetActive(false);
         }
     }
 }

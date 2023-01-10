@@ -17,13 +17,13 @@ public class TutorialText : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player")) {
-            textField.gameObject.SetActive(true);
+            textField.gameObject.TweenAwareEnable();// SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.CompareTag("Player")) {
-            textField.gameObject.SetActive(false);
+            textField.gameObject.TweenAwareDisable();// SetActive(false);
         }
     }
 }

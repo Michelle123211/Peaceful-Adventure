@@ -331,6 +331,7 @@ MonoBehaviour:
   force: 25
   isDead: 0
   enemyLight: {fileID: 58356835}
+  bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
 --- !u!114 &294120852
 MonoBehaviour:
@@ -1069,6 +1070,7 @@ MonoBehaviour:
   force: 25
   isDead: 0
   enemyLight: {fileID: 325060826}
+  bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
 --- !u!114 &628237892
 MonoBehaviour:
@@ -2007,6 +2009,7 @@ MonoBehaviour:
   force: 25
   isDead: 0
   enemyLight: {fileID: 1258912468}
+  bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
 --- !u!114 &894025334
 MonoBehaviour:
@@ -6028,6 +6031,7 @@ MonoBehaviour:
   force: 25
   isDead: 0
   enemyLight: {fileID: 1739729609}
+  bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
 --- !u!114 &1822723927
 MonoBehaviour:

@@ -59,5 +59,25 @@ PrefabInstance:
       propertyPath: description
       value: to descend
       objectReference: {fileID: 0}
+    - target: {fileID: 4089066126471800187, guid: df0fbfc1905ccfe4b9c7b84bcf570087, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 4089066126471800187, guid: df0fbfc1905ccfe4b9c7b84bcf570087, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.031
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370945989461124050, guid: df0fbfc1905ccfe4b9c7b84bcf570087, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370945989461124050, guid: df0fbfc1905ccfe4b9c7b84bcf570087, type: 3}
+      propertyPath: ShapeModule.m_Scale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370945989461124050, guid: df0fbfc1905ccfe4b9c7b84bcf570087, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df0fbfc1905ccfe4b9c7b84bcf570087, type: 3}

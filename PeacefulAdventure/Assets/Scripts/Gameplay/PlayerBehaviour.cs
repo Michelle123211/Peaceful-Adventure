@@ -18,6 +18,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     public static PlayerInputActions playerInputActions;
 
+    [SerializeField] ParticleSystem dustParticles;
+
     Rigidbody2D rb;
     CharacterAnimation animator;
 
@@ -76,6 +78,19 @@ public class PlayerBehaviour : MonoBehaviour
             rb.velocity = movement * speed;
 
             animator.Move(movement);
+
+            // dust particles
+            if (movement == Vector2.zero && dustParticles.isPlaying) {
+                dustParticles.Stop();
+            } else if (movement != Vector2.zero && dustParticles.isStopped) {
+                dustParticles.Play();
+                if (movement.x != 0) {
+                    float x = -Mathf.Sign(movement.x) * 0.3f;
+                    dustParticles.transform.localPosition = dustParticles.transform.localPosition.WithX(x);
+                } else if (movement.y != 0) {
+                    dustParticles.transform.localPosition = dustParticles.transform.localPosition.WithX(0);
+                }
+            }
         }
     }
 

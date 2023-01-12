@@ -15,6 +15,16 @@ public static class Utils
     public static Color WithB(this Color c, float b)
         => new Color(c.r, c.g, b, c.a);
 
+
+    public static Vector3 WithX(this Vector3 v, float x)
+        => new Vector3(x, v.y, v.z);
+
+    public static Vector3 WithY(this Vector3 v, float y)
+        => new Vector3(v.x, y, v.z);
+
+    public static Vector3 WithZ(this Vector3 v, float z)
+        => new Vector3(v.x, v.y, z);
+
     public static Vector2 ConvertToFourDirections(Vector2 inputVector) {
         float xAbs = Mathf.Abs(inputVector.x);
         float yAbs = Mathf.Abs(inputVector.y);

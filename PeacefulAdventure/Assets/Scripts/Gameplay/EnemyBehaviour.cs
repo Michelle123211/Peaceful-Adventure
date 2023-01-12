@@ -26,6 +26,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
     public bool isDead = false;
 
     public Light2D enemyLight;
+    public ParticleSystem bloodParticles;
     public TextMeshProUGUI healthText;
 
     protected PlayerBehaviour player;
@@ -55,6 +56,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
                 Mathf.Max(0, currentHealth),
                 0.5f);
             healthText.gameObject.GetComponent<GenericTween>()?.DoTween();
+            bloodParticles.Play();
 
             if (currentHealth <= 0) {
                 Die();

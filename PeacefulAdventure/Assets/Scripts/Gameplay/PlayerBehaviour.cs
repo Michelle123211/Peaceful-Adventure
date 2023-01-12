@@ -19,6 +19,7 @@ public class PlayerBehaviour : MonoBehaviour
     public static PlayerInputActions playerInputActions;
 
     [SerializeField] ParticleSystem dustParticles;
+    [SerializeField] ParticleSystem bloodParticles;
 
     Rigidbody2D rb;
     CharacterAnimation animator;
@@ -31,6 +32,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (Time.time - previousDamage > damageCooldown) { // the current damage has not come too soon after the last one
             Debug.Log("Player damage taken " + damage);
             PlayerState.Instance.UpdateHealth((int) -damage);
+            bloodParticles.Play();
             // TODO: play sound effect
             if (PlayerState.Instance.CurrentHealth <= 0) {
                 Die();

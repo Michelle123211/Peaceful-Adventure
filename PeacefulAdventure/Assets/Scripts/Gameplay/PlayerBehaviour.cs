@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterAnimation))]
-public class PlayerBehaviour : MonoBehaviour
-{
+public class PlayerBehaviour : MonoBehaviour {
     public float speed = 5f;
 
     public bool isDead = false;
@@ -21,6 +20,9 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] ParticleSystem dustParticles;
     [SerializeField] ParticleSystem bloodParticles;
 
+    [SerializeField] ParticleSystem attackDamageParticles;
+    [SerializeField] ParticleSystem attackCooldownParticles;
+
     Rigidbody2D rb;
     CharacterAnimation animator;
 
@@ -31,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
     public void TakeDamage(float damage) {
         if (Time.time - previousDamage > damageCooldown) { // the current damage has not come too soon after the last one
             Debug.Log("Player damage taken " + damage);
-            PlayerState.Instance.UpdateHealth((int) -damage);
+            PlayerState.Instance.UpdateHealth((int)-damage);
             bloodParticles.Play();
             // TODO: play sound effect
             if (PlayerState.Instance.CurrentHealth <= 0) {
@@ -66,10 +68,16 @@ public class PlayerBehaviour : MonoBehaviour
         animator = GetComponent<CharacterAnimation>();
     }
 
+    private void Start() {
+        PlayerState.Instance.onStatsChangedCallback += RefreshEffectParticles;
+        RefreshEffectParticles();
+    }
+
     private void OnDestroy() {
         playerInputActions.Player.Attack.performed -= Attack;
         playerInputActions.Player.Inventory.performed -= Inventory;
         playerInputActions.Player.Interaction.performed -= Interaction;
+        PlayerState.Instance.onStatsChangedCallback -= RefreshEffectParticles;
     }
 
     private void FixedUpdate() {
@@ -117,5 +125,19 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Interaction(InputAction.CallbackContext ocontext) {
         Debug.Log("Interaction!");
+    }
+
+    private void RefreshEffectParticles() {
+        RefreshEffect(PlayerState.Instance.attackDamage, attackDamageParticles);
+        RefreshEffect(PlayerState.Instance.attackCooldown, attackCooldownParticles);
+
+    }
+
+    private void RefreshEffect(Stat stat, ParticleSystem particles) {
+        if (stat.IsModified() && particles.isStopped) {
+            particles.Play();
+        } else if (!stat.IsModified() && particles.isPlaying) {
+            particles.Stop();
+        }
     }
 }

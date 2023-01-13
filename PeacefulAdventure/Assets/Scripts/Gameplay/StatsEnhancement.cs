@@ -20,10 +20,10 @@ public class StatsEnhancement : Item {
 
     private IEnumerator ApplyEffectInternal() {
         PlayerState playerState = PlayerState.Instance;
-        playerState.attackDamage.AddModifier(attackDamageModifier);
-        playerState.attackCooldown.AddModifier(attackCooldownModifier);
+        playerState.AddStatModifier(playerState.attackDamage, attackDamageModifier);
+        playerState.AddStatModifier(playerState.attackCooldown, attackCooldownModifier);
         yield return new WaitForSeconds(duration);
-        playerState.attackDamage.RemoveModifier(attackDamageModifier);
-        playerState.attackCooldown.RemoveModifier(attackCooldownModifier);
+        playerState.RemoveStatModifier(playerState.attackDamage, attackDamageModifier);
+        playerState.RemoveStatModifier(playerState.attackCooldown, attackCooldownModifier);
     }
 }

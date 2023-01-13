@@ -32,8 +32,8 @@ public class PickableItem : Interactable, ISaveable<bool> {
         return true;
     }
 
-    public void LoadState(bool model) {
-        if (!model)
+    public void LoadState(bool isActive) {
+        if (!isActive)
             Destroy(gameObject); // TODO: some effects
     }
 

@@ -32,6 +32,8 @@ public class PlayerState : MonoBehaviour {
     [Tooltip("After how many seconds the player can attack again")]
     public Stat attackCooldown = new Stat(0.5f);
     //public float attackCooldown = 0.5f;
+    public delegate void OnStatsChanged();
+    public OnStatsChanged onStatsChangedCallback;
 
     [Tooltip("Number of slots in the inventory")]
     [SerializeField] private int inventorySlots = 12;
@@ -57,6 +59,16 @@ public class PlayerState : MonoBehaviour {
         int delta = newValue - MaxHealth;
         MaxHealth = newValue;
         UpdateHealth(delta);
+    }
+
+    public void AddStatModifier(Stat stat, StatModifier modifier) {
+        stat.AddModifier(modifier);
+        onStatsChangedCallback?.Invoke();
+    }
+
+    public void RemoveStatModifier(Stat stat, StatModifier modifier) {
+        stat.RemoveModifier(modifier);
+        onStatsChangedCallback?.Invoke();
     }
 
     public static void ResetCompletely() {

@@ -21,6 +21,6 @@ MonoBehaviour:
     type: 0
     value: 10
   attackCooldownModifier:
-    type: 0
-    value: 0
+    type: 1
+    value: 1
   duration: 10

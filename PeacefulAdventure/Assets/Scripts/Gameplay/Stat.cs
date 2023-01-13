@@ -22,6 +22,10 @@ public class Stat {
         this.BaseValue = baseValue;
     }
 
+    public bool IsModified() {
+        return Value != BaseValue;
+    }
+
     public void AddModifier(StatModifier modifier) {
         isCached = false;
         modifiers.Add(modifier);

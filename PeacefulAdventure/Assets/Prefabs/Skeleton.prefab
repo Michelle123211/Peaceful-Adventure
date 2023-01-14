@@ -317,7 +317,7 @@ MonoBehaviour:
   enemyLight: {fileID: 6364166782186821923}
   bloodParticles: {fileID: 3025974239427378963}
   healthText: {fileID: 3420512407129335949}
-  followAfterTime: 3
+  followAfterTime: 1.5
   attentionParticles: {fileID: 6281386479315916705}
 --- !u!95 &913155247084939193
 Animator:
@@ -1444,7 +1444,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -5277,7 +5277,7 @@ ParticleSystem:
     widthOverTrail:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.05
+      scalar: 0.07
       minScalar: 1
       maxCurve:
         serializedVersion: 2

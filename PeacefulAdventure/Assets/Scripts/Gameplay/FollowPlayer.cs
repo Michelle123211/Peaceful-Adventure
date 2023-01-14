@@ -8,7 +8,6 @@ public class FollowPlayer : MonoBehaviour
 
     public SkeletonBehaviour enemy;
 
-    private float followAfterTime = 3f;
     private float followCountdown = 0;
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -25,7 +24,7 @@ public class FollowPlayer : MonoBehaviour
     }
 
     private void Awake() {
-        followCountdown = followAfterTime;
+        followCountdown = enemy.followAfterTime;
     }
 
     private void Update() {
@@ -35,7 +34,7 @@ public class FollowPlayer : MonoBehaviour
                 enemy.IsFollowing = true;
             }
         } else {
-            followCountdown = followAfterTime;
+            followCountdown = enemy.followAfterTime;
         }
     }
 

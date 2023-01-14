@@ -90,16 +90,16 @@ public class PlayerBehaviour : MonoBehaviour {
             animator.Move(movement);
 
             // dust particles
-            if (movement == Vector2.zero && dustParticles.isPlaying) {
-                dustParticles.Stop();
-            } else if (movement != Vector2.zero && dustParticles.isStopped) {
+            if (Mathf.Abs(movement.x) > Mathf.Abs(movement.y)) { // left or right
+                float x = (movement.x > 0 ? -1 : 1) * 0.3f;
+                dustParticles.transform.localPosition = dustParticles.transform.localPosition.WithX(x);
+            } else { // up or down
+                dustParticles.transform.localPosition = dustParticles.transform.localPosition.WithX(0);
+            }
+            if (movement != Vector2.zero && dustParticles.isStopped) {
                 dustParticles.Play();
-                if (movement.x != 0) {
-                    float x = -Mathf.Sign(movement.x) * 0.3f;
-                    dustParticles.transform.localPosition = dustParticles.transform.localPosition.WithX(x);
-                } else if (movement.y != 0) {
-                    dustParticles.transform.localPosition = dustParticles.transform.localPosition.WithX(0);
-                }
+            } else if (movement == Vector2.zero && dustParticles.isPlaying) {
+                dustParticles.Stop();
             }
         }
     }

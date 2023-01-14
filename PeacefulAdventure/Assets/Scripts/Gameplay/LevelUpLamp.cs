@@ -8,6 +8,7 @@ public class LevelUpLamp : Interactable
 {
 
     public Light2D lampLight;
+    public ParticleSystem lampParticles;
 
     protected override void OnInteraction(InputAction.CallbackContext context) {
         // level the player up if they have enough XP
@@ -36,8 +37,10 @@ public class LevelUpLamp : Interactable
     private void UpdateState() {
         if (PlayerState.Instance.levelSystem.CanLevelUp()) {
             lampLight.color = Color.green;
+            lampParticles.Play();
         } else {
             lampLight.color = Color.red;
+            lampParticles.Stop();
         }
     }
 }

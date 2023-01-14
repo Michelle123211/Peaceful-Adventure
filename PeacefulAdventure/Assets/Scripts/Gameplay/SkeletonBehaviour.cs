@@ -6,9 +6,23 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterAnimation))]
 public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
 
+    [SerializeField] ParticleSystem attentionParticles;
+
     private PositionID ID;
     private bool idInitialized = false;
 
+    private bool seesPlayer = false;
+    public bool SeesPlayer {
+        get {
+            return seesPlayer;
+        }
+        set {
+            seesPlayer = value;
+            if (seesPlayer) {
+                attentionParticles.Play();
+            }
+        }
+    }
     public bool IsFollowing { get; set; }
 
     protected override void ComputeMovement() {

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicFadeOutDuration: 2
   backgroundMusic:
-    clip: {fileID: 8300000, guid: 8e68d34085461d641af64b012cdc7e77, type: 3}
+    clip: {fileID: 0}
     volume: 1
   soundEffects:
   - clip: {fileID: 8300000, guid: 26449e5d1f403b4458b74b161833724b, type: 3}

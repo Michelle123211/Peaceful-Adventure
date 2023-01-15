@@ -20,6 +20,8 @@ public class SceneLoader : MonoBehaviour {
         }
         LoadState(currentScene); // load state if available
         fadeCanvasGroup.DOFade(0f, fadeDuration).SetEase(Ease.InCubic);
+
+        //AudioManager.Instance.PlayMusic();
     }
 
     public void LoadSceneWithState(string sceneName) {

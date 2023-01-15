@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 341bb850320922147962eb16aaed067c, type: 3}
+  m_Name: GameAudio
+  m_EditorClassIdentifier: 
+  musicFadeOutDuration: 2
+  backgroundMusic:
+    clip: {fileID: 8300000, guid: 8e68d34085461d641af64b012cdc7e77, type: 3}
+    volume: 1
+  soundEffects:
+  - clip: {fileID: 8300000, guid: 26449e5d1f403b4458b74b161833724b, type: 3}
+    volume: 1
+    type: 0

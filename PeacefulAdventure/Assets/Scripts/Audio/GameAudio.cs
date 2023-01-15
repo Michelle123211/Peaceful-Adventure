@@ -47,5 +47,10 @@ public class SoundEffect : Audio {
 }
 
 public enum SoundType { 
-    PickedItem
+    PickedItem,
+    Attack,
+    Damage,
+    EnemyDeath,
+    SceneTransition,
+    Step
 }

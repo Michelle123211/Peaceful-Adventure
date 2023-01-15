@@ -35,12 +35,11 @@ public class PlayerBehaviour : MonoBehaviour {
             Debug.Log("Player damage taken " + damage);
             PlayerState.Instance.UpdateHealth((int)-damage);
             bloodParticles.Play();
-            // TODO: play sound effect
             if (PlayerState.Instance.CurrentHealth <= 0) {
                 Die();
             } else {
                 animator.TakeDamage();
-                // TODO: play sound effect
+                AudioManager.Instance.PlaySoundEffect(SoundType.Damage);
             }
             previousDamage = Time.time;
         } else {
@@ -55,6 +54,10 @@ public class PlayerBehaviour : MonoBehaviour {
         this.isDead = true;
         // show the UI
         Utils.FindObject<GameOverUI>()[0].Open();
+    }
+
+    public void DoStep() {
+        AudioManager.Instance.PlaySoundEffect(SoundType.Step);
     }
 
     private void Awake() {
@@ -108,6 +111,7 @@ public class PlayerBehaviour : MonoBehaviour {
         if (!this.isDead && Time.time > this.nextAttackTime) {
             this.nextAttackTime = Time.time + PlayerState.Instance.attackCooldown.Value;
             animator.Attack();
+            AudioManager.Instance.PlaySoundEffect(SoundType.Attack);
         }
     }
 

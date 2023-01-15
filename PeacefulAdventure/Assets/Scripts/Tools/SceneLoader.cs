@@ -20,11 +20,10 @@ public class SceneLoader : MonoBehaviour {
         }
         LoadState(currentScene); // load state if available
         fadeCanvasGroup.DOFade(0f, fadeDuration).SetEase(Ease.InCubic);
-
-        //AudioManager.Instance.PlayMusic();
     }
 
     public void LoadSceneWithState(string sceneName) {
+        AudioManager.Instance.PlaySoundEffect(SoundType.SceneTransition);
         fadeCanvasGroup.DOFade(1f, fadeDuration).SetEase(Ease.OutCubic).OnComplete(() => {
             string currentScene = SceneManager.GetActiveScene().name;
             // save the current state (rewriting any previous one)
@@ -35,6 +34,7 @@ public class SceneLoader : MonoBehaviour {
     }
 
     public void LoadSceneWithoutState(string sceneName) {
+        AudioManager.Instance.PlaySoundEffect(SoundType.SceneTransition);
         fadeCanvasGroup.DOFade(1f, 0.5f).SetEase(Ease.OutCubic).OnComplete(() => {
             SceneManager.LoadScene(sceneName);
         });

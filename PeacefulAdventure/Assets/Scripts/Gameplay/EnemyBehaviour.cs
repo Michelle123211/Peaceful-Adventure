@@ -57,12 +57,11 @@ public abstract class EnemyBehaviour : MonoBehaviour {
                 0.5f);
             healthText.gameObject.GetComponent<GenericTween>()?.DoTween();
             bloodParticles.Play();
-
             if (currentHealth <= 0) {
                 Die();
             } else {
                 animator.TakeDamage();
-                // TODO: play sound effect
+                AudioManager.Instance.PlaySoundEffect(SoundType.Damage);
             }
         }
     }
@@ -74,13 +73,14 @@ public abstract class EnemyBehaviour : MonoBehaviour {
         }
         healthText.gameObject.SetActive(false); // hide the health
         PlayerState.Instance.levelSystem.UpdateExperience(3); // add experience points
-        // TODO: play sound effect
+        AudioManager.Instance.PlaySoundEffect(SoundType.EnemyDeath);
         spriteRenderer.sortingLayerName = "EnemyBack";
         this.isDead = true;
     }
 
     protected virtual void Attack() {
         animator.Attack();
+        AudioManager.Instance.PlaySoundEffect(SoundType.Attack);
     }
 
     protected virtual void Awake() {

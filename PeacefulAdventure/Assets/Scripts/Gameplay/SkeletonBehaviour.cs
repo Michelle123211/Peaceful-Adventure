@@ -20,7 +20,7 @@ public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
         }
         set {
             seesPlayer = value;
-            if (seesPlayer) {
+            if (seesPlayer && !isDead) {
                 attentionParticles.Play();
             }
         }

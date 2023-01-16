@@ -22,6 +22,7 @@ public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
             seesPlayer = value;
             if (seesPlayer && !isDead) {
                 attentionParticles.Play();
+                AudioManager.Instance.PlaySoundEffect(SoundType.EnemyAttention);
             }
         }
     }

@@ -38,21 +38,30 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 6097e652cfb799943b354af87a75449a, type: 3}
     volume: 1
     type: 7
-  - clip: {fileID: 8300000, guid: 96797f40935a85448985a56ed1c4cf9f, type: 3}
+  - clip: {fileID: 8300000, guid: 0d3e65ff6ac84db4890810f4bbb38b4e, type: 3}
     volume: 1
     type: 8
-  - clip: {fileID: 8300000, guid: c8f8e3d8f8bd58645b6b62d53a8f7067, type: 3}
+  - clip: {fileID: 8300000, guid: 9d1017f385a560f4caa36f7eda6ba614, type: 3}
     volume: 1
     type: 9
-  - clip: {fileID: 8300000, guid: 123dfa16e85b1fc4991d64dcedd44b5e, type: 3}
+  - clip: {fileID: 8300000, guid: 40a913895e72c914eac821e0b59b618c, type: 3}
     volume: 1
     type: 10
+  - clip: {fileID: 8300000, guid: 96797f40935a85448985a56ed1c4cf9f, type: 3}
+    volume: 1
+    type: 60
+  - clip: {fileID: 8300000, guid: c8f8e3d8f8bd58645b6b62d53a8f7067, type: 3}
+    volume: 1
+    type: 61
+  - clip: {fileID: 8300000, guid: 123dfa16e85b1fc4991d64dcedd44b5e, type: 3}
+    volume: 1
+    type: 62
   - clip: {fileID: 8300000, guid: e440dad6d4d7b1c4b8e33108faaa45ca, type: 3}
     volume: 1
-    type: 11
+    type: 63
   - clip: {fileID: 8300000, guid: 531c6c87f0c90c844b23284d0337d2e0, type: 3}
     volume: 1
-    type: 12
+    type: 64
   sceneMusics:
   - clip: {fileID: 8300000, guid: c6ed121909cacbd4691569b43afa97c0, type: 3}
     volume: 1

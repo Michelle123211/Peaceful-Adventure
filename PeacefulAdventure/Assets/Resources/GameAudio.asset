@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341bb850320922147962eb16aaed067c, type: 3}
   m_Name: GameAudio
   m_EditorClassIdentifier: 
-  musicFadeOutDuration: 2
-  backgroundMusic:
-    clip: {fileID: 0}
-    volume: 1
+  musicFadeOutDuration: 1
   soundEffects:
   - clip: {fileID: 8300000, guid: 26449e5d1f403b4458b74b161833724b, type: 3}
     volume: 1
@@ -35,3 +32,20 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 1fa0ff4e03e7ffb41a94f3c975183843, type: 3}
     volume: 1
     type: 5
+  sceneMusics:
+  - clip: {fileID: 8300000, guid: c6ed121909cacbd4691569b43afa97c0, type: 3}
+    volume: 1
+    sceneNameCondition: 0
+    conditionValue: Dungeon
+  - clip: {fileID: 8300000, guid: 8fc94061c8845b34588a16b1ec038340, type: 3}
+    volume: 1
+    sceneNameCondition: 0
+    conditionValue: House
+  - clip: {fileID: 8300000, guid: 29c0985b5c184194aa0b0c7e4092286e, type: 3}
+    volume: 1
+    sceneNameCondition: 1
+    conditionValue: MainMenu
+  - clip: {fileID: 8300000, guid: 8e68d34085461d641af64b012cdc7e77, type: 3}
+    volume: 1
+    sceneNameCondition: 2
+    conditionValue: 

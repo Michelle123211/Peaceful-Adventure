@@ -7,9 +7,9 @@ public class GameAudio : ScriptableObject
 {
     public float musicFadeOutDuration;
 
-    public Audio backgroundMusic;
-
     public List<SoundEffect> soundEffects;
+    [Tooltip("The music corresponding to the first satisfied condition from the top will be played.")]
+    public List<SceneMusic> sceneMusics;
 
     private static GameAudio instance;
     public static GameAudio Instance {
@@ -24,13 +24,34 @@ public class GameAudio : ScriptableObject
         }
     }
 
-    public SoundEffect GetSound(SoundType soundType) {
+    public Audio GetSound(SoundType soundType) {
         foreach (SoundEffect sound in soundEffects) {
             if (soundType == sound.type) {
                 return sound;
             }
         }
         return null;
+    }
+
+    public Audio GetMusic(string sceneName) {
+        SceneMusic returnValue = null;
+        foreach (SceneMusic music in sceneMusics) {
+            switch (music.sceneNameCondition) {
+                case StringCondition.Contains:
+                    if (sceneName.Contains(music.conditionValue))
+                        return music;
+                    break;
+                case StringCondition.Equals:
+                    if (sceneName == music.conditionValue)
+                        return music;
+                    break;
+                case StringCondition.Default:
+                    if (returnValue == null)
+                        returnValue = music;
+                    break;
+            }
+        }
+        return returnValue;
     }
 }
 
@@ -53,4 +74,16 @@ public enum SoundType {
     EnemyDeath,
     SceneTransition,
     Step
+}
+
+[System.Serializable]
+public class SceneMusic : Audio {
+    public StringCondition sceneNameCondition;
+    public string conditionValue;
+}
+
+public enum StringCondition { 
+    Contains,
+    Equals,
+    Default
 }

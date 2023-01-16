@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
                 instance = ps.AddComponent<AudioManager>();
                 instance.soundEffectSource = ps.AddComponent<AudioSource>();
                 instance.musicSource = ps.AddComponent<AudioSource>();
+                instance.musicSource.loop = true;
             }
             GameObject.DontDestroyOnLoad(instance);
             return instance;
@@ -30,24 +31,57 @@ public class AudioManager : MonoBehaviour
     private AudioSource soundEffectSource;
     private AudioSource musicSource;
 
+    private Audio nextMusic;
+
     public void PlaySoundEffect(SoundType soundType) {
-        SoundEffect sound = gameAudio.GetSound(soundType);
+        Audio sound = gameAudio.GetSound(soundType);
         if (sound != null) {
             Debug.Log($"Playing sound effect {soundType}.");
             soundEffectSource.PlayOneShot(sound.clip, sound.volume);
         }
     }
 
-    public void PlayMusic() {
-        Debug.Log("Playing music.");
-        musicSource.volume = gameAudio.backgroundMusic.volume;
-        musicSource.clip = gameAudio.backgroundMusic.clip;
+    public void PlaySceneMusic(string sceneName) {
+        Debug.Log($"Starting to play music for the scene {sceneName}");
+        Audio music = gameAudio.GetMusic(sceneName);
+        if (music == null) {
+            Debug.Log("No music.");
+            StopMusic();
+            return;
+        }
+        if (musicSource.isPlaying) {
+            if (nextMusic.clip == music.clip) {
+                // do nothing, just continue playing
+                Debug.Log("No change in music.");
+            } else {
+                // change the music
+                Debug.Log("Changing music.");
+                musicSource.DOKill();
+                nextMusic = music;
+                musicSource.DOFade(0, gameAudio.musicFadeOutDuration)
+                    .OnComplete(() => {
+                        PlayMusic();
+                    });
+            }
+        } else {
+            // start playing the assigned music
+            Debug.Log("Starting music.");
+            nextMusic = music;
+            PlayMusic();
+        }
+    }
+
+    private void PlayMusic() {
+        Debug.Log($"Playing music {nextMusic.clip.name}.");
+        musicSource.volume = nextMusic.volume;
+        musicSource.clip = nextMusic.clip;
         musicSource.Play();
     }
 
-    public void StopMusic() {
+    private void StopMusic() {
         // fade out of the currently played music clip
         if (musicSource.isPlaying) {
+            musicSource.DOKill();
             musicSource.DOFade(0, gameAudio.musicFadeOutDuration)
                 .OnComplete(() => musicSource.Stop());
         }

@@ -9,17 +9,20 @@ public class LevelUpUI : MonoBehaviour
     public void Open() {
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.UI.Enable();
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIOpen);
         gameObject.TweenAwareEnable();
     }
 
     public void Close() {
         PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIClose);
         gameObject.TweenAwareDisable();
     }
 
     public void IncreaseAttackDamage() {
         if (initialized) {
+            AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             float newDamage = PlayerState.Instance.attackDamage.BaseValue * 1.1f;
             PlayerState.Instance.attackDamage.ChangeBaseValue(newDamage);
             Debug.Log("Attack damage increased.");
@@ -31,6 +34,7 @@ public class LevelUpUI : MonoBehaviour
 
     public void IncreaseAttackSpeed() {
         if (initialized) {
+            AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             float newCooldown = PlayerState.Instance.attackCooldown.BaseValue * 0.9f;
             PlayerState.Instance.attackCooldown.ChangeBaseValue(newCooldown);
             Debug.Log("Attack speed increased.");
@@ -42,6 +46,7 @@ public class LevelUpUI : MonoBehaviour
 
     public void IncreaseMaxHealth() {
         if (initialized) {
+            AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             int newMaxHealth = (int)(PlayerState.Instance.MaxHealth * 1.1f);
             PlayerState.Instance.UpdateMaxHealth(newMaxHealth);
             Debug.Log("Max health increased.");

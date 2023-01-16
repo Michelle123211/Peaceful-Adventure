@@ -12,12 +12,14 @@ public class GameOverUI : MonoBehaviour
     public void Open() {
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.UI.Enable();
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIOpen);
         gameObject.TweenAwareEnable();
     }
 
     public void Close() {
         PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIClose);
         gameObject.TweenAwareDisable();
     }
 

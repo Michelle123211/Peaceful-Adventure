@@ -73,7 +73,14 @@ public enum SoundType {
     Damage,
     EnemyDeath,
     SceneTransition,
-    Step
+    Step,
+    ChestOpen,
+    ChestClose,
+    UIPress,
+    UIRelease,
+    UIOpen,
+    UIClose,
+    UICheckbox
 }
 
 [System.Serializable]

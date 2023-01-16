@@ -32,6 +32,27 @@ MonoBehaviour:
   - clip: {fileID: 8300000, guid: 1fa0ff4e03e7ffb41a94f3c975183843, type: 3}
     volume: 1
     type: 5
+  - clip: {fileID: 8300000, guid: bbefdaf4d732a014ab6efa08617c8e5e, type: 3}
+    volume: 1
+    type: 6
+  - clip: {fileID: 8300000, guid: 6097e652cfb799943b354af87a75449a, type: 3}
+    volume: 1
+    type: 7
+  - clip: {fileID: 8300000, guid: 96797f40935a85448985a56ed1c4cf9f, type: 3}
+    volume: 1
+    type: 8
+  - clip: {fileID: 8300000, guid: c8f8e3d8f8bd58645b6b62d53a8f7067, type: 3}
+    volume: 1
+    type: 9
+  - clip: {fileID: 8300000, guid: 123dfa16e85b1fc4991d64dcedd44b5e, type: 3}
+    volume: 1
+    type: 10
+  - clip: {fileID: 8300000, guid: e440dad6d4d7b1c4b8e33108faaa45ca, type: 3}
+    volume: 1
+    type: 11
+  - clip: {fileID: 8300000, guid: 531c6c87f0c90c844b23284d0337d2e0, type: 3}
+    volume: 1
+    type: 12
   sceneMusics:
   - clip: {fileID: 8300000, guid: c6ed121909cacbd4691569b43afa97c0, type: 3}
     volume: 1

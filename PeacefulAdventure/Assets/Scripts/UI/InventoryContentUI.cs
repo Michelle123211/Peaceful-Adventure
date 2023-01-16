@@ -20,10 +20,12 @@ public class InventoryContentUI : MonoBehaviour
 
     public void Open() {
         Refresh();
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIOpen);
         gameObject.TweenAwareEnable();
     }
 
     public void Close() {
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIClose);
         gameObject.TweenAwareDisable();
     }
 
@@ -102,6 +104,7 @@ public class InventoryContentUI : MonoBehaviour
     }
 
     private void Navigate(InputAction.CallbackContext context) {
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
         this.slots[selectedRow, selectedColumn].Deselect();
         Vector2 delta = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());
         selectedRow -= (int)delta.y;
@@ -118,8 +121,10 @@ public class InventoryContentUI : MonoBehaviour
     }
 
     private void Select(InputAction.CallbackContext context) {
-        if (initialized)
+        if (initialized) {
+            AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             this.slots[selectedRow, selectedColumn].ShowDetails();
+        }
     }
 
     private void CloseInventory(InputAction.CallbackContext context) {

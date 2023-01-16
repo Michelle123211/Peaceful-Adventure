@@ -52,8 +52,10 @@ public class ItemSlotUI : MonoBehaviour
     }
 
     public void ShowDetails() {
-        if (this.Item != null && this.inventoryUI != null)
+        if (this.Item != null && this.inventoryUI != null) {
+            AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             inventoryUI.ShowDetails(this.Item);
+        }
     }
 
     public void TakeFromChest() {

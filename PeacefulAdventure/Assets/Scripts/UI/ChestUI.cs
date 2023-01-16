@@ -23,12 +23,14 @@ public class ChestUI : MonoBehaviour
         this.chest = chest;
         Debug.Log("Opening a chest");
         Refresh();
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIOpen);
         gameObject.TweenAwareEnable();
     }
 
     public void Close() {
         PlayerBehaviour.playerInputActions.UI.Disable();
         PlayerBehaviour.playerInputActions.Player.Enable();
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIClose);
         gameObject.TweenAwareDisable();
     }
 
@@ -98,6 +100,7 @@ public class ChestUI : MonoBehaviour
     }
 
     private void Navigate(InputAction.CallbackContext context) {
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
         if (selectedIndex < this.slots.Length)
             this.slots[selectedIndex].Deselect();
         Vector2 delta = Utils.ConvertToFourDirections(context.ReadValue<Vector2>());
@@ -111,7 +114,9 @@ public class ChestUI : MonoBehaviour
     }
 
     private void Select(InputAction.CallbackContext context) {
-        if (initialized)
+        if (initialized) {
+            AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             this.slots[selectedIndex].TakeFromChest();
+        }
     }
 }

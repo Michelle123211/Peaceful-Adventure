@@ -27,16 +27,20 @@ public class ItemDetailsUI : MonoBehaviour {
         if (!Application.isMobilePlatform)
             useControl.SetActive(item.item.isUsable);
         useButton.interactable = item.item.isUsable;
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIOpen);
         gameObject.TweenAwareEnable();
     }
 
     public void Close() {
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIClose);
         gameObject.TweenAwareDisable();
     }
 
     public void UseItem() {
-        if (item.item.Use()) // TODO: Show some popup if not possible to use (false returned)
+        if (item.item.Use()) {// TODO: Show some popup if not possible to use (false returned)
+            AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             inventoryUI.ShowInventoryContent();
+        }
     }
 
     public void SetInitialized() {
@@ -55,8 +59,9 @@ public class ItemDetailsUI : MonoBehaviour {
     }
 
     private void Use(InputAction.CallbackContext context) {
-        if (initialized)
+        if (initialized) {
             UseItem();
+        }
     }
 
     private void CloseDetails(InputAction.CallbackContext context) {

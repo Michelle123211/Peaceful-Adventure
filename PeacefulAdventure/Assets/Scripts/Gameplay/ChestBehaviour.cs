@@ -64,6 +64,7 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
     public IEnumerator OpenChest() {
         PlayerBehaviour.playerInputActions.UI.Action3_L.performed += OnInteraction;
         animator.SetBool("IsOpen", true);
+        AudioManager.Instance.PlaySoundEffect(SoundType.ChestOpen);
         // wait for a moment to allow the animation to finish
         yield return new WaitForSeconds(this.lag);
         // open UI
@@ -77,6 +78,7 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
         // wait for a moment to allow UI to disappear
         yield return new WaitForSeconds(this.lag);
         animator.SetBool("IsOpen", false);
+        AudioManager.Instance.PlaySoundEffect(SoundType.ChestClose);
     }
 
     void Awake() {

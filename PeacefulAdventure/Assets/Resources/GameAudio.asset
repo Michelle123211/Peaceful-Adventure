@@ -64,18 +64,18 @@ MonoBehaviour:
     type: 64
   sceneMusics:
   - clip: {fileID: 8300000, guid: c6ed121909cacbd4691569b43afa97c0, type: 3}
-    volume: 1
+    volume: 0.1
+    sceneNameCondition: 1
+    conditionValue: GameEnd
+  - clip: {fileID: 8300000, guid: 5ccc5b8257dfd1945a251cde3421a236, type: 3}
+    volume: 0.1
+    sceneNameCondition: 0
+    conditionValue: Menu
+  - clip: {fileID: 8300000, guid: 29c0985b5c184194aa0b0c7e4092286e, type: 3}
+    volume: 0.1
     sceneNameCondition: 0
     conditionValue: Dungeon
-  - clip: {fileID: 8300000, guid: 8fc94061c8845b34588a16b1ec038340, type: 3}
-    volume: 1
-    sceneNameCondition: 0
-    conditionValue: House
-  - clip: {fileID: 8300000, guid: 29c0985b5c184194aa0b0c7e4092286e, type: 3}
-    volume: 1
-    sceneNameCondition: 1
-    conditionValue: MainMenu
-  - clip: {fileID: 8300000, guid: 8e68d34085461d641af64b012cdc7e77, type: 3}
-    volume: 1
+  - clip: {fileID: 8300000, guid: a67d489de512428458c9c22772dc7187, type: 3}
+    volume: 0.1
     sceneNameCondition: 2
     conditionValue: 

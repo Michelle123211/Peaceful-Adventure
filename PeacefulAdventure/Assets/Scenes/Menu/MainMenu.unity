@@ -327,7 +327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5700764798131388526, guid: ba1a8dfa42efed840ab10654d9868d64, type: 3}
       propertyPath: onInteractionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Credits
+      value: MenuCredits
       objectReference: {fileID: 0}
     - target: {fileID: 5700764798131388527, guid: ba1a8dfa42efed840ab10654d9868d64, type: 3}
       propertyPath: m_RootOrder
@@ -547,7 +547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5700764798131388526, guid: ba1a8dfa42efed840ab10654d9868d64, type: 3}
       propertyPath: onInteractionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Settings
+      value: MenuSettings
       objectReference: {fileID: 0}
     - target: {fileID: 5700764798131388527, guid: ba1a8dfa42efed840ab10654d9868d64, type: 3}
       propertyPath: m_RootOrder
@@ -625,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5700764798131388526, guid: ba1a8dfa42efed840ab10654d9868d64, type: 3}
       propertyPath: onInteractionEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: End
+      value: GameEnd
       objectReference: {fileID: 0}
     - target: {fileID: 5700764798131388527, guid: ba1a8dfa42efed840ab10654d9868d64, type: 3}
       propertyPath: m_RootOrder

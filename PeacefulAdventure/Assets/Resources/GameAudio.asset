@@ -67,7 +67,7 @@ MonoBehaviour:
     volume: 0.1
     sceneNameCondition: 1
     conditionValue: GameEnd
-  - clip: {fileID: 8300000, guid: 5ccc5b8257dfd1945a251cde3421a236, type: 3}
+  - clip: {fileID: 8300000, guid: aacc9c2708b135a4da6d6db63b416bdf, type: 3}
     volume: 0.1
     sceneNameCondition: 0
     conditionValue: Menu
@@ -75,7 +75,7 @@ MonoBehaviour:
     volume: 0.1
     sceneNameCondition: 0
     conditionValue: Dungeon
-  - clip: {fileID: 8300000, guid: c9abeae1420fd0b4c94481f397d895fa, type: 3}
+  - clip: {fileID: 8300000, guid: 12b36c530d2ad2946b6a9096bf718115, type: 3}
     volume: 0.1
     sceneNameCondition: 2
     conditionValue: 

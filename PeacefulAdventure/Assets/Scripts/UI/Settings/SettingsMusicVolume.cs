@@ -18,6 +18,11 @@ public class SettingsMusicVolume : MonoBehaviour {
         volumeSlider.value = currentVolume;
     }
 
+    public void OnSliderValueChanged(float value) {
+        currentVolume = value;
+        AudioManager.Instance.ChangeMusicVolume(currentVolume);
+    }
+
     public void Awake() {
         volumeSlider.value = currentVolume;
     }

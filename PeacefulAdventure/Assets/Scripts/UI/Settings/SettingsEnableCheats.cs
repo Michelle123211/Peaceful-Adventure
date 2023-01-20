@@ -11,4 +11,8 @@ public class SettingsEnableCheats : MonoBehaviour
         PlayerState.Instance.cheatsEnabled = !PlayerState.Instance.cheatsEnabled;
         cheatsCheckbox.isOn = PlayerState.Instance.cheatsEnabled;
     }
+
+    public void OnToggleValueChanged(bool value) {
+        PlayerState.Instance.cheatsEnabled = value;
+    }
 }

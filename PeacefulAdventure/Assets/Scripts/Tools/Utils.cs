@@ -6,6 +6,16 @@ using UnityEngine.Events;
 
 public static class Utils
 {
+    public static int Wrap(int value, int minInclusive, int maxInclusive) {
+        while (value < minInclusive || value > maxInclusive) {
+            if (value < minInclusive)
+                value += (maxInclusive - minInclusive + 1);
+            else if (value > maxInclusive)
+                value -= (maxInclusive - minInclusive + 1);
+        }
+        return value;
+    }
+
     public static Color WithA(this Color c, float a)
         => new Color(c.r, c.g, c.b, a);
     public static Color WithR(this Color c, float r)

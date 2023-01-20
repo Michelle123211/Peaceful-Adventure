@@ -47,6 +47,8 @@ public class PlayerState : MonoBehaviour {
 
     public bool tutorialCompleted = false;
 
+    public bool cheatsEnabled = false;
+
 
     public void UpdateHealth(int delta) {
         CurrentHealth += delta;
@@ -133,6 +135,9 @@ public class PlayerState : MonoBehaviour {
         onHealthChangedCallback?.Invoke(); // update the UI
         inventory = new Inventory(inventorySlots);
         initialState = SaveState();
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        cheatsEnabled = true;
+#endif
     }
 
 }

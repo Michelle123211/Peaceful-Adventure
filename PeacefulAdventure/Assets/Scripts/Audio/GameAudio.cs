@@ -83,7 +83,7 @@ public enum SoundType {
     UIRelease,
     UIOpen,
     UIClose,
-    UICheckbox
+    UIToggle
 }
 
 [System.Serializable]

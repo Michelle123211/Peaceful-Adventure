@@ -33,11 +33,14 @@ public class AudioManager : MonoBehaviour
 
     private Audio nextMusic;
 
+    private float masterMusicVolume = 1f;
+    private float masterSoundEffectVolume = 1f;
+
     public void PlaySoundEffect(SoundType soundType, float volume = 1) {
         Audio sound = gameAudio.GetSound(soundType);
         if (sound != null) {
             Debug.Log($"Playing sound effect {soundType}.");
-            soundEffectSource.PlayOneShot(sound.clip, sound.volume * volume);
+            soundEffectSource.PlayOneShot(sound.clip, sound.volume * volume * masterSoundEffectVolume);
         }
     }
 
@@ -71,9 +74,23 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void ChangeMusicVolume(float volume) {
+        // change volume of the currently played music
+        if (masterMusicVolume == 0)
+            musicSource.volume = nextMusic.volume * volume;
+        else
+            musicSource.volume = musicSource.volume * (1 / masterMusicVolume) * volume;
+        masterMusicVolume = volume;
+    }
+
+    public void ChangeSoundEffectVolume(float volume) {
+        // sound effects are short, no need to change the volume of currently played sound effects
+        masterSoundEffectVolume = volume;
+    }
+
     private void PlayMusic() {
         Debug.Log($"Playing music {nextMusic.clip.name}.");
-        musicSource.volume = nextMusic.volume;
+        musicSource.volume = nextMusic.volume * masterMusicVolume;
         musicSource.clip = nextMusic.clip;
         musicSource.Play();
     }

@@ -13,6 +13,7 @@ public class SettingsEnableCheats : MonoBehaviour
     }
 
     public void OnToggleValueChanged(bool value) {
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIToggle);
         PlayerState.Instance.cheatsEnabled = value;
     }
 }

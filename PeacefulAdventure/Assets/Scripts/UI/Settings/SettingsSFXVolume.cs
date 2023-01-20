@@ -20,6 +20,7 @@ public class SettingsSFXVolume : MonoBehaviour
     }
 
     public void OnSliderValueChanged(float value) {
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIToggle);
         currentVolume = value;
         AudioManager.Instance.ChangeSoundEffectVolume(currentVolume);
     }

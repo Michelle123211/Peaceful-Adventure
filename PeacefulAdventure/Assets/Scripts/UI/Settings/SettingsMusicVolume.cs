@@ -19,6 +19,7 @@ public class SettingsMusicVolume : MonoBehaviour {
     }
 
     public void OnSliderValueChanged(float value) {
+        AudioManager.Instance.PlaySoundEffect(SoundType.UIToggle);
         currentVolume = value;
         AudioManager.Instance.ChangeMusicVolume(currentVolume);
     }

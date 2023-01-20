@@ -33,11 +33,11 @@ public class AudioManager : MonoBehaviour
 
     private Audio nextMusic;
 
-    public void PlaySoundEffect(SoundType soundType) {
+    public void PlaySoundEffect(SoundType soundType, float volume = 1) {
         Audio sound = gameAudio.GetSound(soundType);
         if (sound != null) {
             Debug.Log($"Playing sound effect {soundType}.");
-            soundEffectSource.PlayOneShot(sound.clip, sound.volume);
+            soundEffectSource.PlayOneShot(sound.clip, sound.volume * volume);
         }
     }
 

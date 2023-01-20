@@ -15,13 +15,13 @@ MonoBehaviour:
   musicFadeOutDuration: 1
   soundEffects:
   - clip: {fileID: 8300000, guid: 3cfd542fb12acd543a33b10e0dc1e342, type: 3}
-    volume: 1
+    volume: 0.8
     type: 0
   - clip: {fileID: 8300000, guid: 7abcafecb811e8a4eb56d34d813ab231, type: 3}
     volume: 1
     type: 1
   - clip: {fileID: 8300000, guid: e747cebc548b7e64885a85171d74f681, type: 3}
-    volume: 1
+    volume: 0.4
     type: 2
   - clip: {fileID: 8300000, guid: 82db7903dad0d8b43a55d7be36458a5c, type: 3}
     volume: 1
@@ -33,49 +33,49 @@ MonoBehaviour:
     volume: 1
     type: 5
   - clip: {fileID: 8300000, guid: bbefdaf4d732a014ab6efa08617c8e5e, type: 3}
-    volume: 1
+    volume: 0.4
     type: 6
   - clip: {fileID: 8300000, guid: 6097e652cfb799943b354af87a75449a, type: 3}
-    volume: 1
+    volume: 0.4
     type: 7
   - clip: {fileID: 8300000, guid: edd7d054ddb475342bfcf5b2c2e0283d, type: 3}
     volume: 1
     type: 8
   - clip: {fileID: 8300000, guid: 24aca9c60b238074e9e06fc27d03e4da, type: 3}
-    volume: 1
+    volume: 0.25
     type: 9
   - clip: {fileID: 8300000, guid: 40a913895e72c914eac821e0b59b618c, type: 3}
-    volume: 1
+    volume: 0.9
     type: 10
   - clip: {fileID: 8300000, guid: aa0252fe268a03d4d8889defc11031b9, type: 3}
-    volume: 1
+    volume: 0.5
     type: 60
   - clip: {fileID: 8300000, guid: c8f8e3d8f8bd58645b6b62d53a8f7067, type: 3}
-    volume: 1
+    volume: 0.5
     type: 61
   - clip: {fileID: 8300000, guid: 123dfa16e85b1fc4991d64dcedd44b5e, type: 3}
-    volume: 1
+    volume: 0.4
     type: 62
   - clip: {fileID: 8300000, guid: 12d11835681fc144d9bdcab6c85f4f54, type: 3}
-    volume: 1
+    volume: 0.4
     type: 63
   - clip: {fileID: 8300000, guid: 531c6c87f0c90c844b23284d0337d2e0, type: 3}
     volume: 1
     type: 64
   sceneMusics:
-  - clip: {fileID: 8300000, guid: c6ed121909cacbd4691569b43afa97c0, type: 3}
+  - clip: {fileID: 8300000, guid: 6c58ceada12464248a011c3688072630, type: 3}
     volume: 0.1
     sceneNameCondition: 1
     conditionValue: GameEnd
   - clip: {fileID: 8300000, guid: aacc9c2708b135a4da6d6db63b416bdf, type: 3}
-    volume: 0.1
+    volume: 0.2
     sceneNameCondition: 0
     conditionValue: Menu
-  - clip: {fileID: 8300000, guid: 29c0985b5c184194aa0b0c7e4092286e, type: 3}
-    volume: 0.1
+  - clip: {fileID: 8300000, guid: 8f55e049408b0484ca1964317d03dd48, type: 3}
+    volume: 0.2
     sceneNameCondition: 0
     conditionValue: Dungeon
   - clip: {fileID: 8300000, guid: 12b36c530d2ad2946b6a9096bf718115, type: 3}
-    volume: 0.1
+    volume: 0.2
     sceneNameCondition: 2
     conditionValue: 

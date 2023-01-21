@@ -5,7 +5,7 @@ using TMPro;
 
 public class EndGame : MonoBehaviour
 {
-    public TextMeshProUGUI text;
+    public GameObject text;
 
     void Start()
     {
@@ -13,13 +13,12 @@ public class EndGame : MonoBehaviour
     }
 
     private IEnumerator QuitGame() {
-        // show the TMPro
-        // TODO: tween
+        // show the text
         yield return new WaitForSeconds(0.5f);
-        text.gameObject.SetActive(true);
-        // hide the TMPro
+        text.TweenAwareEnable();
+        // hide the text
         yield return new WaitForSeconds(2f);
-        text.gameObject.SetActive(false);
+        text.TweenAwareDisable();
         // end the game after a short time
         yield return new WaitForSeconds(0.5f);
         Application.Quit();

@@ -49,6 +49,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ReturnToMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""43f36c49-4a83-44dd-a53d-7e2800119b6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -181,6 +189,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc508c8c-394b-4802-947b-417191878338"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e152e06-2f8c-495b-a7ae-3f03dbe11dff"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnToMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -390,6 +420,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_ReturnToMenu = m_Player.FindAction("ReturnToMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigation = m_UI.FindAction("Navigation", throwIfNotFound: true);
@@ -449,6 +480,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Interaction;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_ReturnToMenu;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -457,6 +489,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Interaction => m_Wrapper.m_Player_Interaction;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @ReturnToMenu => m_Wrapper.m_Player_ReturnToMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -478,6 +511,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Inventory.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInventory;
+                @ReturnToMenu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToMenu;
+                @ReturnToMenu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToMenu;
+                @ReturnToMenu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReturnToMenu;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -494,6 +530,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @ReturnToMenu.started += instance.OnReturnToMenu;
+                @ReturnToMenu.performed += instance.OnReturnToMenu;
+                @ReturnToMenu.canceled += instance.OnReturnToMenu;
             }
         }
     }
@@ -579,6 +618,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnReturnToMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

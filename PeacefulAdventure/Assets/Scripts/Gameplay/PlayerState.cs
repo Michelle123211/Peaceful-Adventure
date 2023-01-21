@@ -20,7 +20,7 @@ public class PlayerState : MonoBehaviour {
         }
     }
 
-    [field:SerializeField] public int MaxHealth { get; private set; } = 100;
+    [field: SerializeField] public int MaxHealth { get; private set; } = 100;
     public int CurrentHealth { get; private set; }
 
     public delegate void OnHealthChanged();
@@ -46,6 +46,7 @@ public class PlayerState : MonoBehaviour {
     private static PlayerStateData initialState; // different after completing the tutorial
 
     public bool tutorialCompleted = false;
+    public bool gameStarted = false;
 
     public bool cheatsEnabled = false;
 
@@ -88,6 +89,7 @@ public class PlayerState : MonoBehaviour {
 
     public static void SetCurrentStateAsInitial() {
         initialState = SaveState();
+        initialState.currentHealth = initialState.maxHealth;
         Debug.Log("Current state was set as initial.");
     }
 
@@ -128,6 +130,10 @@ public class PlayerState : MonoBehaviour {
         } else {
             return null;
         }
+    }
+
+    public static void SetGameStarted() {
+        Instance.gameStarted = true;
     }
 
     private void Initialize() {

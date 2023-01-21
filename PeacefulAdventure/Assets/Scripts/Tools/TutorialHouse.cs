@@ -24,9 +24,12 @@ public class TutorialHouse : MonoBehaviour
     }
 
     public void CheckIfTutorialIsComplete() {
-        if (PlayerState.Instance.levelSystem.Level > 0 && PlayerState.Instance.inventory.GetDistinctItemsCount() > 0) {
-            // the tutorial is completed if the player has leveled up and has some items in the inventory
+        if (PlayerState.Instance.levelSystem.Level > 0 && // the tutorial is completed if the player has leveled up
+            PlayerState.Instance.inventory.GetDistinctItemsCount() > 0 && // and has some items in the inventory
+            !PlayerState.Instance.gameStarted) { // and has not started the game yet
             PlayerState.Instance.tutorialCompleted = true;
+            // whenever the player restarts the game, they will start from the state after the tutorial
+            PlayerState.SetCurrentStateAsInitial();
         }
     }
 }

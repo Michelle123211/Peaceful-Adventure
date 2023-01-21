@@ -333,6 +333,8 @@ MonoBehaviour:
   enemyLight: {fileID: 58356835}
   bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
+  followAfterTime: 3
+  attentionParticles: {fileID: 0}
 --- !u!114 &294120852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,6 +1074,8 @@ MonoBehaviour:
   enemyLight: {fileID: 325060826}
   bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
+  followAfterTime: 3
+  attentionParticles: {fileID: 0}
 --- !u!114 &628237892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,6 +1523,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae6256269dbfcfb479002739576422a5, type: 3}
+--- !u!1001 &789005760
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1268412871524464002, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_Name
+      value: ReturnToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.99251
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.99015
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.470155
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
 --- !u!4 &793268897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5313164702003125066, guid: 48bce3a6a6bf71a49b3e4c1e53f3af6a, type: 3}
@@ -2011,6 +2072,8 @@ MonoBehaviour:
   enemyLight: {fileID: 1258912468}
   bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
+  followAfterTime: 3
+  attentionParticles: {fileID: 0}
 --- !u!114 &894025334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5497,6 +5560,7 @@ MonoBehaviour:
     maxLevel: 30
     maxExperience: 2700
   tutorialCompleted: 0
+  cheatsEnabled: 0
 --- !u!4 &1455779739
 Transform:
   m_ObjectHideFlags: 0
@@ -6033,6 +6097,8 @@ MonoBehaviour:
   enemyLight: {fileID: 1739729609}
   bloodParticles: {fileID: 0}
   healthText: {fileID: 0}
+  followAfterTime: 3
+  attentionParticles: {fileID: 0}
 --- !u!114 &1822723927
 MonoBehaviour:
   m_ObjectHideFlags: 0

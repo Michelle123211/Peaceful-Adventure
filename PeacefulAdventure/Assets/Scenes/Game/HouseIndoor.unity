@@ -1071,6 +1071,63 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1001 &943399675
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1268412871524464002, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_Name
+      value: ReturnToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.99251
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.99015
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.470155
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268412871524464003, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 052a9755b62fd5f49b27f7b12660c466, type: 3}
 --- !u!1 &1293388699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2184,6 +2241,7 @@ MonoBehaviour:
     maxLevel: 30
     maxExperience: 2700
   tutorialCompleted: 0
+  cheatsEnabled: 0
 --- !u!4 &1455779739
 Transform:
   m_ObjectHideFlags: 0

@@ -15,7 +15,6 @@ public class PickableItem : Interactable, ISaveable<bool> {
         if (PlayerState.Instance.inventory.AddToInventory(item)) {
             // item added to the inventory
             AudioManager.Instance.PlaySoundEffect(SoundType.PickedItem);
-            Debug.Log("Item " + item.itemName + " was added to the inventory.");
             Destroy(gameObject); // TODO: some effects
         }
     }

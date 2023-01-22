@@ -83,19 +83,16 @@ public class PlayerState : MonoBehaviour {
             instance.inventorySlots = 12;
             instance.inventory = new Inventory(instance.inventorySlots);
             instance.levelSystem.ResetCompletely();
-            Debug.Log("PlayerState reset completely.");
         }
     }
 
     public static void SetCurrentStateAsInitial() {
         initialState = SaveState();
         initialState.currentHealth = initialState.maxHealth;
-        Debug.Log("Current state was set as initial.");
     }
 
     public static void ResetToInitialState() {
         LoadState(initialState);
-        Debug.Log("PlayerState reset to the initial state.");
     }
 
     public static void LoadState(PlayerStateData stateData) {
@@ -107,7 +104,6 @@ public class PlayerState : MonoBehaviour {
         Instance.levelSystem.LoadState(stateData.maxLevel, stateData.maxExperience, stateData.level, stateData.experience);
         // deep copy of the inventory
         Instance.inventory = stateData.inventory.Copy();
-        Debug.Log("PlayerState state loaded.");
     }
 
     public static PlayerStateData SaveState() {
@@ -125,7 +121,6 @@ public class PlayerState : MonoBehaviour {
             };
             // deep copy of the inventory
             result.inventory = Instance.inventory.Copy();
-            Debug.Log("PlayerState saved.");
             return result;
         } else {
             return null;

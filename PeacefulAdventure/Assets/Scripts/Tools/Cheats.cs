@@ -35,35 +35,29 @@ public class Cheats : MonoBehaviour {
 
             if (!show) {
                 if (GUI.Button(new Rect(ColumnToX(1), RowToY(0), width, height), "Show")) {
-                    Debug.Log("Show cheats");
                     show = true;
                 }
             } else {
                 if (GUI.Button(new Rect(ColumnToX(1), RowToY(0), width, height), "Hide")) {
-                    Debug.Log("Hide cheats");
                     show = false;
                 }
 
                 // Increase health +10
                 if (GUI.Button(new Rect(ColumnToX(0), RowToY(1), width, height), "Health +10")) {
-                    Debug.Log("Health +10");
                     PlayerState.Instance.UpdateHealth(10);
                 }
                 // Decrease health -10
                 if (GUI.Button(new Rect(ColumnToX(1), RowToY(1), width, height), "Health -10")) {
-                    Debug.Log("Health -10");
                     PlayerState.Instance.UpdateHealth(-10);
                 }
 
                 // Increase XP +20
                 if (GUI.Button(new Rect(ColumnToX(0), RowToY(2), width, height), "XP +25")) {
-                    Debug.Log("XP +25");
                     PlayerState.Instance.levelSystem.UpdateExperience(25);
                 }
 
                 // Add one of each item
                 if (GUI.Button(new Rect(ColumnToX(1), RowToY(2), width, height), "Add items")) {
-                    Debug.Log("Add items");
                     foreach (var item in items) {
                         PlayerState.Instance.inventory.AddToInventory(item);
                     }
@@ -71,17 +65,14 @@ public class Cheats : MonoBehaviour {
 
                 // Teleport to the town scene
                 if (GUI.Button(new Rect(ColumnToX(-1), RowToY(3), width, height), "Town")) {
-                    Debug.Log("Town");
                     FindObjectOfType<SceneLoader>().LoadSceneWithState("MainMap");
                 }
                 // Teleport to the house scene
                 if (GUI.Button(new Rect(ColumnToX(0), RowToY(3), width, height), "House")) {
-                    Debug.Log("House");
                     FindObjectOfType<SceneLoader>().LoadSceneWithState("HouseIndoor");
                 }
                 // Teleport to the dungeon scene
                 if (GUI.Button(new Rect(ColumnToX(1), RowToY(3), width, height), "Dungeon")) {
-                    Debug.Log("Dungeon");
                     FindObjectOfType<SceneLoader>().LoadSceneWithState("Dungeon");
                 }
 

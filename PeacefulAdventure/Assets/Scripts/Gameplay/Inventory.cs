@@ -97,16 +97,6 @@ public class Inventory
                 result.AddToInventory(item.item, item.count);
             }
         }
-        Debug.Log($"Inventory copied with the following results:");
-        Debug.Log($"Inventory: {result == this}.");
-        Debug.Log($"Inventory items: {result.items == this.items}.");
-        if (result.items[0] == null) {
-            Debug.Log($"Inventory items[0] is null, so: {result.items[0] == this.items[0]}.");
-        } else {
-            Debug.Log($"Inventory items[0]: {result.items[0] == this.items[0]}.");
-        }
-        if (result.items[0] != null)
-            Debug.Log($"Inventory items[0].item: {result.items[0].item == this.items[0].item}.");
         return result;
     }
 

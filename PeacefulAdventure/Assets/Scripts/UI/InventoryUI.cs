@@ -10,7 +10,6 @@ public class InventoryUI : MonoBehaviour {
     [SerializeField] private InventoryContentUI inventoryContentUI;
 
     public void Open() {
-        Debug.Log("Opening inventory");
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.UI.Enable();
         itemDetailsUI.gameObject.SetActive(false);
@@ -32,9 +31,5 @@ public class InventoryUI : MonoBehaviour {
 
     public void ShowInventoryContent() {
         itemDetailsUI.Close();
-    }
-
-    public void Log(string message) {
-        Debug.Log(message);
     }
 }

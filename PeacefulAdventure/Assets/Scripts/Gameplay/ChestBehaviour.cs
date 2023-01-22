@@ -20,7 +20,6 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
 
     public void InitializeItemsRandomly(int count) {
         items.Clear();
-        Debug.Log("Creating " + count + " items.");
         int[] itemCounts = new int[itemsToPickRandomly.Count];
         // how many of each item will be selected
         for (int i = 0; i < count; ++i) {
@@ -39,13 +38,11 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
             if (this.items[i] != null && this.items[i].item == item) {
                 // remove the given count of the given item
                 this.items[i].count -= count;
-                Debug.Log("Item removed from the chest.");
                 if (this.items[i].count <= 0) // remove if none are left
                     this.items[i] = null;
                 return;
             }
         }
-        Debug.Log("Item NOT removed from the chest.");
     }
 
     public void RemoveItem(InventoryItem item) {

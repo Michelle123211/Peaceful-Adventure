@@ -26,7 +26,6 @@ public class LevelUpUI : MonoBehaviour
             AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             float newDamage = PlayerState.Instance.attackDamage.BaseValue * 1.1f;
             PlayerState.Instance.attackDamage.ChangeBaseValue(newDamage);
-            Debug.Log("Attack damage increased.");
             Close();
         }
     }
@@ -38,7 +37,6 @@ public class LevelUpUI : MonoBehaviour
             AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             float newCooldown = PlayerState.Instance.attackCooldown.BaseValue * 0.9f;
             PlayerState.Instance.attackCooldown.ChangeBaseValue(newCooldown);
-            Debug.Log("Attack speed increased.");
             Close();
         }
     }
@@ -50,7 +48,6 @@ public class LevelUpUI : MonoBehaviour
             AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             int newMaxHealth = (int)(PlayerState.Instance.MaxHealth * 1.1f);
             PlayerState.Instance.UpdateMaxHealth(newMaxHealth);
-            Debug.Log("Max health increased.");
             Close();
         }
     }

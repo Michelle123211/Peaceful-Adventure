@@ -39,26 +39,21 @@ public class AudioManager : MonoBehaviour
     public void PlaySoundEffect(SoundType soundType, float volume = 1) {
         Audio sound = gameAudio.GetSound(soundType);
         if (sound != null) {
-            Debug.Log($"Playing sound effect {soundType}.");
             soundEffectSource.PlayOneShot(sound.clip, sound.volume * volume * masterSoundEffectVolume);
         }
     }
 
     public void PlaySceneMusic(string sceneName) {
-        Debug.Log($"Starting to play music for the scene {sceneName}");
         Audio music = gameAudio.GetMusic(sceneName);
         if (music == null) {
-            Debug.Log("No music.");
             StopMusic();
             return;
         }
         if (musicSource.isPlaying) {
             if (nextMusic.clip == music.clip) {
                 // do nothing, just continue playing
-                Debug.Log("No change in music.");
             } else {
                 // change the music
-                Debug.Log("Changing music.");
                 musicSource.DOKill();
                 nextMusic = music;
                 musicSource.DOFade(0, gameAudio.musicFadeOutDuration)
@@ -68,7 +63,6 @@ public class AudioManager : MonoBehaviour
             }
         } else {
             // start playing the assigned music
-            Debug.Log("Starting music.");
             nextMusic = music;
             PlayMusic();
         }
@@ -89,7 +83,6 @@ public class AudioManager : MonoBehaviour
     }
 
     private void PlayMusic() {
-        Debug.Log($"Playing music {nextMusic.clip.name}.");
         musicSource.volume = nextMusic.volume * masterMusicVolume;
         musicSource.clip = nextMusic.clip;
         musicSource.Play();

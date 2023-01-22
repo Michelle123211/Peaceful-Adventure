@@ -20,14 +20,11 @@ public class LevelSystem
     public int Experience { get; private set; } = 0;
 
     public void UpdateExperience(int delta) {
-        Debug.Log($"Current level: {Level}");
-        Debug.Log($"Current XP: {Experience}");
         Experience += delta;
         if (Experience >= maxExperience) {
             Experience = maxExperience;
         }
         onExperiencePointsChangedCallback?.Invoke();
-        Debug.Log($"XP increased by {delta} to {Experience}");
     }
 
     public int GetExperienceNeededForLevel(int level) {
@@ -36,15 +33,13 @@ public class LevelSystem
 
     public bool TryLevelUp() {
         if (CanLevelUp()) {
-            Debug.Log($"Leveled up from {Level} to {Level + 1}");
             Level++;
             onLevelChangedCallback?.Invoke();
             return true;
         } else {
-
+            Debug.Log($"Not enough XP to level up from {Level} to {Level + 1}.");
+            return false;
         }
-        Debug.Log($"Not enough XP to level up from {Level} to {Level + 1}.");
-        return false;
     }
 
     public bool CanLevelUp() {
@@ -53,8 +48,6 @@ public class LevelSystem
             return false;
         }
         int nextLevelExperience = GetExperienceNeededForLevel(Level + 1);
-        Debug.Log($"Current XP: {Experience}");
-        Debug.Log($"XP needed: {nextLevelExperience}");
         if (Experience >= nextLevelExperience) {
             return true;
         } else {
@@ -69,7 +62,6 @@ public class LevelSystem
         Experience = 0;
         onExperiencePointsChangedCallback?.Invoke();
         onLevelChangedCallback?.Invoke();
-        Debug.Log("LevelSystem reset completely.");
     }
 
     public void LoadState(int maxLevel, int maxExperience, int level, int experience) {
@@ -79,6 +71,5 @@ public class LevelSystem
         this.Experience = experience;
         onExperiencePointsChangedCallback?.Invoke();
         onLevelChangedCallback?.Invoke();
-        Debug.Log("LevelSystem state loaded.");
     }
 }

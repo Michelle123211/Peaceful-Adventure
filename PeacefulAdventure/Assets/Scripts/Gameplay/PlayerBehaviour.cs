@@ -32,7 +32,6 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void TakeDamage(float damage) {
         if (Time.time - previousDamage > damageCooldown) { // the current damage has not come too soon after the last one
-            Debug.Log("Player damage taken " + damage);
             PlayerState.Instance.UpdateHealth((int)-damage);
             bloodParticles.Play();
             if (PlayerState.Instance.CurrentHealth <= 0) {
@@ -43,12 +42,11 @@ public class PlayerBehaviour : MonoBehaviour {
             }
             previousDamage = Time.time;
         } else {
-            Debug.Log("Player did not take damage (it is too early).");
+            // it is too soon to take a damage again
         }
     }
 
     public void Die() {
-        Debug.Log("Player died.");
         animator.Die();
         // TODO: play sound effect
         this.isDead = true;
@@ -116,7 +114,6 @@ public class PlayerBehaviour : MonoBehaviour {
     }
 
     private void Inventory(InputAction.CallbackContext context) {
-        Debug.Log("Inventory!");
         if (this.inventoryUI == null) {
             this.inventoryUI = Utils.FindObject<InventoryUI>()[0];
         }
@@ -128,7 +125,6 @@ public class PlayerBehaviour : MonoBehaviour {
     }
 
     private void Interaction(InputAction.CallbackContext ocontext) {
-        Debug.Log("Interaction!");
     }
 
     private void RefreshEffectParticles() {

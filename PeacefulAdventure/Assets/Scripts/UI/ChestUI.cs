@@ -21,7 +21,6 @@ public class ChestUI : MonoBehaviour
         PlayerBehaviour.playerInputActions.Player.Disable();
         PlayerBehaviour.playerInputActions.UI.Enable();
         this.chest = chest;
-        Debug.Log("Opening a chest");
         Refresh();
         AudioManager.Instance.PlaySoundEffect(SoundType.UIOpen);
         gameObject.TweenAwareEnable();

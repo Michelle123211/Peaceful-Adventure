@@ -42,8 +42,6 @@ public abstract class EnemyBehaviour : MonoBehaviour {
 
     public virtual void TakeDamage(float damage) {
         if (!this.isDead) {
-            Debug.Log("Damage taken " + damage);
-            
             currentHealth -= damage;
             if (healthTween != null && !healthTween.IsComplete()) {
                 healthTween.Complete();

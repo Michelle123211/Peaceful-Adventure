@@ -17,11 +17,6 @@ public class SettingsUI : MonoBehaviour
         AudioManager.Instance.PlaySoundEffect(SoundType.UIOpen);
         gameObject.TweenAwareEnable();
 
-        Debug.Log($"Found {properties.Count} children.");
-        foreach (var prop in properties) {
-            Debug.Log(prop.gameObject.name);
-        }
-
         // select the first property
         if (!Application.isMobilePlatform) {
             foreach (var prop in properties) {

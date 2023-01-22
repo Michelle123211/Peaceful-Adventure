@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameAudio", menuName = "Audio/Game Audio")]
 public class GameAudio : ScriptableObject
 {
+    [Tooltip("Duration (in seconds) of a fade out of the currently playing music before switching to a different one.")]
     public float musicFadeOutDuration;
 
+    [Tooltip("All the one-shots used in the game.")]
     public List<SoundEffect> soundEffects;
     [Tooltip("The music corresponding to the first satisfied condition from the top will be played.")]
     public List<SceneMusic> sceneMusics;

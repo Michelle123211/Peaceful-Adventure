@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class ChestUI : MonoBehaviour
-{
+public class ChestUI : MonoBehaviour {
+    [Tooltip("Prefab of a single item slot.")]
     [SerializeField] private GameObject itemSlotPrefab;
+    [Tooltip("Common parent of the item slots.")]
     [SerializeField] private GridLayoutGroup itemsGrid;
 
     private ChestBehaviour chest;

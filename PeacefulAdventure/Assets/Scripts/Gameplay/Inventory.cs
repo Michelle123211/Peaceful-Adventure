@@ -8,7 +8,7 @@ public class Inventory
     public delegate void OnInventoryChanged();
     public OnInventoryChanged onInventoryChangedCallback;
 
-    private InventoryItem[] items;
+    [SerializeField] private InventoryItem[] items;
     private int freeSlots;
 
     public Inventory(int slots) {
@@ -36,7 +36,7 @@ public class Inventory
         }
         if (!itemAdded && freeSlots > 0) {
             for (int i = 0; i < items.Length; ++i) {
-                if (items[i] == null) {
+                if (items[i] == null || items[i].item == null) {
                     items[i] = new InventoryItem(item, count);
                     --freeSlots;
                     itemAdded = true;

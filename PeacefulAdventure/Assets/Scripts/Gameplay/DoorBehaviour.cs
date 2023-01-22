@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DoorBehaviour : Interactable
 {
+    [Tooltip("Scene loaded after an interaction with the door.")]
     [SerializeField] string nextScene;
 
     public void SetNextScene(string nextScene) {

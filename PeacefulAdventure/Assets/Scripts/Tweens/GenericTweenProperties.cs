@@ -188,10 +188,15 @@ public class TweenPropertyValuesColor : TweenPropertyValues<Color> {
 [System.Serializable]
 public class TweenVectorCurves {
     // TODO: if tweenComponentWise == false, show tweenCurve, otherwise tweenCurves
+    [Tooltip("A curve describing change from the start value to the end value in time.")]
     [ConditionalHide("tweenComponentWise", true)]
     public AnimationCurve tweenCurve = AnimationCurve.Linear(0f, 0f, 1f, 1f);
+
     // TODO: show only if numOfComponents is > 1
+    [Tooltip("Checked means that each component will be tweened separately according to its own animation curve.")]
     public bool tweenComponentWise; // true = work with the position as a vector, false = tween each axis separately
+
+    [Tooltip("Curves describing change from the start value to the end value in time component-wise.")]
     [ConditionalHide("tweenComponentWise")]
     public AnimationCurve[] tweenCurves;
 

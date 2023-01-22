@@ -7,7 +7,9 @@ using DG.Tweening;
 
 public class SceneLoader : MonoBehaviour {
 
+    [Tooltip("Duration of the fade out and fade in between the scenes.")]
     public float fadeDuration = 0.3f;
+    [Tooltip("CanvasGroup used for the fade in/out effect.")]
     public CanvasGroup fadeCanvasGroup;
 
     private void Start() {

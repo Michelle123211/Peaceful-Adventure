@@ -19,14 +19,13 @@ public class PlayerState : MonoBehaviour {
             return instance;
         }
     }
-
     [field: SerializeField] public int MaxHealth { get; private set; } = 100;
     public int CurrentHealth { get; private set; }
 
     public delegate void OnHealthChanged();
     public OnHealthChanged onHealthChangedCallback;
 
-
+    [Header("Stats")]
     public Stat attackDamage = new Stat(20f);
     //public float attackDamage = 20;
     [Tooltip("After how many seconds the player can attack again")]
@@ -35,20 +34,22 @@ public class PlayerState : MonoBehaviour {
     public delegate void OnStatsChanged();
     public OnStatsChanged onStatsChangedCallback;
 
+    [Header("Inventory")]
     [Tooltip("Number of slots in the inventory")]
     [SerializeField] private int inventorySlots = 12;
     public int InventorySlots { get => inventorySlots; }
     public Inventory inventory;
 
-
-    public LevelSystem levelSystem;
-
-    private static PlayerStateData initialState; // different after completing the tutorial
-
+    [Header("State")]
     public bool tutorialCompleted = false;
     public bool gameStarted = false;
 
     public bool cheatsEnabled = false;
+
+    [Header("Level system")]
+    public LevelSystem levelSystem;
+
+    private static PlayerStateData initialState; // different after completing the tutorial
 
 
     public void UpdateHealth(int delta) {

@@ -6,10 +6,15 @@ using TMPro;
 
 public class ItemSlotUI : MonoBehaviour
 {
+    [Tooltip("A frame around the item slot.")]
     [SerializeField] private Image frame;
+    [Tooltip("A color applied to the frame if the corresponding item is selected.")]
     [SerializeField] private Color selectedColor;
+    [Tooltip("An Image for the item's icon.")]
     [SerializeField] private Image icon;
+    [Tooltip("A TMP for the count of the item.")]
     [SerializeField] private TextMeshProUGUI count;
+    [Tooltip("A Button for displaying details about the item.")]
     [SerializeField] private Button detailsButton;
 
     private Color origColor;

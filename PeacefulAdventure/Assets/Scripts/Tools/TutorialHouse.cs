@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class TutorialHouse : MonoBehaviour
 {
-
+    [Tooltip("Everything included in the first part of the tutorial.")]
     public GameObject part1;
+    [Tooltip("Everything included in the second part of the tutorial.")]
     public GameObject part2;
+    [Tooltip("Everything included in the third part of the tutorial.")]
     public GameObject part3;
 
     void Start() {

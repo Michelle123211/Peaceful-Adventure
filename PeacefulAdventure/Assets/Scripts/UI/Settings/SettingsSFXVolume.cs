@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsSFXVolume : MonoBehaviour
 {
+    [Tooltip("Slider used to control the sound effects volume.")]
     [SerializeField] Slider volumeSlider;
     private float currentVolume = 1f;
     public void IncreaseSFXVolume() {

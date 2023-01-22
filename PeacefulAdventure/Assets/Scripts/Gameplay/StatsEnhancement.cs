@@ -6,11 +6,12 @@ using UnityEngine.Jobs;
 
 [CreateAssetMenu(fileName = "NewStatsEnhancementItem", menuName = "Inventory/Stat Enhancement Item")]
 public class StatsEnhancement : Item {
-
+    [Tooltip("The effect this item has on the attack damage stat.")]
     [SerializeField] StatModifier attackDamageModifier;
+    [Tooltip("The effect this item has on the attack damage stat.")]
     [SerializeField] StatModifier attackCooldownModifier;
 
-    [Tooltip("Duration of the effect in seconds")]
+    [Tooltip("Duration of the effect in seconds.")]
     public float duration;
 
     protected override void ApplyEffect() {

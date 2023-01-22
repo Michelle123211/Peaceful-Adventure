@@ -4,16 +4,27 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class DungeonGenerator : MonoBehaviour {
-    public int minRoomWidth, maxRoomWidth, minRoomHeight, maxRoomHeight;
-    public int minNumOfRooms, maxNumOfRooms;
+    [Header("Parameters")]
+    public int minRoomWidth;
+    public int maxRoomWidth;
+    public int minRoomHeight;
+    public int maxRoomHeight;
+    public int minNumOfRooms;
+    public int maxNumOfRooms;
 
+    [Header("Tilemaps")]
     [SerializeField] private Tilemap wallTilemap;
     [SerializeField] private Tilemap groundTilemap;
 
+    [Header("Rule tiles")]
+    [Tooltip("A Rule Tile which is used as a floor in the generated rooms.")]
     [SerializeField] private TileBase groundTile;
+    [Tooltip("A Rule Tile which is used for walls of the generated rooms.")]
     [SerializeField] private TileBase wallTile;
+    [Tooltip("A Rule Tile which is used as an upper level of the walls.")]
     [SerializeField] private TileBase outterWallTile;
 
+    [Header("Spawned objects")]
     [SerializeField] private GameObject skeletonPrefab;
     [SerializeField] private Transform skeletonsParent;
     [SerializeField] private GameObject chestPrefab;

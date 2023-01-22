@@ -5,6 +5,7 @@ using TMPro;
 
 public class TutorialText : MonoBehaviour
 {
+    [Tooltip("The text displayed in the middle of the screen.")]
     [TextArea]
     public string text;
 

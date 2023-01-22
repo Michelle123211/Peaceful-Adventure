@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class PickableItem : Interactable, ISaveable<bool> {
-
+    [Tooltip("A specific item connected this generic component.")]
     public Item item;
 
     [SerializeField] private Light2D backgroundLight;

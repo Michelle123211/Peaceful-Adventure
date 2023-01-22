@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
+    [Tooltip("There should be two instances - inner range (smaller, entering initializes the following behaviour) and outter range (larger, exiting terminates the behaviour).")]
     public bool isInnerRange = true;
 
+    [Tooltip("A SkeletonBehaviour this component belongs to.")]
     public SkeletonBehaviour enemy;
 
     private float followCountdown = 0;

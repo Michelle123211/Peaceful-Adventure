@@ -11,6 +11,7 @@ public abstract class Item : ScriptableObject
     public string description;
     public Sprite icon;
     public bool isUsable;
+    [Tooltip("The color used for the background light if the item is placed freely on the map.")]
     public Color lightColor;
 
     public bool Use() {

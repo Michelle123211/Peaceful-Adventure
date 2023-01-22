@@ -16,7 +16,7 @@ public class Stat {
 
     private float modifiedValue = 0;
     private bool isCached = false;
-    private List<StatModifier> modifiers = new List<StatModifier>();
+    [SerializeField] private List<StatModifier> modifiers = new List<StatModifier>();
 
     public Stat(float baseValue) {
         this.BaseValue = baseValue;

@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour {
 
+    [Tooltip("A pop-up displaying details of an item (child).")]
     [SerializeField] private ItemDetailsUI itemDetailsUI;
+    [Tooltip("A pop-up displaying content of the inventory (child).")]
     [SerializeField] private InventoryContentUI inventoryContentUI;
 
     public void Open() {

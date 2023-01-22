@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsEnableCheats : MonoBehaviour
 {
+    [Tooltip("A checkbox determining whether cheats are enabled or disabled.")]
     [SerializeField] Toggle cheatsCheckbox;
 
     public void ToggleEnableCheats() {

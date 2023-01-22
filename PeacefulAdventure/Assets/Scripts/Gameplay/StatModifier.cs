@@ -4,7 +4,9 @@ using UnityEngine;
 
 [System.Serializable]
 public struct StatModifier {
+    [Tooltip("The type of the relative change.")]
     public StatModifierType type;
+    [Tooltip("The value by which the stat base value is changed.")]
     public float value;
 
     public StatModifier(StatModifierType type, float value) {

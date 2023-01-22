@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Cheats : MonoBehaviour {
-
+    [Tooltip("A list of all the items available in the game.")]
     public List<Item> items;
 
     private int width = 180;

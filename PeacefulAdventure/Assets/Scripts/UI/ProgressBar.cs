@@ -7,10 +7,12 @@ using TMPro;
 using DG.Tweening;
 using DG.Tweening.Core;
 
-public class ProgressBar : MonoBehaviour
-{
+public class ProgressBar : MonoBehaviour {
+    [Tooltip("Value label.")]
     [SerializeField] TextMeshProUGUI valueTMP;
+    [Tooltip("Fill image used in the progress bar.")]
     [SerializeField] Image fillImage;
+    [Tooltip("Property label.")]
     [SerializeField] TextMeshProUGUI labelTMP;
 
     int currentValue = 0;

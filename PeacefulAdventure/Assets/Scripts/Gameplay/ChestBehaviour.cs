@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
-
+    [Tooltip("Items contained in the chest (if not initialized randomly).")]
     public List<InventoryItem> items = new List<InventoryItem>();
     [Tooltip("Time in seconds between start of animation and UI appearing")]
     [SerializeField] private float lag = 0.4f;

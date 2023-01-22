@@ -7,6 +7,7 @@ using DG.Tweening;
 using DG.Tweening.Core;
 
 public class GenericTween : MonoBehaviour {
+    [Header("Parameters")]
     public float duration = 0.5f;
     [Tooltip("If the object should be destroyed when the tween is complete.")]
     public bool destroy;
@@ -19,18 +20,23 @@ public class GenericTween : MonoBehaviour {
     [Tooltip("If the tween should be reverted immediately after finishing.")]
     public bool revertAfter = false;
 
+    [Header("Tweened properties")]
     // position
-    [Tooltip("Start and end position are given as relative displacements.")]
+    [Tooltip("Start and end positions are given as relative displacements.")]
     public TweenPropertyPosition positionTween = new TweenPropertyPosition();
     // scale
     public TweenPropertyScale scaleTween = new TweenPropertyScale();
     // alpha through CanvasGroup
+    [Tooltip("Affects alpha property of the CanvasGroupt component.")]
     public TweenPropertyAlpha alphaTween = new TweenPropertyAlpha();
     // color through SpriteRenderer or Image or Light2D or TextMeshProUGUI or Text
+    [Tooltip("Affects color of the SpriteRenderer, Image, Light2D, TextMeshProUGUI or Text component.")]
     public TweenPropertyColor colorTween = new TweenPropertyColor();
     // intensity through Light2D
+    [Tooltip("Affects intensity of the Light2D component.")]
     public TweenPropertyIntensity intensityTween = new TweenPropertyIntensity();
 
+    [Header("Callbacks")]
     public UnityEvent onTweenComplete = null;
     public UnityEvent onUntweenComplete = null;
 

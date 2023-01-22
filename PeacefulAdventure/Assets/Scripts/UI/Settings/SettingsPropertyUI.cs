@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingsPropertyUI : MonoBehaviour
 {
+    [Header("Callbacks")]
     [Tooltip("If this event is not empty, it will be called no matter in which direction the value was changed.")]
     [SerializeField] UnityEvent onValueChanged;
     [Tooltip("This event is called when the value is decreased.")]
@@ -13,6 +14,7 @@ public class SettingsPropertyUI : MonoBehaviour
     [Tooltip("This event is called when the value is increased.")]
     [SerializeField] UnityEvent onValueIncreased;
 
+    [Header("UI elements")]
     [SerializeField] Image selectedImage;
 
     public void Select() {

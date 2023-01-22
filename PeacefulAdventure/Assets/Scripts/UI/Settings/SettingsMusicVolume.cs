@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SettingsMusicVolume : MonoBehaviour {
+    [Tooltip("Slider used to control the music volume.")]
     [SerializeField] Slider volumeSlider;
     private float currentVolume = 1f;
     public void IncreaseMusicVolume() {

@@ -5,6 +5,7 @@ using TMPro;
 
 public class EndGame : MonoBehaviour
 {
+    [Tooltip("An object containing a text which is shown after a short delay.")]
     public GameObject text;
 
     void Start()

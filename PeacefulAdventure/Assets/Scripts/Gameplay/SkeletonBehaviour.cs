@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterAnimation))]
 public class SkeletonBehaviour : EnemyBehaviour, ISaveable<SkeletonState> {
-
-    [Tooltip("After seeing the player for so many second the skeleton will start following them.")]
-    public float followAfterTime = 3f;
+    [Header("Skeleton-specific")]
+    [Tooltip("After seeing the player for so many seconds the skeleton will start following them.")]
+    public float followAfterTime = 1.5f;
     [SerializeField] ParticleSystem attentionParticles;
 
     private PositionID ID;

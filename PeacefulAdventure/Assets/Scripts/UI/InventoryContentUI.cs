@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 
 public class InventoryContentUI : MonoBehaviour
 {
+    [Tooltip("Prefab of a single inventory item slot.")]
     [SerializeField] private GameObject itemSlotPrefab;
+    [Tooltip("Common parent of the inventory item slots.")]
     [SerializeField] private GridLayoutGroup itemsGrid;
 
     private ItemSlotUI[,] slots;

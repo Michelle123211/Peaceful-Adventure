@@ -9,6 +9,7 @@ using DG.Tweening.Core;
 
 public abstract class EnemyBehaviour : MonoBehaviour {
 
+    [Header("Basic stats")]
     public float maxHealth = 60;
     protected float currentHealth;
 
@@ -19,15 +20,18 @@ public abstract class EnemyBehaviour : MonoBehaviour {
     public float attackRange = 1.5f;
     protected float nextAttackTime = 0f;
 
+    [Header("Movement")]
     public float force = 25f;
-
     protected Vector2 movement;
 
+    [Header("State")]
     public bool isDead = false;
 
+    [Header("Effects")]
     public Light2D enemyLight;
     public ParticleSystem bloodParticles;
     public TextMeshProUGUI healthText;
+
 
     protected PlayerBehaviour player;
 
@@ -43,7 +47,7 @@ public abstract class EnemyBehaviour : MonoBehaviour {
     public virtual void TakeDamage(float damage) {
         if (!this.isDead) {
             currentHealth -= damage;
-            if (healthTween != null && !healthTween.IsComplete()) {
+            if (healthTween.IsActive() && !healthTween.IsComplete()) {
                 healthTween.Complete();
             }
             healthTween = DOTween.To(() => displayedHealth,

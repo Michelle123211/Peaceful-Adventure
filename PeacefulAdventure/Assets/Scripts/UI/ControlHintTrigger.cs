@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public class ControlHintTrigger : MonoBehaviour
-{
+public class ControlHintTrigger : MonoBehaviour {
+    [Header("Controls")]
     [Tooltip("An image of the button used on Android.")]
     public Sprite buttonImage;
     [Tooltip("A name of the key used on Windows.")]
     public string key = "L";
+    [Header("Action description")]
     [Tooltip("A description of the action which is invoked by the specified control.")]
     [TextArea]
     public string description = "to interact";

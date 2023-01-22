@@ -7,16 +7,21 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CharacterAnimation))]
 public class PlayerBehaviour : MonoBehaviour {
+    [Header("Movement")]
     public float speed = 5f;
 
+    [HideInInspector]
     public bool isDead = false;
 
-    [Tooltip("The minimum time between two consecutive damages.")]
+    [Header("Parameters")]
+    [Tooltip("The minimum time between two consecutive damages received.")]
     public float damageCooldown = 1f;
     float previousDamage = 0f;
 
+    [Header("Input")]
     public static PlayerInputActions playerInputActions;
 
+    [Header("Effects")]
     [SerializeField] ParticleSystem dustParticles;
     [SerializeField] ParticleSystem bloodParticles;
 

@@ -20,8 +20,6 @@ public class ItemDetailsUI : MonoBehaviour {
 
     public void Open(InventoryItem item) {
         this.item = item;
-        // TODO: maybe display item
-        // TODO: maybe add image and count
         nameText.text = item.item.itemName;
         descText.text = item.item.description;
         if (!Application.isMobilePlatform)
@@ -37,7 +35,7 @@ public class ItemDetailsUI : MonoBehaviour {
     }
 
     public void UseItem() {
-        if (item.item.Use()) {// TODO: Show some popup if not possible to use (false returned)
+        if (item.item.Use()) {
             AudioManager.Instance.PlaySoundEffect(SoundType.UIPress);
             inventoryUI.ShowInventoryContent();
         }

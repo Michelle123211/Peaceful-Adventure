@@ -15,7 +15,7 @@ public class PickableItem : Interactable, ISaveable<bool> {
         if (PlayerState.Instance.inventory.AddToInventory(item)) {
             // item added to the inventory
             AudioManager.Instance.PlaySoundEffect(SoundType.PickedItem);
-            Destroy(gameObject); // TODO: some effects
+            Destroy(gameObject);
         }
     }
 
@@ -34,7 +34,7 @@ public class PickableItem : Interactable, ISaveable<bool> {
 
     public void LoadState(bool isActive) {
         if (!isActive)
-            Destroy(gameObject); // TODO: some effects
+            Destroy(gameObject);
     }
 
     [ContextMenu("Set item sprite")]

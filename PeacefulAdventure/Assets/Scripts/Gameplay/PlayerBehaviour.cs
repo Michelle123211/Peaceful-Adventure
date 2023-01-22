@@ -48,9 +48,8 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public void Die() {
         animator.Die();
-        // TODO: play sound effect
         this.isDead = true;
-        // show the UI
+        // show the UI (comes with a sound effect)
         Utils.FindObject<GameOverUI>()[0].Open();
     }
 

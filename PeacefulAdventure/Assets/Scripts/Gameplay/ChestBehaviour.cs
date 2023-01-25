@@ -33,12 +33,6 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
         }
     }
 
-    [ContextMenu("Fill with random items")]
-    public void FillWithRandomItems() {
-        InitializeItemsRandomly(Random.Range(2, 4));
-    }
-
-    [ContextMenu("Fill with one of each items")]
     public void FillWithOneOfEach() {
         items.Clear();
         // add the corresponding number of items to the chest

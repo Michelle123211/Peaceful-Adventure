@@ -37,7 +37,6 @@ public class PickableItem : Interactable, ISaveable<bool> {
             Destroy(gameObject);
     }
 
-    [ContextMenu("Set item sprite")]
     public void SetItemSprite() {
         if (this.spriteRenderer == null)
             this.spriteRenderer = GetComponent<SpriteRenderer>();
@@ -45,7 +44,6 @@ public class PickableItem : Interactable, ISaveable<bool> {
             this.spriteRenderer.sprite = item.icon;
     }
 
-    [ContextMenu("Set light color")]
     public void SetLightColor() {
         if (this.backgroundLight != null)
             this.backgroundLight.color = item.lightColor;

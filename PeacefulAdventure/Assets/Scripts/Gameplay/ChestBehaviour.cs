@@ -33,6 +33,11 @@ public class ChestBehaviour : Interactable, ISaveable<List<InventoryItem>> {
         }
     }
 
+    [ContextMenu("Fill with random items")]
+    public void FillWithRandomItems() {
+        InitializeItemsRandomly(Random.Range(2, 4));
+    }
+
     public void RemoveItem(Item item, int count = 1) {
         for (int i = 0; i < this.items.Count; ++i) {
             if (this.items[i] != null && this.items[i].item == item) {

@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class Item : ScriptableObject
 {
     public string itemName;
-    [TextArea(15, 20)]
+    [TextArea(5, 20)]
     public string description;
     public Sprite icon;
     public bool isUsable;

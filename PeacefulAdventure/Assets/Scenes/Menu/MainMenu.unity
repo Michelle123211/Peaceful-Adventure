@@ -273,8 +273,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 361.88022, y: -11.175}
-  m_SizeDelta: {x: 723.76044, y: 22.35}
+  m_AnchoredPosition: {x: 300, y: -11.175}
+  m_SizeDelta: {x: 600, y: 22.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &198911236
 MonoBehaviour:
@@ -4000,7 +4000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: -100, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &929909383
@@ -4024,6 +4024,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Pixel art assets purchased from https://snodekfeld.itch.io/fantasy-rpg-pixel-art-asset-pack
+
+
+    On-screen
+    controls modified from https://www.kenney.nl/assets/onscreen-controls
 
 
     Sound
@@ -11818,9 +11822,16 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   attackDamage:
     <BaseValue>k__BackingField: 20
+    modifiers: []
   attackCooldown:
     <BaseValue>k__BackingField: 0.5
+    modifiers: []
   inventorySlots: 18
+  inventory:
+    items: []
+  tutorialCompleted: 0
+  gameStarted: 0
+  cheatsEnabled: 0
   levelSystem:
     experienceNeeded:
       serializedVersion: 2
@@ -11848,9 +11859,6 @@ MonoBehaviour:
       m_RotationOrder: 4
     maxLevel: 30
     maxExperience: 2700
-  tutorialCompleted: 0
-  gameStarted: 0
-  cheatsEnabled: 0
 --- !u!4 &1455779739
 Transform:
   m_ObjectHideFlags: 0
@@ -11918,7 +11926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7560104326112609412, guid: b3b52974439a90442b60c69ea8b770b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8099995
+      value: 0.8099997
       objectReference: {fileID: 0}
     - target: {fileID: 7560104326112609412, guid: b3b52974439a90442b60c69ea8b770b5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12539,7 +12547,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 5
   m_TargetDisplay: 0
@@ -35232,7 +35240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6459430635818133216, guid: 2d3b55bc6191ab64185bde36a80c6b0d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8099995
+      value: 0.8099997
       objectReference: {fileID: 0}
     - target: {fileID: 6459430635818133216, guid: 2d3b55bc6191ab64185bde36a80c6b0d, type: 3}
       propertyPath: m_LocalPosition.y

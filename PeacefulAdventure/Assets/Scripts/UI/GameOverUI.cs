@@ -55,6 +55,11 @@ public class GameOverUI : MonoBehaviour
     private void QuitToMenu(InputAction.CallbackContext context) => QuitToMenu();
 
     public void SetInitialized() {
+        StartCoroutine(nameof(DelayedInitialization));
+    }
+
+    private IEnumerator DelayedInitialization() {
+        yield return new WaitForSeconds(2); // give the player 2 seconds to realize he's dead
         initialized = true;
     }
 

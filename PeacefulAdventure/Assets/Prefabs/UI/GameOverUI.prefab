@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 5915084763455778086}
   - component: {fileID: 8907993751798757566}
   m_Layer: 5
-  m_Name: Rewards
+  m_Name: Options
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

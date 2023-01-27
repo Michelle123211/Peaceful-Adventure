@@ -2,7 +2,7 @@
 
 The game was created as a final project for the "NCGD008: Practical Course on Managed Game Development" course at the Charles University in Prague.
 
-There is also an itch.io page.
+There is also an [itch.io page](https://michelle2.itch.io/peaceful-adventure).
  
 ## Game summary
 
@@ -22,9 +22,8 @@ Right now it is only a simple prototype utilizing basic 2D game mechanics (nothi
 
 Both, but more emphasis on PC.
 
-## Assets
+## Asset list
 
-**Asset list**:
 |Name                            |Link                                                       |License          |
 |--------------------------------|-----------------------------------------------------------|-----------------|
 |Fantasy RPG Pixel art Asset-Pack|https://snodekfeld.itch.io/fantasy-rpg-pixel-art-asset-pack|                 |

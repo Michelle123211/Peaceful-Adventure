@@ -68,6 +68,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public float GetMusicVolume() => masterMusicVolume;
     public void ChangeMusicVolume(float volume) {
         // change volume of the currently played music
         if (masterMusicVolume == 0)
@@ -77,6 +78,7 @@ public class AudioManager : MonoBehaviour
         masterMusicVolume = volume;
     }
 
+    public float GetSoundEffectVolume() => masterSoundEffectVolume;
     public void ChangeSoundEffectVolume(float volume) {
         // sound effects are short, no need to change the volume of currently played sound effects
         masterSoundEffectVolume = volume;

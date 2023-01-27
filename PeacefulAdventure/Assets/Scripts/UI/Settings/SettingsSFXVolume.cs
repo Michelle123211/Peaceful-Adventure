@@ -26,7 +26,8 @@ public class SettingsSFXVolume : MonoBehaviour
         AudioManager.Instance.ChangeSoundEffectVolume(currentVolume);
     }
 
-    public void Awake() {
+    private void Start() {
+        AudioManager.Instance.ChangeSoundEffectVolume(currentVolume);
         volumeSlider.value = currentVolume;
     }
 }

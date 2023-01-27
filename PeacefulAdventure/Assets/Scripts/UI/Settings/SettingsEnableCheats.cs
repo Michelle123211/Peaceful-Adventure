@@ -17,4 +17,8 @@ public class SettingsEnableCheats : MonoBehaviour
         AudioManager.Instance.PlaySoundEffect(SoundType.UIToggle);
         PlayerState.Instance.cheatsEnabled = value;
     }
+
+    private void Start() {
+        cheatsCheckbox.isOn = PlayerState.Instance.cheatsEnabled;
+    }
 }

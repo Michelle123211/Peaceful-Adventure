@@ -25,7 +25,8 @@ public class SettingsMusicVolume : MonoBehaviour {
         AudioManager.Instance.ChangeMusicVolume(currentVolume);
     }
 
-    public void Awake() {
+    private void Start() {
+        AudioManager.Instance.ChangeMusicVolume(currentVolume);
         volumeSlider.value = currentVolume;
     }
 }
